@@ -1,0 +1,17 @@
+{
+  "name": "nxf-notes",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "vue-template-compiler": "^2.7.10",
+    "vuepress": "^1.9.7"
+  }
+}
