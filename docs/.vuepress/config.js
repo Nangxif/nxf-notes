@@ -19,6 +19,11 @@ module.exports = {
           { text: 'ESBuild', link: '/blogs/automation/esbuild/introduction' },
         ],
       },
+      { text: 'TypeScript', link: '/blogs/ts/introduction' },
+      {
+        text: '浏览器',
+        link: '/blogs/browser/operating-machining',
+      },
       { text: 'Node', link: '/blogs/node/introduction' },
       { text: '掘金', link: 'https://juejin.cn/user/1821245353761704/posts' },
     ],
@@ -59,6 +64,10 @@ module.exports = {
               title: 'introduction',
               path: '/blogs/automation/webpack/introduction',
             },
+            {
+              title: 'babel',
+              path: '/blogs/automation/webpack/babel',
+            },
           ],
         },
         {
@@ -71,7 +80,41 @@ module.exports = {
           ],
         },
       ],
-
+      '/blogs/ts/': [
+        {
+          title: 'TypeScript',
+          children: [
+            {
+              title: 'introduction',
+              path: '/blogs/ts/introduction',
+            },
+            {
+              title: '杂货间',
+              children: [
+                {
+                  title: '.d.ts和declare的用途',
+                  path: '/blogs/ts/groceries/d.ts-he-declare-de-yong-tu',
+                },
+              ],
+            },
+          ],
+        },
+      ],
+      '/blogs/browser/': [
+        {
+          title: '浏览器',
+          children: [
+            {
+              title: '浏览器运行机制',
+              path: '/blogs/browser/operating-machining',
+            },
+            {
+              title: '事件循环',
+              path: '/blogs/browser/event-loop',
+            },
+          ],
+        },
+      ],
       '/blogs/node/': [
         {
           title: 'Node',
@@ -85,5 +128,8 @@ module.exports = {
       ],
     },
     lastUpdated: true,
+  },
+  markdown: {
+    lineNumbers: true,
   },
 };
