@@ -1,7 +1,7 @@
 // const sidebar = require('./siderbar.js');
 module.exports = {
-  title: "Nangxi's doc",
-  description: "Nangxi's doc",
+  title: "Nangxi's docs",
+  description: "Nangxi's docs",
   base: '/',
   themeConfig: {
     nav: [
