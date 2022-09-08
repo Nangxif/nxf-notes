@@ -19,7 +19,7 @@ module.exports = {
           { text: 'ESBuild', link: '/blogs/automation/esbuild/introduction' },
         ],
       },
-      { text: 'TypeScript', link: '/blogs/ts/introduction' },
+      { text: 'JS&TS', link: '/blogs/js&ts/js/coriolization-of-the-function' },
       {
         text: '浏览器',
         link: '/blogs/browser/operating-machining',
@@ -80,20 +80,29 @@ module.exports = {
           ],
         },
       ],
-      '/blogs/ts/': [
+      '/blogs/js&ts/': [
+        {
+          title: 'JavaScript',
+          children: [
+            {
+              title: '函数柯里化',
+              path: '/blogs/js&ts/js/coriolization-of-the-function',
+            },
+          ],
+        },
         {
           title: 'TypeScript',
           children: [
             {
               title: 'introduction',
-              path: '/blogs/ts/introduction',
+              path: '/blogs/js&ts/ts/introduction',
             },
             {
               title: '杂货间',
               children: [
                 {
                   title: '.d.ts和declare的用途',
-                  path: '/blogs/ts/groceries/d.ts-he-declare-de-yong-tu',
+                  path: '/blogs/js&ts/ts/groceries/d.ts-he-declare-de-yong-tu',
                 },
               ],
             },
