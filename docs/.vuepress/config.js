@@ -33,8 +33,12 @@ module.exports = {
           title: 'Vue3',
           children: [
             {
-              title: 'introduction',
+              title: 'Vue3介绍',
               path: '/blogs/front-frame/vue3/introduction',
+            },
+            {
+              title: 'Vue3环境搭建',
+              path: '/blogs/front-frame/vue3/environment-setup',
             },
             {
               title: 'reactive',
@@ -53,6 +57,10 @@ module.exports = {
               title: 'introduction',
               path: '/blogs/front-frame/react/introduction',
             },
+            {
+              title: '如何调试react源码',
+              path: '/blogs/front-frame/react/debug-react',
+            },
           ],
         },
       ],
@@ -67,6 +75,10 @@ module.exports = {
             {
               title: 'babel',
               path: '/blogs/automation/webpack/babel',
+            },
+            {
+              title: 'postcss',
+              path: '/blogs/automation/webpack/postcss',
             },
           ],
         },
