@@ -1,7 +1,8 @@
-// const sidebar = require('./siderbar.js');
+const path = require('path');
 module.exports = {
   title: "Nangxi's docs",
   description: "Nangxi's docs",
+  dest: path.resolve(__dirname, '../nxf-notes-view'),
   base: '/',
   themeConfig: {
     nav: [
