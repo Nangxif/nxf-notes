@@ -48,6 +48,15 @@ module.exports = {
               title: 'diff',
               path: '/blogs/front-frame/vue3/diff',
             },
+            {
+              title: '杂货间',
+              children: [
+                {
+                  title: 'Vue3渲染的几种方式',
+                  path: '/blogs/front-frame/vue3/groceries/rendering',
+                },
+              ],
+            },
           ],
         },
         {
@@ -72,13 +81,23 @@ module.exports = {
               title: 'introduction',
               path: '/blogs/automation/webpack/introduction',
             },
+
             {
-              title: 'babel',
-              path: '/blogs/automation/webpack/babel',
-            },
-            {
-              title: 'postcss',
-              path: '/blogs/automation/webpack/postcss',
+              title: '杂货间',
+              children: [
+                {
+                  title: 'Babel相关',
+                  path: '/blogs/automation/webpack/groceries/babel',
+                },
+                {
+                  title: '自定义postcss插件',
+                  path: '/blogs/automation/webpack/groceries/postcss',
+                },
+                {
+                  title: 'webpack打包vue3',
+                  path: '/blogs/automation/webpack/groceries/webpack-vue3',
+                },
+              ],
             },
           ],
         },

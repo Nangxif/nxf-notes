@@ -13,7 +13,7 @@ const reactiveData = reactive({
 
 那我们在取reactiveData的时候我们会发现它是一个proxy，但是b却还不是一个proxy，但是当我们取reactiveData.b的时候，我们就发现它变成了一个proxy，这就是懒代理，与Vue2的处理方式有很大的不同，Vue2在一开始的时候，就利用递归将嵌套对象都用dineProperty转换了一遍，这样很耗性能。
 
-## 一、reactive代码片段
+## reactive代码片段
 
 ```
 import { isObject } from '@vue/shared';
@@ -88,7 +88,7 @@ PS：reative总共就做了这么几件事
 2. Vue3为reactive对象提供了一个自定义的属性叫`__v_isReactive`，只有reactive对象才可以拿到 `__v_isReactive`属性，当我们对一个reactive对象再进行reactive的时候，那么会去判断对象里面有没有`__v_isReactive`，有的话直接返回reactive过的对象；
 3. 如果拿一个对象多次进行reative，那么它只会代理一次，后面直接从reactiveMap里面取缓存。
 
-## 二、mutableHandlers代码片段
+## mutableHandlers代码片段
 
 ```
 import { isObject } from '@vue/shared';
