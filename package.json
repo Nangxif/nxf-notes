@@ -5,7 +5,7 @@
   "scripts": {
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
-    "docs:deploy": "sh scripts/deploy-gh.sh"
+    "docs:deploy": "sh deploy-gh.sh"
   },
   "keywords": [],
   "author": "",
