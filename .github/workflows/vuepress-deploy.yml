@@ -1,0 +1,17 @@
+name: nxf-notes to Nangxif.github.io
+on: [push]
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@master
+
+    - name: Build and Deploy
+      uses: Nangxif/Nangxif.github.io@master
+      env:
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        TARGET_REPO: Nangxif/Nangxif.github.io
+        TARGET_BRANCH: master
+        BUILD_SCRIPT: yarn && yarn docs:build
+        BUILD_DIR: docs/.vuepress/dist
