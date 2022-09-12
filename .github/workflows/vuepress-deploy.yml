@@ -8,10 +8,10 @@ jobs:
       uses: actions/checkout@master
 
     - name: Build and Deploy
-      uses: Nangxif/Nangxif.github.io@master
+      uses: Nangxif/nxf-notes@master
       env:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         TARGET_REPO: Nangxif/Nangxif.github.io
-        TARGET_BRANCH: master
+        TARGET_BRANCH: main
         BUILD_SCRIPT: yarn && yarn docs:build
         BUILD_DIR: docs/.vuepress/dist
