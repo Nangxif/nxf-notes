@@ -1,8 +1,8 @@
-const path = require('path');
+const isProd = process.env.NODE_ENV === 'production';
 module.exports = {
   title: "Nangxi's docs",
   description: "Nangxi's docs",
-  base: '/nxf-notes/',
+  base: isProd ? '/nxf-notes/' : '/',
   themeConfig: {
     nav: [
       {
@@ -25,7 +25,16 @@ module.exports = {
         link: '/blogs/browser/operating-machining',
       },
       { text: 'Node', link: '/blogs/node/introduction' },
-      { text: '掘金', link: 'https://juejin.cn/user/1821245353761704/posts' },
+      {
+        text: '关于我',
+        items: [
+          { text: 'github', link: 'https://github.com/Nangxif' },
+          {
+            text: '掘金',
+            link: 'https://juejin.cn/user/1821245353761704/posts',
+          },
+        ],
+      },
     ],
     sidebar: {
       '/blogs/front-frame/': [
