@@ -4,6 +4,7 @@
 
 <script lang="ts">
 import { toRefs, computed } from 'vue';
+const pathname = window.location.pathname;
 export default {
   name: 'Image',
   props: {
@@ -12,7 +13,7 @@ export default {
   setup(props) {
     const { src } = toRefs(props);
     const targetSrc = computed(() => {
-      if (window.location.pathname.startsWith('/nxf-notes')) {
+      if (pathname.startsWith('/nxf-notes')) {
         return `/nxf-notes${src.value}`;
       }
       return src.value;
