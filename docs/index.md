@@ -5,21 +5,18 @@ title: 首页
 
 hero:
   name: Nangxif
-  text: 前端好好玩
-  tagline: 前端知识大全
+  text: Nangxif's blogs
+  tagline: 曩昔方的个人博客
   image:
-    src: /pure-logo.png
+    src: /logo.png
     alt: logo
   actions:
     - theme: brand
       text: 更多详情
-      link: /frontend/javascript
+      link: /blogs/front-frame/vue3/introduction
     - theme: alt
       text: 访问我的GitHub
       link: https://github.com/Nangxif
-    - theme: alt
-      text: 关于我
-      link: /me/
 features:
   - icon: ⚡️ 
     title: 记录生活，记录学习

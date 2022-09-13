@@ -1,8 +1,8 @@
 import mdItCustomAttrs from 'markdown-it-custom-attrs';
 const isProd = process.env.NODE_ENV === 'production';
 module.exports = {
-  title: "Nangxi's docs",
-  description: "Nangxi's docs",
+  title: "Nangxi's blogs",
+  description: "Nangxi's blogs",
   base: isProd ? '/nxf-notes/' : '/',
   head: [
     [
