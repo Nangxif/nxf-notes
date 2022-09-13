@@ -2,7 +2,7 @@ const path = require('path');
 module.exports = {
   title: "Nangxi's docs",
   description: "Nangxi's docs",
-  base: '/',
+  base: '/nxf-notes/',
   themeConfig: {
     nav: [
       {
