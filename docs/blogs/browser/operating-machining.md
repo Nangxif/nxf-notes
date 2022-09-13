@@ -2,7 +2,7 @@
 
 ## 一、浏览器的结构
 
-<img :src="$withBase('/browser/operating-machining/1.png')">
+<img src="./images/operating-machining/1.png" data-fancybox="gallery">
 
 ## 二、进程和线程
 当我们启动某个程序时，就会创建一个进程来执行任务代码，同时为该进程分配内存空间，该应用的所有状态都保存在内存空间里，当应用关闭时，该内存空间就会被回收。进程可以启动更多的线程来执行任务，由于每个进程分配的空间是独立的，如果两个进程之间需要传递某些数据，则需要通过进程间通信管道IPC来传递。很多应用都是多进程的结构，这样是为了避免某个进程卡死，由于进程之间相互独立，这样不会影响到整个应用程序。
@@ -21,7 +21,7 @@
 
 html首先经过Tokenizer标记化，通过词法分析将输入的html内容解析成多个标记，根据识别后的标记进行DOM树构造，在dom树构造过程中会创建document对象，然后以document为根节点的DOM树不断进行修改，向其中添加各种元素。HTML代码中往往会引入一些额外的资源，比如图片，css，js脚本等等，图片和css这些资源需要通过网络下载或者从缓存中直接加载，这些资源不会阻塞HTML的解析，因为他们不会影响DOM的生成。但当HTML解析过程中遇到script标签，就会停止html解析流程，转而去加载解析并执行js，js会阻塞渲染这是因为浏览器并不知道js执行是否会改变当前的HTML结构，如果js代码里用了document.write方法来修改HTML，那之前的HTML解析就没有任何意义了，这也是我们为什么一直说要把js脚本放在合适的位置引入，或者使用async或defer属性来异步加载执行js。
 
-<img :src="$withBase('/browser/operating-machining/2.png')">
+<img src="./images/operating-machining/2.png" data-fancybox="gallery">
 
 在HTML解析完成后，我们就会获得一个DOM Tree，但是我们还不知道DOM Tree上面每个节点应该长什么样子，主线程需要解析CSS，确定每个DOM节点的计算样式，即使你没有提供自定义的CSS样式，浏览器也会有自己默认的样式表，比如标签h1，h2会有自己的默认样式。知道DOM结构和每个节点的样式后，我们接下来需要知道每个节点放在页面上的哪个位置，也就是该节点的坐标以及该节点需要占用多大的区域，这个阶段被成为layout布局，主线程通过DOM和计算好的样式来生成Layout tree，Layout tree上的每个节点都记录了x，y坐标和边框尺寸。这里需要注意的一点是，DOM tree和Layout tree并不是一一对应的，设置了display:none的节点不会出现在Layout tree上，而在before等伪类中添加了content值的元素，content里的内容会出现在Layout tree上，不会出现在DOM tree里，这是因为DOM树是通过HTML解析获得，并不关心样式，而Layout tree是根据DOM和计算好的样式来生成，Layout tree和最后显示在页面上的节点是一一对应的。我们在知道了节点的大小，形状和位置之后，这还不够，还需要知道以什么样的顺序绘制（paint）。z-index会影响节点绘制的层级关系如果我们按照dom的层级结构来绘制界面，则会导致错误渲染，为了保证在屏幕上展示正确的层级，主线程遍历Layout tree创建一个绘制记录表（Paint Record），该表记录了绘制的顺序，这个阶段被称为绘制（paint）。现在知道了文档的绘制顺序，就需要把这些信息转化成像素点了，显示在屏幕上，这种行为被成为栅格化（Rastering）。Chrome最早使用了一种很简单的方式 ，只栅格化可视区的（Viewport）的内容，当用户滚动页面时，再栅格化更多的内容来填充缺失的部分，这种方式带来的问题显而易见，会导致展示延迟。随着不断的优化升级，现在的Chrome采用了一种更为复杂的栅格化流程，叫做合成（Composting），合成是一种将页面的各个部分分成多个图层，分别对其进行栅格化并在合成器线程中单独进行合成页面的技术。简单来说就是页面所有的元素按照某种规则进行分图层，并把图层都栅格化好了，然后只需要把可视区的内容组合成一帧展示给用户即可。
 
@@ -29,7 +29,7 @@ html首先经过Tokenizer标记化，通过词法分析将输入的html内容解
 
 整理一下上面所讲的东西：浏览器进程中的网络线程请求获取到html数据后，通过IPC将数据传给渲染器进程的主线程，主线程将HTML解析构造DOM树，然后进行样式计算，根据DOM树和生成好的样式生成Layout tree，通过遍历Layout tree生成绘制顺序表，接着遍历Layout tree生成了Layer tree，然后主线程将Layer tree和绘制顺序信息一起传给合成器线程，合成器线程按照规则进行分图层，并把图层分为更小的图块（tiles）传给栅格线程进行栅格化，栅格化完成后，合成器线程会获得栅格线程传过来的“draw quads”图块信息，根据这些信息合成器线程上合成了一个合成器帧，然后将该合成器帧通过IPC传递给浏览器进程，浏览器进程再传到GPU进行渲染，之后就展示到屏幕上了。
 
-<img :src="$withBase('/browser/operating-machining/3.png')">
+<img src="./images/operating-machining/3.png" data-fancybox="gallery">
 
 当我们改变一个元素的尺寸位置属性时，会重新进行样式计算（Computed Style），布局（Layout）绘制（Paint）以及后面的所有流程，这种行为我们成为重排列。
 

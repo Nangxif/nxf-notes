@@ -18,7 +18,7 @@ printSquare(4);
 ```
 调用栈是一个数据结构，用于记录我们当前处在程序运行的哪个位置，如果调用了函数，就让它进栈，如果栈顶函数返回结果，就让它出栈，这个栈就是做函数的压入和弹出。我们运行这段代码，那么整段代码相当于一个main函数，所以我们把它压入栈中，下图就是整段代码的入栈出栈过程
 
-<img :src="$withBase('/browser/event-loop/1.png')">
+<img src="./images/event-loop/1.png" data-fancybox="gallery">
 
 如果你听说过栈溢出的话，这里有个例子
 ```
@@ -29,7 +29,7 @@ foo();
 ```
 这摆明了就是一个套娃嘛
 
-<img :src="$withBase('/browser/event-loop/2.png')">
+<img src="./images/event-loop/2.png" data-fancybox="gallery">
 
 最后浏览器会问你，你该不会帧的要递归调用16000次foo吧？“Maximum call stack size excceeded”,我会先帮你终止进程，让你去检查代码。
 
@@ -55,9 +55,9 @@ console.log('JSCONFEU');
 ```
 那么将异步回调和此前聊过的调用栈联系起来，上面这段代码具体是怎么运行的呢？
 
-<img :src="$withBase('/browser/event-loop/3.png')">
+<img src="./images/event-loop/3.png" data-fancybox="gallery">
 
-<img :src="$withBase('/browser/event-loop/4.png')">
+<img src="./images/event-loop/4.png" data-fancybox="gallery">
 
 代码运行执行console.log打印hi，接着我们看一下setTimeout的时候发生了什么？我们传递了一个回调函数参数和一个时间函数。注意setTimeout是浏览器提供给我们的api（运行JavaScript的环境提供给我们的），调用之后，浏览器给我们设置了一个定时器，之后浏览器会在一遍进行计时。setTimeout调用后已经成功设置了定时器，所以此时它可以出栈了，然后打印JSConfEU，调用栈清空。那么现在Webapi中就有一个定时器，计时五秒后结束，而Webapi是不能无缘无故改动你的代码的，它不能冒然进入调用栈中，否则就会像是随机出现在你的代码中一样。因此这里引入了任务队列或者回调任务队列。一般在Webapi结束之后（计时结束、请求得到响应等）会把回调函数送到任务队列中。然后，我们的重点--事件循环，终于出现了。事件循环实际上就像是这一整个过程中最简单的那个部分。事件循环做的事情很简单，就是查看栈和任务队列，如果栈空，那么就把任务队列队头的任务压入栈中，之后这个任务得到执行。
 
@@ -155,12 +155,12 @@ setTimeout(function(){
 
 任务环中首先关注任务队列（Task Queue），这也是任务环中历史最悠久的部分
 
-<img :src="$withBase('/browser/event-loop/5.jpg')">
+<img src="./images/event-loop/5.png" data-fancybox="gallery">
 
 webapi是浏览器提供给我们的一些api，还有一个神秘的事件循环（Event Loop）和一个回调任务队列（Task Queue）
 JavaScript是一门单线程的语言，单线程在运行时，意味着它只有一个调用栈，也就是上图的stack，同一时刻只能做一件事，我们先来看一个简单的案例，可以用可视化的方式理解一下这部分的知识
 
-<img :src="$withBase('/browser/event-loop/6.png')">
+<img src="./images/event-loop/6.png" data-fancybox="gallery">
 
 左边代表Task Queue，右边代表渲染任务
 如果我们这时候写了一个无限循环，比如
@@ -169,7 +169,7 @@ while(true){}
 ```
 那么循环移动到这就会被卡在这里，界面的gif会动不了，文字选不中
 
-<img :src="$withBase('/browser/event-loop/7.png')">
+<img src="./images/event-loop/7.png" data-fancybox="gallery">
 
 现在我们回过头看一下上面那段display的代码，我们总担心内容会闪现，其实并不会，因为脚本作为任务的一部分，必须执行结束，浏览器才会执行渲染，事件环可以确保你的任务在下一次渲染之前完成。我们再来看一个循环
 ```
@@ -180,7 +180,7 @@ loop();
 ```
 这也是一个循环，在setTimeout的回调中调用自身，我们发现这段代码并不会阻塞页面渲染什么的，那如果按照上面的环图来解释要怎么解释呢？
 
-<img :src="$withBase('/browser/event-loop/8.png')">
+<img src="./images/event-loop/8.png" data-fancybox="gallery">
 
 白色方块一直在循环走动，T会每隔一段时间放入任务队列，方块在执行完页面渲染任务之后就会跑到任务队列的环里面执行setTimeout的回调，当这个回调执行完之后又会跑去执行页面渲染任务，所以页面并不会被阻塞。
 如果你想执行与渲染页面有关的代码，尽量不要把他放在任务队列中，因为任务队列在渲染任务的另一边，我们要把渲染的代码放在渲染阶段之前，浏览器允许我们这样做，使用requestAnimationFrame可以做到这点。我们来创建一个循环
@@ -200,43 +200,43 @@ callback();
 ```
 我们会发现用setTimeout实现的div块移动会比reuestAnimationFrame要快很多，这是为什么呢？这意味着setTimeout的回调被更频繁地调用，这可不是一件好事情，用上面的环图来解释一下
 
-<img :src="$withBase('/browser/event-loop/9.png')">
+<img src="./images/event-loop/9.png" data-fancybox="gallery">
 
 我们看到渲染可能在任务之间执行，但是这不意味着必须是执行一次调用栈从任务队列里面拿到的任务就必须执行一次渲染任务，有可能会执行几次调用栈里面的东西再渲染一次页面，因为调用栈里面的任务可能不是很大，不到16.6毫秒就执行完了，所以我们上面说到的display的例子，那两句代码在一帧的时间内就被执行完了，所以不存在闪现的现象。
 我们一直在纠结setTimeout的0是否真的是立即执行的，其实setTimeout就算设置为0还是会有延迟。即使我们将延迟设置为0，浏览器会根据标准规定选择任意数字作为延时，从测试上看大概是4.7ms。
 我们假设这是显示给用户的帧图，浏览器的渲染发生在每个帧的开头，包括样式计算，布局和绘制，不一定三个都有，取决于需要更新的内容
 
-<img :src="$withBase('/browser/event-loop/10.png')">
+<img src="./images/event-loop/10.png" data-fancybox="gallery">
 
 接下来假设有一些任务
 
-<img :src="$withBase('/browser/event-loop/11.png')">
+<img src="./images/event-loop/11.png" data-fancybox="gallery">
 
 他们不在乎整洁，他们可以出现在任何地方，但就帧内的时间段而言，没有任何顺序，我们通过setTimeout观察到了这一点，假设我们每帧都会执行三到四个任务
 
-<img :src="$withBase('/browser/event-loop/12.png')">
+<img src="./images/event-loop/12.png" data-fancybox="gallery">
 
 这意味着四分之三的任务都是不必要的，因为压根不会被渲染
 
-<img :src="$withBase('/browser/event-loop/13.png')">
+<img src="./images/event-loop/13.png" data-fancybox="gallery">
 
 一些老的动画库为了避免上面这种情况，会采取下面这种做法
 setTimeout(animationFrame,1000/60)
 他们利用这么一个毫秒值，每秒执行60次，他们假设这是一个60赫兹的屏幕，所以这样做可以减少无用的任务，这是一个无奈之举，因为setTimeout不是为了动画存在的，这种做法由于不精确会造成漂移。这里显示的就是一帧没有任务执行，然后下一帧执行了两个任务
 
-<img :src="$withBase('/browser/event-loop/14.png')">
+<img src="./images/event-loop/14.png" data-fancybox="gallery">
 
 对用户来说显示效果并不好。除此之外如果某个任务运行时间过长，浏览器会推迟渲染，因为它们都在同一个线程上运行。
 
-<img :src="$withBase('/browser/event-loop/15.png')">
+<img src="./images/event-loop/15.png" data-fancybox="gallery">
 
 这样就破坏了既定的程序，如果我们使用的是requestAnimationFrame而不是用setTimeout，它们看起来会像这样，一切都整洁有序，每一帧都按顺序发生，即使有任务耗时较长，也是这个结果
 
-<img :src="$withBase('/browser/event-loop/16.png')">
+<img src="./images/event-loop/16.png" data-fancybox="gallery">
 
 当然，你无法完全避免任务像点击事件会在任务中传递，通常你希望尽快响应事件，但如果你有像计时器这样的东西，或者你有来自网络的响应，真心建议使用requestAnimationFrame，将动画的工作打包起来，特别是如果你已经有动画运行，因为这样会节省很多重复的工作
 
-<img :src="$withBase('/browser/event-loop/17.png')">
+<img src="./images/event-loop/17.png" data-fancybox="gallery">
 
 还有一个细节，这是难倒很多开发人员的地方，requestAnimationFrame回调函数运行在处理css之前和绘制之前
 所以像下面这样的代码可能看起来开销很大，我们多次展示和隐藏一个盒子，但是实际上并不大
@@ -332,7 +332,7 @@ nextClick.then(event => {
 我们首先会创建一个事件对象，然后调用每一个监听器，传入事件对象，然后我们检查事件对象的canceled属性，如果是canceled，就不会打开链接，如果没有canceled，就打开链接，当调用event.preventDefault()时，事件会标记成canceled。如果用户单击一个链接，那么我的微任务就会在每次回调之后发生，因为js调用栈清空了，但是当我们用js调用click的时候，它会执行完链接点击的操作，只有在算法完成之后才会返回，因此js执行栈永远不会清空。在此算法执行期间，微任务不可能发生，所以它到达了“查看事件对象”这一步，即使你有很多的Promise想要调用event.preventDefault()，也太晚了，它会打开超链接之后，执行Promise回调，但是已经错过了取消事件的时间点。
 ### 2.那么宏任务和微任务处于事件循环中的哪个环节？
 
-<img :src="$withBase('/browser/event-loop/18.png')">
+<img src="./images/event-loop/18.png" data-fancybox="gallery">
 
 ### 3.哪些是宏任务哪些是微任务
 
