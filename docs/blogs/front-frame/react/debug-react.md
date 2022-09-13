@@ -15,16 +15,16 @@ npm run eject
 跑完这个命令，会自动把之前启动项目的工具react-scripts替换为eject生成的node scripts/start.js   
 跑命令前的样子
 
-<img src="./images/debug-react/1.png" data-fancybox="gallery">
+<img :src="$withBase('/browser/debug-react/1.png')" data-fancybox="gallery">
 
 跑命令后的样子
 
-<img src="./images/debug-react/2.png" data-fancybox="gallery">
+<img :src="$withBase('/browser/debug-react/2.png')" data-fancybox="gallery">
 
 跑完这段命令会创建.git文件夹并在项目生成仓库，如果我们是先进行3步骤再进行2步骤，那么在进行2步骤的时候会报错，说仓库还有未commit的代码，导致eject命令无法执行，这时候我们需要将代码全部commit，再跑这串命令。
 ## 3.将facebook仓库的react源码clone或者下载，放至src/react目录下
 
-<img src="./images/debug-react/3.png" data-fancybox="gallery">
+<img :src="$withBase('/browser/debug-react/3.png')" data-fancybox="gallery">
 
 ## 4.修改react-app/src/index.js里面关于react的引入方式
 
@@ -84,7 +84,7 @@ npm run start
 我们先将项目跑起来，再看看报什么错。emmm，貌似报了不少错，我们一个个来解决!
 ## 8.修改第一个遇到的错误
 
-<img src="./images/debug-react/4.png" data-fancybox="gallery">
+<img :src="$withBase('/browser/debug-react/4.png')" data-fancybox="gallery">
 
 
 ```js
@@ -99,7 +99,7 @@ export const unstable_setDisableYieldValue = SchedulerMock.unstable_setDisableYi
 ```
 ## 9.项目跑起来了，但是我们依然能在浏览器控制台看到报错
 
-<img src="./images/debug-react/5.png" data-fancybox="gallery">
+<img :src="$withBase('/browser/debug-react/5.png')" data-fancybox="gallery">
 
 看来是环境变量没有设置
 在react-app/config/env.js，全局搜索stringified
@@ -115,7 +115,7 @@ const stringified = {
 };
 ```
 
-<img src="./images/debug-react/6.png" data-fancybox="gallery">
+<img :src="$withBase('/browser/debug-react/6.png')" data-fancybox="gallery">
 
 看来还有未设置的环境变量，那我们继续添加
 
@@ -131,7 +131,7 @@ const stringified = {
 };
 ```
 
-<img src="./images/debug-react/7.png" data-fancybox="gallery">
+<img :src="$withBase('/browser/debug-react/7.png')" data-fancybox="gallery">
 
 好吧，还有一个环境变量
 ```js
@@ -148,7 +148,7 @@ const stringified = {
 ```
 ## 10.解决__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED问题
 
-<img src="./images/debug-react/8.png" data-fancybox="gallery">
+<img :src="$withBase('/browser/debug-react/8.png')" data-fancybox="gallery">
 
 修改react-app/src/react/packages/shared/ReactSharedInternals.js
 
@@ -165,7 +165,7 @@ export default ReactSharedInternals;
 ```
 ## 11.This module must be shimmed by a specific renderer
 
-<img src="./images/debug-react/9.png" data-fancybox="gallery">
+<img :src="$withBase('/browser/debug-react/9.png')" data-fancybox="gallery">
 
 修改react-app/src/react/packages/react-reconciler/src/ReactFiberHostConfig.js
 
@@ -177,7 +177,7 @@ export * from './forks/ReactFiberHostConfig.dom';
 ```
 ## 12.跑起来了
 
-<img src="./images/debug-react/10.png" data-fancybox="gallery">
+<img :src="$withBase('/browser/debug-react/10.png')" data-fancybox="gallery">
 
 ## 13.开始debug
 在app.js文件中加个debugger
@@ -198,13 +198,13 @@ root.render(
 ```
 点击运行调试，选择chrome环境
 
-<img src="./images/debug-react/11.png" data-fancybox="gallery">
+<img :src="$withBase('/browser/debug-react/11.png')" data-fancybox="gallery">
 
 端口改为当前项目的服务端口3000，点击运行和调试
 
-<img src="./images/debug-react/12.png" data-fancybox="gallery">
+<img :src="$withBase('/browser/debug-react/12.png')" data-fancybox="gallery">
 
 ## 14.大功告成
 
-<img src="./images/debug-react/13.png" data-fancybox="gallery">
+<img :src="$withBase('/browser/debug-react/13.png')" data-fancybox="gallery">
 

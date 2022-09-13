@@ -369,7 +369,7 @@ module.exports = {
 
 单进程因为是同步所以webpack可以收集错误信息，并通过dev-server反馈到浏览器:
 
-<img src="./images/webpack-vue3/1.png" data-fancybox="gallery">
+<img :src="$withBase('/browser/webpack-vue3/1.png')" data-fancybox="gallery">
 
 现在试试多进程方案：
 
@@ -409,7 +409,7 @@ module.exports = {
 ```
 Ok，同样可以工作:
 
-<img src="./images/webpack-vue3/2.png" data-fancybox="gallery">
+<img :src="$withBase('/browser/webpack-vue3/2.png')" data-fancybox="gallery">
 
 对于babel还是atl，配置方式同理, 只是把ts-loader替换而已。
 
