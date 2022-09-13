@@ -4,7 +4,7 @@ layout: home
 title: 首页
 
 hero:
-  name: Process
+  name: Nangxif
   text: 前端好好玩
   tagline: 前端知识大全
   image:
@@ -16,7 +16,7 @@ hero:
       link: /frontend/javascript
     - theme: alt
       text: 访问我的GitHub
-      link: https://github.com/process1024
+      link: https://github.com/Nangxif
     - theme: alt
       text: 关于我
       link: /me/

@@ -7,7 +7,7 @@
     "docs:build": "cross-env NODE_ENV=production vitepress build docs"
   },
   "keywords": [],
-  "author": "",
+  "author": "Nangxif",
   "license": "ISC",
   "devDependencies": {
     "cross-env": "^7.0.3",

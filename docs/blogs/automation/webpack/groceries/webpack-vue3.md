@@ -326,9 +326,9 @@ plugins: [
 
 webpack转译Typescript现有方案
 
-| 进程                                   |                                                              |                                                 |                                        |
-| -------------------------------------- | ------------------------------------------------------------ | ----------------------------------------------- | -------------------------------------- |
-| 单进程方案(类型检查和转译在同一个进程) | ts-loader(transpileOnly为false)                              | awesome-typescript-loader                       |                                        |
+| 进程                                   |                                                                 |                                                 |                                        |
+| -------------------------------------- | --------------------------------------------------------------- | ----------------------------------------------- | -------------------------------------- |
+| 单进程方案(类型检查和转译在同一个进程) | ts-loader(transpileOnly为false)                                 | awesome-typescript-loader                       |                                        |
 | 多进程方案                             | ts-loader(transpileOnly为true) + fork-ts-checker-webpack-plugin | awesome-typescript-loader + 自带的CheckerPlugin | babel + fork-ts-checker-webpack-plugin |
 
 综合考虑性能和扩展性，目前比较推荐的是`babel+fork-ts-checker-webpack-plugin`方案
@@ -369,7 +369,7 @@ module.exports = {
 
 单进程因为是同步所以webpack可以收集错误信息，并通过dev-server反馈到浏览器:
 
-<img :src="$withBase('/browser/webpack-vue3/1.png')" data-fancybox="gallery">
+<Image :src="'/automation/webpack/webpack-vue3/1.png'" />
 
 现在试试多进程方案：
 
@@ -409,7 +409,7 @@ module.exports = {
 ```
 Ok，同样可以工作:
 
-<img :src="$withBase('/browser/webpack-vue3/2.png')" data-fancybox="gallery">
+<Image :src="'/automation/webpack/webpack-vue3/2.png'" />
 
 对于babel还是atl，配置方式同理, 只是把ts-loader替换而已。
 
