@@ -1,48 +1,3 @@
-# name: nxf-notes to Nangxif.github.io
-# on: [push]
-# jobs:
-#   build-and-deploy:
-#     runs-on: ubuntu-latest
-#     steps:
-#     - name: Checkout
-#       uses: actions/checkout@master
-
-#     - name: Build and Deploy
-#       uses: Nangxif/nxf-notes@master
-#       env:
-#         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-#         TARGET_REPO: Nangxif/Nangxif.github.io
-#         TARGET_BRANCH: main
-#         BUILD_SCRIPT: pnpm && pnpm docs:build
-#         BUILD_DIR: docs/.vuepress/dist
-
-# name: nxf-notes to Nangxif.github.io
-
-# on:
-#   push:
-#     branches:
-#       - master
-
-# jobs:
-#   deploy:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@v2
-#       - uses: actions/setup-node@v3
-#         with:
-#           node-version: 16
-#       - run: pnpm install
-#       - name: Build
-#         run: pnpm docs:build
-
-#       # - name: CreateTag
-#       #   run git tag -a
-#       - name: Deploy
-#         uses: peaceiris/actions-gh-pages@v3
-#         with:
-#           deploy_key: ${{ secrets.ACTION_SECRET }}
-#           publish_dir: docs/.vitepress/dist
-
 # name 可以自定义
 name: Deploy nxf-notes
 
@@ -70,7 +25,7 @@ jobs:
 
       # 部署到 GitHub Pages
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+        uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }} # 也就是我们刚才生成的 secret
           BRANCH: gh-pages # 部署到 gh-pages 分支，因为 main 分支存放的一般是源码，而 gh-pages 分支则用来存放生成的静态文件
