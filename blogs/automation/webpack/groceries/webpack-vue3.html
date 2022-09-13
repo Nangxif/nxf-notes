@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>webpack打包vue3 | Nangxi&#39;s docs</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    
+    <meta name="description" content="Nangxi&#39;s docs">
+    
+    <link rel="preload" href="/assets/css/0.styles.9825735b.css" as="style"><link rel="preload" href="/assets/js/app.577a89d3.js" as="script"><link rel="preload" href="/assets/js/2.dc5a3d57.js" as="script"><link rel="preload" href="/assets/js/13.2e7f3cee.js" as="script"><link rel="prefetch" href="/assets/js/10.376969f8.js"><link rel="prefetch" href="/assets/js/11.b7cfb206.js"><link rel="prefetch" href="/assets/js/12.ac174cb7.js"><link rel="prefetch" href="/assets/js/14.21284f9f.js"><link rel="prefetch" href="/assets/js/15.bb4f9f89.js"><link rel="prefetch" href="/assets/js/16.f863ff74.js"><link rel="prefetch" href="/assets/js/17.7137ef6c.js"><link rel="prefetch" href="/assets/js/18.e542e422.js"><link rel="prefetch" href="/assets/js/19.92702bfa.js"><link rel="prefetch" href="/assets/js/20.f4f96a57.js"><link rel="prefetch" href="/assets/js/21.9384358c.js"><link rel="prefetch" href="/assets/js/22.0fc5472c.js"><link rel="prefetch" href="/assets/js/23.30bf512d.js"><link rel="prefetch" href="/assets/js/24.414f9dd3.js"><link rel="prefetch" href="/assets/js/25.70be0545.js"><link rel="prefetch" href="/assets/js/26.2db442da.js"><link rel="prefetch" href="/assets/js/27.e0154de6.js"><link rel="prefetch" href="/assets/js/28.ed981891.js"><link rel="prefetch" href="/assets/js/29.b2b5a47c.js"><link rel="prefetch" href="/assets/js/3.0ce7fa96.js"><link rel="prefetch" href="/assets/js/30.21281572.js"><link rel="prefetch" href="/assets/js/31.67a0d1db.js"><link rel="prefetch" href="/assets/js/32.db6c7415.js"><link rel="prefetch" href="/assets/js/33.12659d82.js"><link rel="prefetch" href="/assets/js/4.43879640.js"><link rel="prefetch" href="/assets/js/5.60572b82.js"><link rel="prefetch" href="/assets/js/6.22f00265.js"><link rel="prefetch" href="/assets/js/7.b6a287fb.js"><link rel="prefetch" href="/assets/js/8.5d14f72d.js"><link rel="prefetch" href="/assets/js/9.71ceb8ff.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.9825735b.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">Nangxi's docs</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="框架" class="dropdown-title"><span class="title">框架</span> <span class="arrow down"></span></button> <button type="button" aria-label="框架" class="mobile-dropdown-title"><span class="title">框架</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/blogs/front-frame/vue3/introduction.html" class="nav-link">
+  Vue3
+</a></li><li class="dropdown-item"><!----> <a href="/blogs/front-frame/react/introduction.html" class="nav-link">
+  React
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="自动化" class="dropdown-title"><span class="title">自动化</span> <span class="arrow down"></span></button> <button type="button" aria-label="自动化" class="mobile-dropdown-title"><span class="title">自动化</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/blogs/automation/webpack/introduction.html" class="nav-link">
+  Webpack
+</a></li><li class="dropdown-item"><!----> <a href="/blogs/automation/esbuild/introduction.html" class="nav-link">
+  ESBuild
+</a></li></ul></div></div><div class="nav-item"><a href="/blogs/js&amp;ts/js/coriolization-of-the-function.html" class="nav-link">
+  JS&amp;TS
+</a></div><div class="nav-item"><a href="/blogs/browser/operating-machining.html" class="nav-link">
+  浏览器
+</a></div><div class="nav-item"><a href="/blogs/node/introduction.html" class="nav-link">
+  Node
+</a></div><div class="nav-item"><a href="https://juejin.cn/user/1821245353761704/posts" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  掘金
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="框架" class="dropdown-title"><span class="title">框架</span> <span class="arrow down"></span></button> <button type="button" aria-label="框架" class="mobile-dropdown-title"><span class="title">框架</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/blogs/front-frame/vue3/introduction.html" class="nav-link">
+  Vue3
+</a></li><li class="dropdown-item"><!----> <a href="/blogs/front-frame/react/introduction.html" class="nav-link">
+  React
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="自动化" class="dropdown-title"><span class="title">自动化</span> <span class="arrow down"></span></button> <button type="button" aria-label="自动化" class="mobile-dropdown-title"><span class="title">自动化</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/blogs/automation/webpack/introduction.html" class="nav-link">
+  Webpack
+</a></li><li class="dropdown-item"><!----> <a href="/blogs/automation/esbuild/introduction.html" class="nav-link">
+  ESBuild
+</a></li></ul></div></div><div class="nav-item"><a href="/blogs/js&amp;ts/js/coriolization-of-the-function.html" class="nav-link">
+  JS&amp;TS
+</a></div><div class="nav-item"><a href="/blogs/browser/operating-machining.html" class="nav-link">
+  浏览器
+</a></div><div class="nav-item"><a href="/blogs/node/introduction.html" class="nav-link">
+  Node
+</a></div><div class="nav-item"><a href="https://juejin.cn/user/1821245353761704/posts" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  掘金
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>Webpack</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/blogs/automation/webpack/introduction.html" class="sidebar-link">introduction</a></li><li><section class="sidebar-group collapsable is-sub-group depth-1"><p class="sidebar-heading open"><span>杂货间</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/blogs/automation/webpack/groceries/babel.html" class="sidebar-link">Babel相关</a></li><li><a href="/blogs/automation/webpack/groceries/postcss.html" class="sidebar-link">自定义postcss插件</a></li><li><a href="/blogs/automation/webpack/groceries/webpack-vue3.html" aria-current="page" class="active sidebar-link">webpack打包vue3</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blogs/automation/webpack/groceries/webpack-vue3.html#一、项目目录" class="sidebar-link">一、项目目录</a></li><li class="sidebar-sub-header"><a href="/blogs/automation/webpack/groceries/webpack-vue3.html#二、详细配置" class="sidebar-link">二、详细配置</a></li><li class="sidebar-sub-header"><a href="/blogs/automation/webpack/groceries/webpack-vue3.html#三、需注意的点" class="sidebar-link">三、需注意的点</a></li></ul></li></ul></section></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>ESBuild</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="webpack打包vue3"><a href="#webpack打包vue3" class="header-anchor">#</a> webpack打包vue3</h1> <p>我们用webpack5+pnpm来打包vue3</p> <h2 id="一、项目目录"><a href="#一、项目目录" class="header-anchor">#</a> 一、项目目录</h2> <div class="language- line-numbers-mode"><pre class="language-text"><code>- scripts
+  - webpack.config.dev.js
+  - webpack.config.base.js
+  - webpack.config.prod.js
+- src
+- babel.config.js
+- package.json
+- pnpm-lock.yaml
+- tsconfig.json
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><p>PS：因为我们一个项目肯定会分成开发和发布，所以我们将webpack.config.base.js配置拆分成prod和dev版本的配置，公有配置都放置于webpack.config.base.js。</p> <h2 id="二、详细配置"><a href="#二、详细配置" class="header-anchor">#</a> 二、详细配置</h2> <h3 id="_1-开发时"><a href="#_1-开发时" class="header-anchor">#</a> 1.开发时</h3> <p><code>webpack.config.dev.js</code></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>const HtmlWebpackPlugin = require('html-webpack-plugin');
+module.exports = {
+  mode: 'development',
+  devServer: {
+    port: 3000,
+    compress: true,
+    hot: true,
+  },
+  cache: {
+    type: 'filesystem',
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './src/index.html',
+    }),
+  ],
+};
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br></div></div><h3 id="_2-打包时"><a href="#_2-打包时" class="header-anchor">#</a> 2.打包时</h3> <p><code>webpack.config.prod.js</code></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+module.exports = {
+  mode: 'production',
+  plugins: [
+    new HtmlWebpackPlugin({
+      //创建插件的实例对象
+      template: './src/index.html', //指定要用到的模板文件，会自动引入打包后的资源
+      filename: 'index.html', //指定生成的文件的名称，该文件存在于内存中，在目录中不显示
+      minify: {
+        //可以减少打包后html一些体积的操作
+        removeAttributeQuotes: true, //是否去掉html里面的可以去掉的双引号
+        collapseWhitespace: true, //移除空格，生成的html变成一行
+        removeComments: true, //移除注释
+      },
+      hash: true, //生成的html里面引入的入口文件是否有hash戳eg：bandle.js?hash戳
+    }),
+  ],
+};
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br></div></div><h3 id="_3-基础配置"><a href="#_3-基础配置" class="header-anchor">#</a> 3.基础配置</h3> <p><code>webpack.config.base.js</code></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>const path = require('path');
+const { merge } = require('webpack-merge');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin');
+const WebpackBar = require('webpackbar');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const { VueLoaderPlugin } = require('vue-loader');
+const prodWebpackConfig = require('./webpack.config.prod');
+const devWebpackConfig = require('./webpack.config.dev');
+
+const mergeConfig =
+  process.env.NODE_ENV === 'production' ? prodWebpackConfig : devWebpackConfig;
+module.exports = merge(
+  {
+    entry: path.join(__dirname, '../src/main.ts'),
+    output: {
+      path: path.join(__dirname, '../dist'),
+      filename: './js/[name].[contenthash:5].js',
+    },
+    module: {
+      rules: [
+        {
+          test: /\.js$/,
+          exclude: [/node_modules/],
+          use: [
+            {
+              loader: 'babel-loader',
+            },
+          ],
+        },
+        {
+          test: /\.(ts|tsx)$/,
+          exclude: /node_modules/,
+          use: [
+            'babel-loader',
+            {
+              loader: 'ts-loader',
+              options: {
+                transpileOnly: true,
+                happyPackMode: false,
+                appendTsSuffixTo: [/\.vue$/],
+              },
+            },
+          ],
+        },
+        {
+          test: /\.vue$/,
+          exclude: /node_modules/,
+          loader: 'vue-loader',
+        },
+        {
+          test: /\.css$/,
+          use: [
+            MiniCssExtractPlugin.loader,
+            {
+              loader: 'css-loader',
+              options: {
+                modules: true,
+              },
+            },
+          ],
+        },
+        {
+          test: /\.less$/,
+          use: [
+            'vue-style-loader',
+            {
+              loader: 'css-loader',
+              options: {
+                importLoaders: 1,
+              },
+            },
+            'postcss-loader',
+            'less-loader',
+          ],
+        },
+        {
+          test: /\.(png|svg|jpg|jpeg|gif)$/i,
+          type: 'asset/resource',
+          generator: {
+            filename: 'images/[hash][ext][query]',
+          },
+        },
+        {
+          test: /\.html$/,
+          loader: 'html-loader',
+        },
+      ],
+    },
+    resolve: {
+      extensions: [
+        '.tsx',
+        '.ts',
+        '.mjs',
+        '.js',
+        '.jsx',
+        '.vue',
+        '.json',
+        '.wasm',
+      ],
+      alias: {
+        '@': path.join(__dirname, '../src'),
+      },
+    },
+    plugins: [
+      new MiniCssExtractPlugin({
+        filename: 'css/main.css',
+      }),
+      new OptimizeCssAssetsWebpackPlugin(),
+      new VueLoaderPlugin(),
+      new ForkTsCheckerWebpackPlugin(),
+      new WebpackBar({
+        color: '#85d', // 默认green，进度条颜色支持HEX
+        basic: false, // 默认true，启用一个简单的日志报告器
+        profile: false, // 默认false，启用探查器。
+      }),
+    ],
+  },
+  mergeConfig
+);
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br><span class="line-number">65</span><br><span class="line-number">66</span><br><span class="line-number">67</span><br><span class="line-number">68</span><br><span class="line-number">69</span><br><span class="line-number">70</span><br><span class="line-number">71</span><br><span class="line-number">72</span><br><span class="line-number">73</span><br><span class="line-number">74</span><br><span class="line-number">75</span><br><span class="line-number">76</span><br><span class="line-number">77</span><br><span class="line-number">78</span><br><span class="line-number">79</span><br><span class="line-number">80</span><br><span class="line-number">81</span><br><span class="line-number">82</span><br><span class="line-number">83</span><br><span class="line-number">84</span><br><span class="line-number">85</span><br><span class="line-number">86</span><br><span class="line-number">87</span><br><span class="line-number">88</span><br><span class="line-number">89</span><br><span class="line-number">90</span><br><span class="line-number">91</span><br><span class="line-number">92</span><br><span class="line-number">93</span><br><span class="line-number">94</span><br><span class="line-number">95</span><br><span class="line-number">96</span><br><span class="line-number">97</span><br><span class="line-number">98</span><br><span class="line-number">99</span><br><span class="line-number">100</span><br><span class="line-number">101</span><br><span class="line-number">102</span><br><span class="line-number">103</span><br><span class="line-number">104</span><br><span class="line-number">105</span><br><span class="line-number">106</span><br><span class="line-number">107</span><br><span class="line-number">108</span><br><span class="line-number">109</span><br><span class="line-number">110</span><br><span class="line-number">111</span><br><span class="line-number">112</span><br><span class="line-number">113</span><br><span class="line-number">114</span><br><span class="line-number">115</span><br><span class="line-number">116</span><br><span class="line-number">117</span><br><span class="line-number">118</span><br><span class="line-number">119</span><br><span class="line-number">120</span><br></div></div><h3 id="_4-babel配置"><a href="#_4-babel配置" class="header-anchor">#</a> 4.babel配置</h3> <p><code>babel.config.js</code></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>module.exports = {
+  presets: [
+    '@vue/cli-plugin-babel/preset'
+  ]
+};
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><h3 id="_5-ts配置"><a href="#_5-ts配置" class="header-anchor">#</a> 5.ts配置</h3> <p><code>tsconfig.json</code></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>{
+  &quot;compilerOptions&quot;: {
+    &quot;target&quot;: &quot;esnext&quot;,
+    &quot;module&quot;: &quot;esnext&quot;,
+    &quot;strict&quot;: true,
+    &quot;jsx&quot;: &quot;preserve&quot;,
+    &quot;moduleResolution&quot;: &quot;node&quot;,
+    &quot;skipLibCheck&quot;: true,
+    &quot;esModuleInterop&quot;: true,
+    &quot;allowSyntheticDefaultImports&quot;: true,
+    &quot;forceConsistentCasingInFileNames&quot;: true,
+    &quot;useDefineForClassFields&quot;: true,
+    &quot;noImplicitAny&quot;: false,
+    &quot;sourceMap&quot;: true,
+    &quot;baseUrl&quot;: &quot;.&quot;,
+    &quot;types&quot;: [
+      &quot;webpack-env&quot;
+    ],
+    &quot;paths&quot;: {
+      &quot;@/*&quot;: [
+        &quot;src/*&quot;
+      ]
+    },
+    &quot;lib&quot;: [
+      &quot;esnext&quot;,
+      &quot;dom&quot;,
+      &quot;dom.iterable&quot;,
+      &quot;scripthost&quot;
+    ]
+  },
+  &quot;include&quot;: [
+    &quot;src/**/*.ts&quot;,
+    &quot;src/**/*.tsx&quot;,
+    &quot;src/**/*.vue&quot;,
+    &quot;tests/**/*.ts&quot;,
+    &quot;tests/**/*.tsx&quot;
+  ],
+  &quot;exclude&quot;: [
+    &quot;node_modules&quot;
+  ]
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br></div></div><h3 id="_6-scripts运行命令"><a href="#_6-scripts运行命令" class="header-anchor">#</a> 6.scripts运行命令</h3> <div class="language- line-numbers-mode"><pre class="language-text"><code>&quot;scripts&quot;: {
+    &quot;dev&quot;: &quot;cross-env NODE_ENV=development webpack serve  --config ./script/webpack.config.base.js&quot;,
+    &quot;build&quot;: &quot;cross-env NODE_ENV=production webpack --config ./script/webpack.config.base.js&quot;
+  },
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><h2 id="三、需注意的点"><a href="#三、需注意的点" class="header-anchor">#</a> 三、需注意的点</h2> <h3 id="_1-类型声明"><a href="#_1-类型声明" class="header-anchor">#</a> 1.类型声明</h3> <p><code>因为我们使用了&lt;script lang=&quot;ts&quot;&gt;</code>，所以为了ts能够兼容vue文件，我们需要在src<code>目录下创建一个shims-vue.d.ts</code>文件，内容如下</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>declare module '*.vue' {
+  import type { DefineComponent } from 'vue';
+  const component: DefineComponent&lt;{}, {}, any&gt;;
+  export default component;
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><h3 id="_2-当style拥有scoped"><a href="#_2-当style拥有scoped" class="header-anchor">#</a> 2.当style拥有scoped</h3> <p>如果vue文件里面的style使用了scoped，css样式域的写法，<code>我们需要将原来的MiniCssExtractPlugin.loader</code>换成<code>vue-style-loader</code></p> <h3 id="_3-图片类型的loader"><a href="#_3-图片类型的loader" class="header-anchor">#</a> 3.图片类型的loader</h3> <p>图片类型的loader在webpack5已经被内置了，采用<code>asset/resource</code></p> <h3 id="_4-记得在resolve添加后缀自动补齐的配置"><a href="#_4-记得在resolve添加后缀自动补齐的配置" class="header-anchor">#</a> 4.记得在resolve添加后缀自动补齐的配置</h3> <div class="language- line-numbers-mode"><pre class="language-text"><code>extensions: [
+    '.tsx',
+    '.ts',
+    '.mjs',
+    '.js',
+    '.jsx',
+    '.vue',
+    '.json',
+    '.wasm',
+]
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div><h3 id="_5-解析vue文件"><a href="#_5-解析vue文件" class="header-anchor">#</a> 5.解析vue文件</h3> <p>解析vue文件除了需要<code>vue-loader</code>之外还需要一个plugin</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>{
+  test: /\.vue$/,
+  exclude: /node_modules/,
+  loader: 'vue-loader',
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><div class="language- line-numbers-mode"><pre class="language-text"><code>const { VueLoaderPlugin } = require('vue-loader');
+plugins: [
+	new VueLoaderPlugin()
+]
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><h3 id="_6-webpack转译typescript"><a href="#_6-webpack转译typescript" class="header-anchor">#</a> 6.webpack转译Typescript</h3> <p>webpack转译Typescript现有方案</p> <table><thead><tr><th>进程</th> <th></th> <th></th> <th></th></tr></thead> <tbody><tr><td>单进程方案(类型检查和转译在同一个进程)</td> <td>ts-loader(transpileOnly为false)</td> <td>awesome-typescript-loader</td> <td></td></tr> <tr><td>多进程方案</td> <td>ts-loader(transpileOnly为true) + fork-ts-checker-webpack-plugin</td> <td>awesome-typescript-loader + 自带的CheckerPlugin</td> <td>babel + fork-ts-checker-webpack-plugin</td></tr></tbody></table> <p>综合考虑性能和扩展性，目前比较推荐的是<code>babel+fork-ts-checker-webpack-plugin</code>方案</p> <p>用实例解释一下吧。</p> <p>首先是单进程方案：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>module.exports = {
+  mode: 'development',
+  entry: './src/index.tsx',
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js',
+  },
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        use:{
+          loader: 'ts-loader', // ? 单进程，只使用ts-loader进行'转译'和‘类型检查’
+          options: {
+          }
+        }
+      }
+    ]
+  },
+  devServer: {
+    contentBase: './dist',
+    overlay: true,
+  },
+  plugins: [
+    new HtmlWebpackPlugin(),
+  ]
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br></div></div><p>单进程因为是同步所以webpack可以收集错误信息，并通过dev-server反馈到浏览器:</p> <img src="/automation/webpack/webpack-vue3/1.png"> <p>现在试试多进程方案：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>module.exports = {
+  mode: 'development',
+  entry: './src/index.tsx',
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js',
+  },
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        use:{
+          loader: 'ts-loader',
+          options: {
+            transpileOnly: true  // ? 关闭类型检查，即只进行转译
+          }
+        }
+      }
+    ]
+  },
+  devServer: {
+    contentBase: './dist',
+    overlay: true,
+  },
+  plugins: [
+    new HtmlWebpackPlugin(),
+    new ForkTsCheckerWebpackPlugin({ // ? fork一个进程进行检查，并设置async为false，将错误信息反馈给webpack
+      async: false,
+      eslint: false
+    })
+  ]
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br></div></div><p>Ok，同样可以工作:</p> <img src="/automation/webpack/webpack-vue3/2.png"> <p>对于babel还是atl，配置方式同理, 只是把ts-loader替换而已。</p> <p>fork-ts-checker-webpack-plugin，顾名思义就是创建一个新进程，专门来运行Typescript类型检查。这么做的原因是为了利用多核资源来提升编译的速度. 所以大多数CLI都是这样子配置的：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>addLoader({
+      loader: 'ts-loader',
+      options: {
+        // ? 禁用Typescript类型检查，只做转译。这里面速度就可以很快了，因为转译不过是删除掉类型注释。
+        // 现在ts-loader基本已经被babel(babel7支持Typescript)取代了
+        transpileOnly: true,
+        appendTsSuffixTo: ['\\.vue$'],
+        // https://github.com/TypeStrong/ts-loader#happypackmode-boolean-defaultfalse
+        happyPackMode: useThreads
+      }
+    })
+    
+    // ...
+          config
+        .plugin('fork-ts-checker')
+          // ? 引进fork-ts-checker-webpack-plugin专门在一个进程中进行类型检查
+          .use(require('fork-ts-checker-webpack-plugin'), [{
+            vue: true,
+            tslint: options.lintOnSave !== false &amp;&amp; fs.existsSync(api.resolve('tslint.json')),
+            formatter: 'codeframe',
+            // https://github.com/TypeStrong/ts-loader#happypackmode-boolean-defaultfalse
+            checkSyntacticErrors: useThreads
+          }])
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br></div></div><p>因为fork-ts-checker-webpack-plugin是在单独的进程跑的，<strong>所以它的错误或警告信息是异步回传给到webpack进程的</strong>。而当webpack自己处理完转译任务后，会将结果同步报告给浏览器去显示。将async设置为false后，就要求webpack等待fork-ts-checker-webpack-plugin进程返回信息。不过这样做也可能会拖慢整个webpack的转译等待时间。这就要看怎么选择了。</p> <h3 id="_7-babel配置"><a href="#_7-babel配置" class="header-anchor">#</a> 7.babel配置</h3> <p>用vue-cli创建的vue项目，我们可以发现他在预设里面只有一个预设配置</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>module.exports = {
+  presets: [&quot;@vue/cli-plugin-babel/preset&quot;]
+};
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p>确实，我们自己搭建的项目只需要用这个就好了，这个里面就集成了包括</p> <ul><li>@babel/core</li> <li>@vue/babel-preset-app</li> <li>babel-loader</li> <li>thread-loader</li></ul> <p>等等，而@vue/babel-preset-app又包含了</p> <ul><li>@babel/core</li> <li>@babel/helper-compilation-targets</li> <li>@babel/helper-module-imports</li> <li>@babel/plugin-proposal-class-properties</li> <li>@babel/plugin-proposal-decorators</li> <li>@babel/plugin-syntax-dynamic-import</li> <li>@babel/plugin-syntax-jsx</li> <li>@babel/plugin-transform-runtime</li> <li>@babel/preset-env</li> <li>@babel/runtime</li> <li>@vue/babel-plugin-jsx</li> <li>@vue/babel-preset-jsx</li> <li>babel-plugin-dynamic-import-node</li> <li>core-js</li> <li>core-js-compat</li></ul> <p>其实我们大概可以猜到，这个预设已经把@babel/preset-env都给配置好了。</p> <p>一开始想在vue里面用jsx的写法，查了很多资料都说用 @vue/babel-preset-jsx，还有的说用@vue/babel-plugin-jsx，害得我是一顿配置，其实不用配置了，@vue/cli-plugin-babel/preset里面都有。至于上面的@vue/babel-preset-jsx是用来干嘛的？</p> <h3 id="_8-vue-babel-preset-jsx"><a href="#_8-vue-babel-preset-jsx" class="header-anchor">#</a> 8.@vue/babel-preset-jsx</h3> <p>Vue JSX 插件的可配置预设。</p> <p>此 repo 仅与 Babel 7.x 兼容，对于 6.x，请使用<a href="https://github.com/vuejs/babel-plugin-transform-vue-jsx" target="_blank" rel="noopener noreferrer">vuejs/babel-plugin-transform-vue-jsx<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p> <p>用法：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>module.exports = {
+  presets: [
+    [
+      '@vue/babel-preset-jsx',
+      {
+        vModel: false,
+        compositionAPI: true,
+      },
+    ],
+  ],
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br></div></div><p>参数说明：</p> <ul><li><code>compositionAPI</code>- Enables @vue/babel-sugar-composition-api-inject-h and @vue/babel-sugar-composition-api-render-instance, support returning render function in <code>setup</code>.
+<ul><li>The default value is <code>false</code>;</li> <li>When set to <code>'auto'</code> (or <code>true</code>), it will detect the Vue version in the project. If it's &gt;= 2.7, it will import the composition utilities from <code>vue</code>, otherwise from <code>@vue/composition-api</code>;</li> <li>When set to <code>'native'</code> (or <code>'naruto'</code>), it will always import the composition utilities from <code>vue</code></li> <li>When set to <code>plugin</code>, it will always import the composition utilities from <code>@vue/composition-api</code>, but it will redirect to <code>'vue'</code> itself when the vue version is <code>2.7.x</code></li> <li>When set to <code>vue-demi</code>, it will always import the composition utilities from <code>vue-demi</code></li> <li>When set to an object like <code>{ importSource: string; }</code>, it will always import the composition utilities from the importSource you set</li></ul></li> <li><code>functional</code> <a href="https://npmmirror.com/package/@vue/babel-preset-jsx" target="_blank" rel="noopener noreferrer">@vue/babel-sugar-functional-vue<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> - Functional components syntactic sugar</li> <li><code>injectH</code> <a href="https://npmmirror.com/package/@vue/babel-preset-jsx" target="_blank" rel="noopener noreferrer">@vue/babel-sugar-inject-h<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> - Automatic <code>h</code> injection syntactic sugar</li> <li><code>vModel</code> <a href="https://npmmirror.com/package/@vue/babel-preset-jsx" target="_blank" rel="noopener noreferrer">@vue/babel-sugar-v-model<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> - <code>vModel</code> syntactic sugar</li> <li><code>vOn</code> <a href="https://npmmirror.com/package/@vue/babel-preset-jsx" target="_blank" rel="noopener noreferrer">@vue/babel-sugar-v-on<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> - <code>vOn</code> syntactic sugar</li></ul></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">Last Updated:</span> <span class="time">9/13/2022, 2:59:42 AM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/blogs/automation/webpack/groceries/postcss.html" class="prev">
+        自定义postcss插件
+      </a></span> <span class="next"><a href="/blogs/automation/esbuild/introduction.html">
+        introduction
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.577a89d3.js" defer></script><script src="/assets/js/2.dc5a3d57.js" defer></script><script src="/assets/js/13.2e7f3cee.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>函数柯里化 | Nangxi&#39;s docs</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    
+    <meta name="description" content="Nangxi&#39;s docs">
+    
+    <link rel="preload" href="/assets/css/0.styles.9825735b.css" as="style"><link rel="preload" href="/assets/js/app.577a89d3.js" as="script"><link rel="preload" href="/assets/js/2.dc5a3d57.js" as="script"><link rel="preload" href="/assets/js/30.21281572.js" as="script"><link rel="prefetch" href="/assets/js/10.376969f8.js"><link rel="prefetch" href="/assets/js/11.b7cfb206.js"><link rel="prefetch" href="/assets/js/12.ac174cb7.js"><link rel="prefetch" href="/assets/js/13.2e7f3cee.js"><link rel="prefetch" href="/assets/js/14.21284f9f.js"><link rel="prefetch" href="/assets/js/15.bb4f9f89.js"><link rel="prefetch" href="/assets/js/16.f863ff74.js"><link rel="prefetch" href="/assets/js/17.7137ef6c.js"><link rel="prefetch" href="/assets/js/18.e542e422.js"><link rel="prefetch" href="/assets/js/19.92702bfa.js"><link rel="prefetch" href="/assets/js/20.f4f96a57.js"><link rel="prefetch" href="/assets/js/21.9384358c.js"><link rel="prefetch" href="/assets/js/22.0fc5472c.js"><link rel="prefetch" href="/assets/js/23.30bf512d.js"><link rel="prefetch" href="/assets/js/24.414f9dd3.js"><link rel="prefetch" href="/assets/js/25.70be0545.js"><link rel="prefetch" href="/assets/js/26.2db442da.js"><link rel="prefetch" href="/assets/js/27.e0154de6.js"><link rel="prefetch" href="/assets/js/28.ed981891.js"><link rel="prefetch" href="/assets/js/29.b2b5a47c.js"><link rel="prefetch" href="/assets/js/3.0ce7fa96.js"><link rel="prefetch" href="/assets/js/31.67a0d1db.js"><link rel="prefetch" href="/assets/js/32.db6c7415.js"><link rel="prefetch" href="/assets/js/33.12659d82.js"><link rel="prefetch" href="/assets/js/4.43879640.js"><link rel="prefetch" href="/assets/js/5.60572b82.js"><link rel="prefetch" href="/assets/js/6.22f00265.js"><link rel="prefetch" href="/assets/js/7.b6a287fb.js"><link rel="prefetch" href="/assets/js/8.5d14f72d.js"><link rel="prefetch" href="/assets/js/9.71ceb8ff.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.9825735b.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">Nangxi's docs</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="框架" class="dropdown-title"><span class="title">框架</span> <span class="arrow down"></span></button> <button type="button" aria-label="框架" class="mobile-dropdown-title"><span class="title">框架</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/blogs/front-frame/vue3/introduction.html" class="nav-link">
+  Vue3
+</a></li><li class="dropdown-item"><!----> <a href="/blogs/front-frame/react/introduction.html" class="nav-link">
+  React
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="自动化" class="dropdown-title"><span class="title">自动化</span> <span class="arrow down"></span></button> <button type="button" aria-label="自动化" class="mobile-dropdown-title"><span class="title">自动化</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/blogs/automation/webpack/introduction.html" class="nav-link">
+  Webpack
+</a></li><li class="dropdown-item"><!----> <a href="/blogs/automation/esbuild/introduction.html" class="nav-link">
+  ESBuild
+</a></li></ul></div></div><div class="nav-item"><a href="/blogs/js&amp;ts/js/coriolization-of-the-function.html" aria-current="page" class="nav-link router-link-exact-active router-link-active">
+  JS&amp;TS
+</a></div><div class="nav-item"><a href="/blogs/browser/operating-machining.html" class="nav-link">
+  浏览器
+</a></div><div class="nav-item"><a href="/blogs/node/introduction.html" class="nav-link">
+  Node
+</a></div><div class="nav-item"><a href="https://juejin.cn/user/1821245353761704/posts" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  掘金
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="框架" class="dropdown-title"><span class="title">框架</span> <span class="arrow down"></span></button> <button type="button" aria-label="框架" class="mobile-dropdown-title"><span class="title">框架</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/blogs/front-frame/vue3/introduction.html" class="nav-link">
+  Vue3
+</a></li><li class="dropdown-item"><!----> <a href="/blogs/front-frame/react/introduction.html" class="nav-link">
+  React
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="自动化" class="dropdown-title"><span class="title">自动化</span> <span class="arrow down"></span></button> <button type="button" aria-label="自动化" class="mobile-dropdown-title"><span class="title">自动化</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/blogs/automation/webpack/introduction.html" class="nav-link">
+  Webpack
+</a></li><li class="dropdown-item"><!----> <a href="/blogs/automation/esbuild/introduction.html" class="nav-link">
+  ESBuild
+</a></li></ul></div></div><div class="nav-item"><a href="/blogs/js&amp;ts/js/coriolization-of-the-function.html" aria-current="page" class="nav-link router-link-exact-active router-link-active">
+  JS&amp;TS
+</a></div><div class="nav-item"><a href="/blogs/browser/operating-machining.html" class="nav-link">
+  浏览器
+</a></div><div class="nav-item"><a href="/blogs/node/introduction.html" class="nav-link">
+  Node
+</a></div><div class="nav-item"><a href="https://juejin.cn/user/1821245353761704/posts" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  掘金
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>JavaScript</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/blogs/js&amp;ts/js/coriolization-of-the-function.html" aria-current="page" class="active sidebar-link">函数柯里化</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blogs/js&amp;ts/js/coriolization-of-the-function.html#一、柯里化的概念" class="sidebar-link">一、柯里化的概念</a></li><li class="sidebar-sub-header"><a href="/blogs/js&amp;ts/js/coriolization-of-the-function.html#二、偏函数" class="sidebar-link">二、偏函数</a></li><li class="sidebar-sub-header"><a href="/blogs/js&amp;ts/js/coriolization-of-the-function.html#三、偏函数-partial-application-与-柯理化-currying-的异同" class="sidebar-link">三、偏函数(Partial Application) 与 柯理化(Currying)的异同</a></li><li class="sidebar-sub-header"><a href="/blogs/js&amp;ts/js/coriolization-of-the-function.html#四、柯里化的用处" class="sidebar-link">四、柯里化的用处</a></li><li class="sidebar-sub-header"><a href="/blogs/js&amp;ts/js/coriolization-of-the-function.html#五、偏函数实现原理" class="sidebar-link">五、偏函数实现原理</a></li><li class="sidebar-sub-header"><a href="/blogs/js&amp;ts/js/coriolization-of-the-function.html#六、如何将普通的函数变成柯里化的函数" class="sidebar-link">六、如何将普通的函数变成柯里化的函数</a></li></ul></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>TypeScript</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="函数柯里化"><a href="#函数柯里化" class="header-anchor">#</a> 函数柯里化</h1> <h2 id="一、柯里化的概念"><a href="#一、柯里化的概念" class="header-anchor">#</a> 一、柯里化的概念</h2> <p>柯里化是指把接收多个参数的函数变换成接收单一参数的函数，嵌套返回直到所有参数都被使用并返回最终结果。更简单地说，柯里化是一个函数变换的过程，是将函数从调用方式：f(a,b,c)变换成调用方式：f(a)(b)(c)的过程。柯里化不会调用函数，它只是对函数进行转换。
+举个栗子</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>function add(x, y, z) {
+  return x + y + z;
+}
+console.log(add(1, 2, 3)); // 6
+var add = function(x) {
+  return function(y) {
+    return function(z) {
+      return x + y + z;
+    }
+  }
+}
+var add1 = add(1);
+var add2 = add1(2);
+var add3 = add2(3);
+console.log(add3);
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br></div></div><p>这里我们定义了一个add函数，它接受一个参数并返回一个新的函数。调用add之后，返回的函数就通过闭包的方式记住了add的第一个参数。</p> <h2 id="二、偏函数"><a href="#二、偏函数" class="header-anchor">#</a> 二、偏函数</h2> <p>其实柯里化函数就是偏函数的其中一种应用，偏函数是指固定多元函数的部分参数，并返回一个可以接受剩余部分参数的函数的转换过程。JavaScript开发过程中，有一个很常用的函数就是我们所谓的偏函数bind！！！</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>function add(a, b, c) {
+  return a+b+c;
+}
+var getResult = add.bind(this, 1, 2);
+getResult(3)
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><h2 id="三、偏函数-partial-application-与-柯理化-currying-的异同"><a href="#三、偏函数-partial-application-与-柯理化-currying-的异同" class="header-anchor">#</a> 三、偏函数(Partial Application) 与 柯理化(Currying)的异同</h2> <p>1、它们都是高阶函数（一个函数就可以接收另一个函数作为参数，这种函数就称之为高阶函数）
+2、它们都是把多元函数转换成更低元的函数
+3、都是减少重复传参，提高函数的适用性
+4、偏函数只返回一次接受剩余参数的函数，柯理化会追溯到所有参数补齐才会真正执行
+5、柯理化就是自动化的偏函数应用</p> <h2 id="四、柯里化的用处"><a href="#四、柯里化的用处" class="header-anchor">#</a> 四、柯里化的用处</h2> <h3 id="_1-延迟计算"><a href="#_1-延迟计算" class="header-anchor">#</a> 1.延迟计算</h3> <p>这个很简单，柯里化函数可以把一个函数分成好几步去执行，这样开发者想什么时候执行下一步就什么时候执行</p> <h3 id="_2-参数复用"><a href="#_2-参数复用" class="header-anchor">#</a> 2.参数复用</h3> <p>这里举个栗子
+假设现在有个商家在做打折促销活动，店里所有商品一律九折，那么最后每件商品的价格就是这么算的</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>function discount(originPrize, discountNum){
+  return originPrize* discountNum;
+}
+// 顾客买了20块钱苹果，那么价格就是
+discount(20, 0.9);
+// 顾客买了30块钱梨，那么价格就是
+discount(30, 0.9);
+// 我们会发现0.9这个参数都是一样的，那么我们可以这么写，写一个打九折的基础函数，只需要传入价格就可以了
+function discount9(originPrize) {
+  return discount(originPrize, 0.9)
+}
+// 最后只需要通过这样就可以算出价格
+discount9(20);
+discount9(30);
+// 这样的话假设哪一天商场想打八折，容易，再创建一个打八折的基础函数，照样可以很方便地算出价格
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br></div></div><h3 id="_3-动态生成函数"><a href="#_3-动态生成函数" class="header-anchor">#</a> 3.动态生成函数</h3> <p>这里举一个实际例子。我们都知道为了兼容IE和其他浏览器的添加事件方法，通常会以下面代码进行兼容行处理：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>const addEvent = (ele, type, fn, capture) =&gt; {
+	if (window.addEventListener) {
+		ele.addEventListener(type, (e) =&gt; fn.call(ele, e), capture);
+	} else if (window.attachEvent) {
+		ele.attachEvent('on'+type, (e) =&gt; fn.call(ele, e));
+	}
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><p>这里会有一个问题，就是在每一次绑定事件的时候，都需要一次环境的判断，再去进行绑定，如果我们将上面的函数进行柯里化，就能规避这个问题，在使用前是做一次判断即可。</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>const addEvent = (function() {
+	if (window.addEventListener) {
+		return function(ele) {
+			return function(type) {
+				return function(fn) {
+					return function(capture) {
+						ele.addEventListener(type, (e) =&gt; fn.call(ele, e), capture);
+					}
+				}
+			}
+		}
+	} else if (window.attachEvent) {
+		return function(ele) {
+			return function(type) {
+				return function(fn) {
+					return function(capture) {
+						ele.addEventListener(type, (e) =&gt; fn.call(ele, e), capture);
+					}
+				}
+			}
+		}
+	}
+})();
+// 调用
+addEvent(document.getElementById('app'))('click')((e) =&gt; {console.log('click function has been call:', e);})(false);
+// 分步骤调用会更加清晰
+const ele = document.getElementById('app');
+// get environment
+const environment = addEvent(ele)
+// bind event
+environment('click')((e) =&gt; {console.log(e)})(false);
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br></div></div><p>利用柯里化的函数可以实现动态的生成不同的函数。实际场景这些代码还可以进行优化</p> <h2 id="五、偏函数实现原理"><a href="#五、偏函数实现原理" class="header-anchor">#</a> 五、偏函数实现原理</h2> <p>首先，偏函数也是一个高阶函数，其实现符合高阶函数的模型：
+它需要一个函数作为第一个参数，并且返回值也是一个函数</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>function partial(fn){
+    return function restFn(){
+        // ...
+    }
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><p>其次，偏函数创建时可以固定部分参数，也即除第一个参数fn以外的参数，都是预置参数。</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>function partial(fn){
+    var args = [].slice.call(arguments,1)
+    return function restFn(){
+        // ...
+    }
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><p>最后，接受剩余参数，并和预置参数整合，作为fn的参数执行应用。</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>function partial(fn){
+    var args = [].slice.call(arguments,1)
+    return function(){
+        var rest = [].slice.call(arguments)
+        return fn.apply(null, args.concat(rest))
+    }
+}
+// 使用方式
+var add=partial((a,b)=&gt;{return a+b},1)
+add(3)
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div><h2 id="六、如何将普通的函数变成柯里化的函数"><a href="#六、如何将普通的函数变成柯里化的函数" class="header-anchor">#</a> 六、如何将普通的函数变成柯里化的函数</h2> <div class="language- line-numbers-mode"><pre class="language-text"><code>// 柯里化函数
+const curry = function (fn) {
+    return function nest(...args) {
+        if (args.length === fn.length) {
+            // 最后所有的参数接收完毕才调用初始函数
+            return fn(...args);
+        } else {
+            return function (arg) {
+                return nest(...args, arg);
+            }
+        }
+    }
+}
+最后这个柯里化函数是这么使用的
+function addNum(a, b, c) {
+    return a + b + c;
+}
+const addCurry = curry(addNum);
+addCurry(1)(2)(3);// 6
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br></div></div><p>这个curry函数我们可以这么理解，先看看最后它是怎么使用的，反推出curry的实现逻辑
+调用curry函数（函数的参数是需要转换的原始函数），返回一个柯里化的函数，所以我们知道curry函数返回的一定是柯里化个函数（一个可以这样的函数a()()()……），所以我们先整理出第一步</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>const curry = function (fn) {
+    return function nest() {
+    }
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><p>第二步，如果还没调用到最后一个参数，那么这时候会一直返回柯里化的函数（这个柯里化函数的特点就是传参只有一个，但是还是返回一样的柯里化函数），以供最后一次调用的使用，这里肯定会用到递归，那么这个递归要怎么写呢？</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>const curry = function (fn) {
+    // 这一步已经到了curry(addNum);的返回值
+    return function nest(arg) {
+        // 下一次调用会走这里，所以返回一个柯里化函数，只接受一个参数，并且返回柯里化函数
+        return nest(arg)
+    }
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><p>怎么看起来有点奇怪？是的，递归的话，需要有个终止条件，这里我先说终止条件是什么，就是当柯里化函数调用的次数与原始函数参数个数一样的时候，会终止递归，然后一次性调用原始函数，那么这样的话，我们肯定要存储之前每一次传进来的参数</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>function curry(fn){
+    const args =[];
+    return function nest(arg){
+        args.push(arg);
+        if(args.length===fn.length){
+           return fn(...args)
+        }else{
+            return nest
+        }
+    }
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br></div></div><p>第三步，简化。args其实是可以省略的，我们可以用nest的形参来存储之前所有传进来的参数</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>const curry = function (fn) {
+    return function nest(...args) {
+        if (args.length === fn.length) {
+            return fn(...args);
+        } else {
+            return function (arg) {
+                // 这里通过function（arg）再包一层
+                return nest(...args, arg);
+            }
+        }
+    }
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br></div></div></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">Last Updated:</span> <span class="time">9/13/2022, 2:59:42 AM</span></div></footer> <div class="page-nav"><p class="inner"><!----> <span class="next"><a href="/blogs/js&amp;ts/ts/introduction.html">
+        introduction
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.577a89d3.js" defer></script><script src="/assets/js/2.dc5a3d57.js" defer></script><script src="/assets/js/30.21281572.js" defer></script>
+  </body>
+</html>
