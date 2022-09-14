@@ -103,7 +103,7 @@ export default ({
   siteData, // 站点元数据
 }) => {
   // ...做一些其他的应用级别的优化
-  cons
+}
 ```
 
 **vitepress的enhanceApp**
