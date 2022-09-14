@@ -80,6 +80,10 @@ module.exports = {
                   text: 'Vue3渲染的几种方式',
                   link: '/blogs/front-frame/vue3/groceries/rendering',
                 },
+                {
+                  text: 'vuepress和vitepress遇到的坑',
+                  link: '/blogs/front-frame/vue3/groceries/vuepress-vitepress',
+                },
               ],
             },
           ],

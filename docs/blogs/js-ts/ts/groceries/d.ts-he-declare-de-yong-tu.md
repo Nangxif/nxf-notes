@@ -65,7 +65,7 @@ declare namespace API {
 
 声明完之后在其他地方的ts就可以直接API.ResponseList引用到这个接口类型
 
-### 三、注意
+## 三、注意
 
 1..d.ts文件顶级声明declare最好不要跟export同级使用，不然在其他ts引用这个.d.ts的内容的时候，就需要手动import导入了
 
