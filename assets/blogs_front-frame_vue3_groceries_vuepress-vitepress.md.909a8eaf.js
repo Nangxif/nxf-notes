@@ -56,7 +56,7 @@ import{_ as l,c as r,a as s,e,d as p,b as n,o as c,r as o}from"./app.b1799fcf.js
 <span class="line"><span style="color:#A6ACCD;">  siteData, // \u7AD9\u70B9\u5143\u6570\u636E</span></span>
 <span class="line"><span style="color:#A6ACCD;">}) =&gt; {</span></span>
 <span class="line"><span style="color:#A6ACCD;">  // ...\u505A\u4E00\u4E9B\u5176\u4ED6\u7684\u5E94\u7528\u7EA7\u522B\u7684\u4F18\u5316</span></span>
-<span class="line"><span style="color:#A6ACCD;">  cons</span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
 <span class="line"><span style="color:#A6ACCD;"></span></span></code></pre><div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><p><strong>vitepress\u7684enhanceApp</strong></p><p><code>/docs/.vieepress/theme/index.js</code></p><div class="language- line-numbers-mode"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">import Theme from &quot;vitepress/theme&quot;;</span></span>
 <span class="line"><span style="color:#A6ACCD;">import Image from &#39;../../../src/components/Image.vue&#39;;</span></span>
 <span class="line"><span style="color:#A6ACCD;">export default {</span></span>
