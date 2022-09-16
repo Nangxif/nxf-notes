@@ -85,8 +85,23 @@ export function reactive(target: Record<string, any>) {
 PS：reative总共就做了这么几件事
 
 1. 判断是否为对象，如果不是对象的话就直接返回undefined；
+
 2. Vue3为reactive对象提供了一个自定义的属性叫`__v_isReactive`，只有reactive对象才可以拿到 `__v_isReactive`属性，当我们对一个reactive对象再进行reactive的时候，那么会去判断对象里面有没有`__v_isReactive`，有的话直接返回reactive过的对象；
+
+   ```
+   const data = { name: 'nangxi', age: 26, address: { num: 200 } };
+   const state = reactive(data);
+   const state1 = reactive(state);
+   ```
+
 3. 如果拿一个对象多次进行reative，那么它只会代理一次，后面直接从reactiveMap里面取缓存。
+
+   ```
+   const data = { name: 'nangxi', age: 26, address: { num: 200 } };
+   const state1 = reactive(data);
+   const state2 = reactive(data);
+   state1 === state2 // true
+   ```
 
 ## mutableHandlers代码片段
 
@@ -143,5 +158,5 @@ export const mutableHandlers = {
 };
 ```
 
-reactive之所以做成代理对象，那是因为需要用它来做依赖收集以及依赖的触发，当我们取值的时候进行依赖收集，当我们设置值的时候需要触发收集的依赖，并且把之前收集的依赖清除掉再重新收集。
+reactive之所以做成代理对象，那是因为需要用它来做依赖收集`track`以及依赖的触发`trigger`，当我们取值的时候进行依赖收集，当我们设置值的时候需要触发收集的依赖，并且把之前收集的依赖清除掉再重新收集。
 

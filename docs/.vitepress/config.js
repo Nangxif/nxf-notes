@@ -5,6 +5,7 @@ module.exports = {
   description: "Nangxi's blogs",
   base: isProd ? '/nxf-notes/' : '/',
   head: [
+    ['link', { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
     [
       'link',
       {
@@ -68,6 +69,10 @@ module.exports = {
             {
               text: 'reactive',
               link: '/blogs/front-frame/vue3/reactive',
+            },
+            {
+              text: 'effect',
+              link: '/blogs/front-frame/vue3/effect',
             },
             {
               text: 'diff',
