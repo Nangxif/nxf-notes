@@ -5,7 +5,7 @@ module.exports = {
   description: "Nangxi's blogs",
   base: isProd ? '/nxf-notes/' : '/',
   head: [
-    ['link', { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    ['link', { rel: 'icon', type: 'image/x-icon', href: `${isProd ? '/nxf-notes/' : '/'}favicon.ico` }],
     [
       'link',
       {
