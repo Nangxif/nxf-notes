@@ -34,6 +34,7 @@ module.exports = {
         items: [
           { text: 'Webpack', link: '/blogs/automation/webpack/introduction' },
           { text: 'ESBuild', link: '/blogs/automation/esbuild/introduction' },
+          { text: 'Rollup', link: '/blogs/automation/rollup/introduction' },
         ],
       },
       { text: 'JS&TS', link: '/blogs/js-ts/js/coriolization-of-the-function' },
