@@ -286,3 +286,54 @@ export function triggerEffects(effects) {
 }
 ```
 
+## 五、补充
+
+#### 1.为什么在依赖收集之前需要清除上一次收集的依赖
+
+```
+const state = reactive({ flag: true, name: 'nangxi', age: 30 });
+effect(() => {
+  console.log('render');
+  document.body.innerHTML = state.flag ? state.name : state.age;
+});
+setTimeout(() => {
+  state.flag = false;
+  setTimeout(() => {
+    // 这里修改的是name，因为flag是false了，所以显示的是age
+    // name原则上就不应该触发副作用了，所以要清除副作用
+    console.log('修改name，原则上不更新');
+    state.name = 'zf';
+  }, 1000);
+}, 1000);
+```
+
+如果不进行依赖清除的话，那么name修改了，还是会触发effect.run的执行，所以在state.flag更新的时候，会触发set然后调用trigger，然后执行之前收集的依赖对应的effect，然后在每个effect里面清除掉effect里面收集的依赖，然后重新收集。
+
+#### 2.调度器
+
+```
+const state = reactive({ flag: true, name: 'nangxi', age: 30 });
+let runner = effect(() => {
+	document.body.innerHTML = state.age;
+}，{
+    scheduler() {
+        //调度 如何更新自己决定
+        console.log('run');
+        setTimeout(() => {
+          runner();
+        });
+      },
+    }
+});
+// 这里停掉不让他自动触发
+runner.effect.stop();
+setTimeout(() => {
+    state.age = 1000;
+    setTimeout(() => {
+      // 三秒后手动触发
+      runner();
+    }, 2000);
+}, 1000);
+```
+
+因此在trigger的时候，我们会发现有一个判断，就是先判断需要遍历执行的effect里面有没有scheduler，有的话就执行调度函数，没有的话就执行effect.run。在调度函数里面，我们什么时候想执行run再执行run。
