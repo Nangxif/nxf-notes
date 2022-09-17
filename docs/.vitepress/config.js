@@ -144,6 +144,24 @@ module.exports = {
             },
           ],
         },
+        {
+          text: 'Rollup',
+          items: [
+            {
+              text: 'introduction',
+              link: '/blogs/automation/rollup/introduction',
+            },
+            {
+              text: '杂货间',
+              items: [
+                {
+                  text: 'rollup打包vue3',
+                  link: '/blogs/automation/rollup/groceries/rollup-vue3',
+                },
+              ],
+            },
+          ],
+        },
       ],
       '/blogs/js-ts/': [
         {
