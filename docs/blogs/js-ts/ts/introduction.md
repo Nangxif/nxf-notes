@@ -1,1 +1,1 @@
-# TypeScript部分介绍
+# TypeScript介绍

@@ -7,15 +7,13 @@
 我们先来猜想用rollup打包一个vue3项目，编译的顺序应该是什么样的
 
 1. 编译.vue文件（先将.vue文件编译成js或者ts等文件）
-
 2. 编译ts文件
-
 3. 打包第三方包
-
 4. babel转译
 5. 打包css/less/sass和图片
 6. 压缩代码
 7. 将打包好的js插入html
+8. 启动一个服务，并且有热更新
 
 其实这大致也就是我们rollup的plugins的配置和执行顺序
 
@@ -110,7 +108,7 @@ import babel from '@rollup/plugin-babel';
 import resolve from '@rollup/plugin-node-resolve';
 // 用来将 CommonJS 转换成 ES2015 模块的
 import commonjs from '@rollup/plugin-commonjs';
-import typescript from '@rollup/plugin-typescript';
+import typescript from 'rollup-plugin-typescript2';
 import url from '@rollup/plugin-url';
 import postcss from 'rollup-plugin-postcss';
 import vuePlugin from 'rollup-plugin-vue';
@@ -129,7 +127,6 @@ export default {
     del({ targets: 'dist/*' }),
     vuePlugin(),
     typescript(),
-    
     resolve(),
     commonjs(),
     babel({
@@ -155,7 +152,8 @@ export default {
 
 1. vuePlugin要写在前面，要先把.vue文件转变成js或者ts，rollup才能进行下一步处理；
 2. babel的extensions参数一定要有.tsx，不然代码里面jsx写法会报错；
-3. 图片除了可以使用@rollup/plugin-url，还可以使用@rollup/plugin-image，但是这个会将图片都转成base64，这个其实是不合理的，会使我们的包变得很大。
+3. 图片除了可以使用@rollup/plugin-url，还可以使用@rollup/plugin-image，图像使用 base64 编码，这意味着它们将比磁盘上的大小大 33%，这个其实是不合理的，会使我们的包变得很大；
+4. typescript现在使用rollup-plugin-typescript2，这是对[原版](https://github.com/rollup/rollup-plugin-typescript/tree/v0.8.1) `rollup-plugin-typescript`的重写。
 
 到这一步就可以成功打包了，但是当我们在浏览器打开html时，我们发现有报错
 
@@ -186,5 +184,41 @@ module.exports = {
 };
 ```
 
-至此就能跑起来了。
+至此直接点击html文件就能跑起来了。
+
+### 5.起一个服务/热更新
+
+```
+import serve from 'rollup-plugin-serve';
+import livereload from 'rollup-plugin-livereload';
+
+plugins:[
+	// 热更新
+	livereload({
+      watch: ['dist'],
+      verbose: false,
+    }),
+	// 服务
+	serve({
+      open: true, // 自动打开页面
+      port: 8000,
+      openPage: '/dist/index.html', // 打开的页面
+      contentBase: '',
+    })
+]
+```
+
+### 6.优化
+
+```
+import { terser } from 'rollup-plugin-terser';
+import strip from '@rollup/plugin-strip';
+
+plugins:[
+	// 放在html插件之前
+	terser(),
+	// 去掉代码中的console，debugger等
+	strip(),
+]
+```
 

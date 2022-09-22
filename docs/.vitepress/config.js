@@ -149,7 +149,7 @@ module.exports = {
           text: 'Rollup',
           items: [
             {
-              text: 'introduction',
+              text: 'Rollup介绍',
               link: '/blogs/automation/rollup/introduction',
             },
             {
