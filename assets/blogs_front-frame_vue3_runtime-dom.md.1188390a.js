@@ -1,1 +1,0 @@
-import{_ as e,c as t,o as r}from"./app.8bc32c14.js";const p=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"blogs/front-frame/vue3/runtime-dom.md"}'),o={name:"blogs/front-frame/vue3/runtime-dom.md"};function a(n,s,m,c,i,d){return r(),t("div")}const _=e(o,[["render",a]]);export{p as __pageData,_ as default};
