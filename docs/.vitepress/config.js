@@ -5,7 +5,14 @@ module.exports = {
   description: "Nangxi's blogs",
   base: isProd ? '/nxf-notes/' : '/',
   head: [
-    ['link', { rel: 'icon', type: 'image/x-icon', href: `${isProd ? '/nxf-notes/' : '/'}favicon.ico` }],
+    [
+      'link',
+      {
+        rel: 'icon',
+        type: 'image/x-icon',
+        href: `${isProd ? '/nxf-notes/' : '/'}favicon.ico`,
+      },
+    ],
     [
       'link',
       {
@@ -78,6 +85,19 @@ module.exports = {
             {
               text: 'diff',
               link: '/blogs/front-frame/vue3/diff',
+            },
+            {
+              text: 'Pinia',
+              items: [
+                {
+                  text: 'Pinia介绍以及使用',
+                  link: '/blogs/front-frame/vue3/pinia/introduction',
+                },
+                {
+                  text: 'Pinia源码',
+                  link: '/blogs/front-frame/vue3/pinia/sound-code',
+                },
+              ],
             },
             {
               text: '杂货间',
