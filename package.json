@@ -12,6 +12,7 @@
   "devDependencies": {
     "cross-env": "^7.0.3",
     "markdown-it-custom-attrs": "^1.0.2",
+    "sass": "1.32.13",
     "vitepress": "1.0.0-alpha.13",
     "vue": "^3.2.39"
   }

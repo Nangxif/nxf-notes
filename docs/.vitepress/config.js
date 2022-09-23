@@ -240,8 +240,11 @@ module.exports = {
         },
       ],
     },
-    lastUpdated: true,
+    footer: {
+      copyright: 'Copyright © 2022-present Nangxif'
+    }
   },
+  lastUpdated: true,
   markdown: {
     lineNumbers: true,
     config: (md) => {

@@ -2,7 +2,7 @@
 
 ## 一、Pinia的特点
 
-* pinia是用来取代vuex的，非常小巧，支持vue2也支持vue3，ts类型支持也非常好，我们在使用pinia之后就不用写类型
+* pinia是用来取代vuex的，非常小巧，支持vue2也支持vue3，ts类型支持也非常好，我们在使用pinia之后就不用写类型。
 
 * 默认支持多仓库，vuex典型的单仓库，$store.state会导致所有的状态都放到一个store里面
 
@@ -10,12 +10,12 @@
 
      举个栗子：
 
-  ​       store.state.a 此时又有一个a模块，此时会产生一个冲突，模块a的状态会放到store里面去，所以要保证模块和状态名字要区分开
+  ​       store.state.a 此时又有一个a模块，此时会产生一个冲突，模块a的状态会放到store里面去，所以要保证模块和状态名字要区分开。
 
-  2. 同时，vuex的树状结构不好维护，store.state.a.b.c.xxx，调用非常长。所以pinia不采用命名空间的方式来管理，pinia采用拍平的方式，将每个状态都可以是单独的store（userStore.xxx，productStore.xxx）
-  3. pinia用起来很方便，store之间可以相互调用
+  2. 同时，vuex的树状结构不好维护，store.state.a.b.c.xxx，调用非常长。所以pinia不采用命名空间的方式来管理，pinia采用拍平的方式，将每个状态都可以是单独的store（userStore.xxx，productStore.xxx）。
+  3. pinia用起来很方便，store之间可以相互调用。
 
-* pinia还解决了vuex的一个痛点，vuex中所有的状态
+* pinia还解决了vuex的一个痛点，vuex中所有的状态。
 
   组件（取决于我们的状态）->我们通过action去请求接口->通过mutation去修改状态
 
@@ -36,9 +36,9 @@
 
   这些重复的commit可以合并成一个action，组件可以直接调用action去嵌套多个commit，也可以去进行异步操作，反正最后要修改状态是通过mutation。所以action起到的作用是封装。
 
-  pinia把所有的更改（mutation，action）改成都只有action可以更新状态了
+  pinia把所有的更改（mutation，action）改成都只有action可以更新状态了。
 
-* pinia的优点：扁平化，多个store，没用mutation，支持ts，支持devtool，而且为了兼容vue2，把vuex的辅助函数mapState，mapGetters，mapActions都支持了
+* pinia的优点：扁平化，多个store，没用mutation，支持ts，支持devtool，而且为了兼容vue2，把vuex的辅助函数mapState，mapGetters，mapActions都支持了。
 
 ## 二、Pinia使用
 
