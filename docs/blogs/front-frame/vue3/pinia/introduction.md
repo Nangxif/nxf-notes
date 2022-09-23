@@ -1,6 +1,6 @@
 # Pinia介绍
 
-## Pinia的特点
+## 一、Pinia的特点
 
 * pinia是用来取代vuex的，非常小巧，支持vue2也支持vue3，ts类型支持也非常好，我们在使用pinia之后就不用写类型
 
@@ -40,7 +40,7 @@
 
 * pinia的优点：扁平化，多个store，没用mutation，支持ts，支持devtool，而且为了兼容vue2，把vuex的辅助函数mapState，mapGetters，mapActions都支持了
 
-## Pinia使用
+## 二、Pinia使用
 
 ```
 import { createPinia } from 'pinia';
@@ -159,7 +159,6 @@ pinia的store自带有以下这些属性和方法
 	const store = useCountStore();
 	// 调用之后会停止store的所有依赖收集，以及清除所有的订阅，并且删除store
 	// store.$dispose();
-	
 	// store.$patch(($store) => {
 	//   这里会输出Proxy{ count:1 }
     //   console.log($store);
@@ -175,3 +174,107 @@ pinia的store自带有以下这些属性和方法
 </script>
 ```
 
+$onAction我这里单独拎出来讲解一下
+
+假设现在有个App.vue，引入了一个HelloWorld.vue组件，同时有一个按钮可以卸载HelloWorld组件
+
+```
+// App.vue
+<script setup>
+import { ref } from 'vue';
+import { useCounterStore } from './stores/counter';
+import HelloWorld from './components/HelloWorld.vue';
+const showHello = ref(true);
+const store = useCounterStore();
+// $onAction的本体是pinia源码里面的addSubscription，这个函数接收四个参数，
+// 参数1是subscriptions，这是pinia在createSetupStore里面定义的一个数组，用来存放订阅的回调函数
+// 参数2是一个订阅的回调，也就是传给$onAction的第一个参数，这个回调的参数是一个option，这个option可以解构出
+//   - after: 一个函数，可以接收一个回调，这个回调在action修改数据后触发
+//   - onError: 一个函数，可以接收一个回调，这个回调在action修改数据时如果有错误就触发
+//   - args: 一个数组，表示传给action的payload
+//   - name： 当前store的id
+//   - store: 当前的store
+//  参数3是一个detached布尔值，也就是传给$onAction的第二个参数，这个参数表示组件卸载的时候是否保留这个订阅
+//  参数4是一个函数，也就是传给$onAction的第三个参数，这个参数虽然在ts类型声明里面是没有的，但是是可以使用的，在detached为false，并且组件卸载的时候会触发
+store.$onAction(
+  (option) => {
+    // 这个option总共有以下几个属性
+    let { after, onError, args, name, store } = option;
+    // after是一个函数，这个函数的参数是一个回调函数，这个回调函数会在
+    console.log('数据被action修改之前触发', store.count);
+    after(() => {
+      console.log('数据被action修改之后触发', store.count);
+    });
+  },
+  false,
+  () => {
+    console.log('已清除订阅');
+  }
+);
+</script>
+
+<template>
+  {{ store.count }}
+  {{ store.dobule }}
+  <button @click="store.increment(3)">修改状态</button>
+  <hello-world v-if="showHello" />
+  <button @click="showHello = false">关闭hello</button>
+</template>
+```
+
+```
+// HelloWorld.vue
+<script setup lang="ts">
+import { useCounterStore } from '../stores/counter';
+const store = useCounterStore();
+
+store.$onAction(
+  (option) => {
+    console.log('helloworld');
+  },
+  false,
+  () => {
+    console.log('已清除helloworld订阅');
+  }
+);
+</script>
+
+<template>我是hello</template>
+```
+
+此时点击“修改状态”按钮会输出
+
+```
+数据被action修改之前触发 0
+helloworld里面-数据被action修改之前触发 0
+数据被action修改之后触发 3
+helloworld里面-数据被action修改之后触发 3
+```
+
+点击”关闭hello“按钮会输出
+
+```
+已清除helloworld订阅
+```
+
+此时无论怎么点击“修改状态”按钮，HelloWorld里面对action变化的订阅都不再会被触发，只会输出
+
+```
+数据被action修改之前触发 3
+数据被action修改之后触发 6
+```
+
+如果将HelloWorld.vue里面$onAction的第二个参数改为true，那么点击”关闭hello“按钮就不会触发HelloWorld里面$action的第三个参数（回调函数），同时继续点击“修改状态”按钮会输出
+
+```
+数据被action修改之前触发 3
+helloworld里面-数据被action修改之前触发 3
+数据被action修改之后触发 6
+helloworld里面-数据被action修改之后触发 6
+```
+
+HelloWorld组件虽然被卸载，但是对action的订阅依然有效
+
+$state我这里也单独拎出来讲解一下
+
+$state的底层其实也是$patch，$state的本质是一个defineProxy，获取的时候会触发get，然后会从store里面获取相应的state，getter或action，设置值的时候会调用$patch，具体源码下一节讲解。

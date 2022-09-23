@@ -94,7 +94,7 @@ module.exports = {
                   link: '/blogs/front-frame/vue3/pinia/introduction',
                 },
                 {
-                  text: 'Pinia源码',
+                  text: '实现一个Pinia',
                   link: '/blogs/front-frame/vue3/pinia/sound-code',
                 },
               ],
