@@ -278,3 +278,20 @@ HelloWorld组件虽然被卸载，但是对action的订阅依然有效
 $state我这里也单独拎出来讲解一下
 
 $state的底层其实也是$patch，$state的本质是一个defineProxy，获取的时候会触发get，然后会从store里面获取相应的state，getter或action，设置值的时候会调用$patch，具体源码下一节讲解。
+
+### 4.使用插件
+
+```
+function piniaPlugin() {
+  return (options) => {
+  	// options: { app, options, pinia, store }
+    console.log(options);
+    // 最后一定要返回一个对象，这个对象会被合并到每个store上面去
+    return { combineKey: 1 };
+  };
+}
+
+const pinia = createPinia();
+pinia.use(piniaPlugin());
+```
+

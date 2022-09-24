@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts">
-import { toRefs, computed, onMounted } from 'vue';
+import { toRefs, onMounted } from 'vue';
 
 export default {
   name: 'Image',
