@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts">
-import { toRefs, computed, onBeforeMount } from 'vue';
+import { toRefs, computed, onMounted } from 'vue';
 
 export default {
   name: 'Image',
@@ -12,8 +12,7 @@ export default {
   },
   setup(props) {
     const { src } = toRefs(props);
-    onBeforeMount(() => {
-      console.log('1111', window.location.pathname);
+    onMounted(() => {
       if (window.location.pathname.startsWith('/nxf-notes')) {
         src.value = `/nxf-notes${src.value}`;
       }
