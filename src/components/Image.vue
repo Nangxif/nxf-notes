@@ -12,8 +12,8 @@ export default {
   },
   setup(props) {
     const { src } = toRefs(props);
-
     onBeforeMount(() => {
+      console.log('1111', window.location.pathname);
       if (window.location.pathname.startsWith('/nxf-notes')) {
         src.value = `/nxf-notes${src.value}`;
       }
