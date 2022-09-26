@@ -75,20 +75,25 @@ module.exports = {
               link: '/blogs/front-frame/vue3/environment-setup',
             },
             {
-              text: 'reactive',
-              link: '/blogs/front-frame/vue3/reactive',
-            },
-            {
-              text: 'effect',
-              link: '/blogs/front-frame/vue3/effect',
-            },
-            {
-              text: 'computed',
-              link: '/blogs/front-frame/vue3/computed',
-            },
-            {
-              text: 'watch',
-              link: '/blogs/front-frame/vue3/watch',
+              text: 'reactivity',
+              items: [
+                {
+                  text: 'reactive',
+                  link: '/blogs/front-frame/vue3/reactivity/reactive',
+                },
+                {
+                  text: 'effect',
+                  link: '/blogs/front-frame/vue3/reactivity/effect',
+                },
+                {
+                  text: 'computed',
+                  link: '/blogs/front-frame/vue3/reactivity/computed',
+                },
+                {
+                  text: 'watch',
+                  link: '/blogs/front-frame/vue3/reactivity/watch',
+                },
+              ],
             },
             {
               text: 'diff',
@@ -249,8 +254,8 @@ module.exports = {
       ],
     },
     footer: {
-      copyright: 'Copyright © 2022-present Nangxif'
-    }
+      copyright: 'Copyright © 2022-present Nangxif',
+    },
   },
   lastUpdated: true,
   markdown: {
