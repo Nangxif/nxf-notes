@@ -81,7 +81,11 @@ export function computed(getterOrOptions) {
 ```
 ## 四、源码流程图
 
+### 1.effect/computed/computedEffect关系图
+
  <Image :src="'/front-frame/vue3/computed/1.png'" />
+
+### 2.更新流程图
 
  <Image :src="'/front-frame/vue3/computed/2.png'" />
 
@@ -117,7 +121,7 @@ const fullName = computed({
       console.log('runner');
       return state.firname + state.lastname;
     },
-	set(newValue) {},
+	  set(newValue) {},
 });
 fullName.value;
 fullName.value;

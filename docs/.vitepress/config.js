@@ -87,6 +87,10 @@ module.exports = {
               link: '/blogs/front-frame/vue3/computed',
             },
             {
+              text: 'watch',
+              link: '/blogs/front-frame/vue3/watch',
+            },
+            {
               text: 'diff',
               link: '/blogs/front-frame/vue3/diff',
             },
