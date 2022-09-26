@@ -1,1 +1,0 @@
-import{_ as e,c as t,o}from"./app.2a5f77e6.js";const m=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"blogs/front-frame/vue3/vnode.md","lastUpdated":1664186269000}'),a={name:"blogs/front-frame/vue3/vnode.md"};function r(n,s,c,d,p,f){return o(),t("div")}const i=e(a,[["render",r]]);export{m as __pageData,i as default};
