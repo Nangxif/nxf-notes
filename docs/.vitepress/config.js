@@ -83,6 +83,10 @@ module.exports = {
               link: '/blogs/front-frame/vue3/effect',
             },
             {
+              text: 'computed',
+              link: '/blogs/front-frame/vue3/computed',
+            },
+            {
               text: 'diff',
               link: '/blogs/front-frame/vue3/diff',
             },
