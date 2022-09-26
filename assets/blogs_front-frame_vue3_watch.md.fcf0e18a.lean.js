@@ -1,1 +1,0 @@
-import{_ as t,c as e,o as a}from"./app.38627750.js";const m=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"blogs/front-frame/vue3/watch.md","lastUpdated":1664176290000}'),r={name:"blogs/front-frame/vue3/watch.md"};function o(s,c,n,p,d,f){return a(),e("div")}const i=t(r,[["render",o]]);export{m as __pageData,i as default};
