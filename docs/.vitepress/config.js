@@ -96,8 +96,25 @@ module.exports = {
               ],
             },
             {
-              text: 'diff',
-              link: '/blogs/front-frame/vue3/diff',
+              text: 'runtime-dom',
+              link: '/blogs/front-frame/vue3/runtime-dom',
+            },
+            {
+              text: 'runtime-core',
+              items: [
+                {
+                  text: '虚拟节点vnode',
+                  link: '/blogs/front-frame/vue3/runtime-core/vnode',
+                },
+                {
+                  text: 'diff算法',
+                  link: '/blogs/front-frame/vue3/runtime-core/diff',
+                },
+                {
+                  text: '生命周期',
+                  link: '/blogs/front-frame/vue3/runtime-core/apiLifecycle',
+                },
+              ],
             },
             {
               text: 'Pinia',

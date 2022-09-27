@@ -13,7 +13,7 @@ const reactiveData = reactive({
 
 那我们在取reactiveData的时候我们会发现它是一个proxy，但是b却还不是一个proxy，但是当我们取reactiveData.b的时候，我们就发现它变成了一个proxy，这就是懒代理，与Vue2的处理方式有很大的不同，Vue2在一开始的时候，就利用递归将嵌套对象都用dineProperty转换了一遍，这样很耗性能。
 
-## reactive代码片段
+## 一、reactive代码片段
 
 ```
 import { isObject } from '@vue/shared';
@@ -103,7 +103,7 @@ PS：reative总共就做了这么几件事
    state1 === state2 // true
    ```
 
-## mutableHandlers代码片段
+## 二、mutableHandlers代码片段
 
 ```
 import { isObject } from '@vue/shared';
