@@ -107,6 +107,10 @@ module.exports = {
                   link: '/blogs/front-frame/vue3/runtime-core/vnode',
                 },
                 {
+                  text: 'createRenderer创建渲染器',
+                  link: '/blogs/front-frame/vue3/runtime-core/createRenderer',
+                },
+                {
                   text: 'diff算法',
                   link: '/blogs/front-frame/vue3/runtime-core/diff',
                 },
