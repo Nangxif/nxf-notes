@@ -281,13 +281,27 @@ $state的底层其实也是$patch，$state的本质是一个defineProxy，获取
 
 ### 4.使用插件
 
+我们使用插件最多的地方是实现一个可持续化的store
+
 ```
 function piniaPlugin() {
   return (options) => {
+    // 有几个store就执行几次
   	// options: { app, options, pinia, store }
     console.log(options);
-    // 最后一定要返回一个对象，这个对象会被合并到每个store上面去
-    return { combineKey: 1 };
+    // 最后可能会返回一个对象，这个对象会被合并到每个store上面去
+    let local = localStorage.getItem(store.$id + 'PINIA_STATE');
+    if (local) {
+    	store.$state = JSON.parse(local);
+    }
+    store.$subscribe(({ storeId: id }, state) => {
+    	localStorage.setItem(`${id}PINIA_STATE`, JSON.stringify(state));
+    });
+    //   插件的核心就是利用$onAction $subscribe
+    //   插件里面也可以return一个对象，这个对象会被合并到store里面
+    return {
+    	combineKey: 1,
+    };
   };
 }
 
