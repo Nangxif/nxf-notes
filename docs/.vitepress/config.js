@@ -42,7 +42,10 @@ module.exports = {
           { text: 'Webpack', link: '/blogs/automation/webpack/introduction' },
           { text: 'ESBuild', link: '/blogs/automation/esbuild/introduction' },
           { text: 'Rollup', link: '/blogs/automation/rollup/introduction' },
-          { text: 'npm', link: '/blogs/automation/npm/introduction' },
+          {
+            text: '包管理工具',
+            link: '/blogs/automation/package-management-tool/npm/introduction',
+          },
         ],
       },
       { text: 'JS&TS', link: '/blogs/js-ts/js/coriolization-of-the-function' },
@@ -219,15 +222,29 @@ module.exports = {
           ],
         },
         {
-          text: 'npm',
+          text: '包管理工具',
           items: [
             {
-              text: 'introduction',
-              link: '/blogs/automation/npm/introduction',
+              text: 'npm',
+              items: [
+                {
+                  text: 'introduction',
+                  link: '/blogs/automation/package-management-tool/npm/introduction',
+                },
+                {
+                  text: '运行 npm run xxx 的时候发生了什么？',
+                  link: '/blogs/automation/package-management-tool/npm/npm-run-xxx',
+                },
+              ],
             },
             {
-              text: '运行 npm run xxx 的时候发生了什么？',
-              link: '/blogs/automation/npm/npm-run-xxx',
+              text: '杂货间',
+              items: [
+                {
+                  text: 'npx',
+                  link: '/blogs/automation/package-management-tool/groceries/npx',
+                },
+              ],
             },
           ],
         },

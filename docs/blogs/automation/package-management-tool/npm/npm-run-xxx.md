@@ -25,15 +25,15 @@ npm run xxx的时候，发生了什么。
 
 因为 直接执行`vue-cli-service serve`，会报错，因为操作系统中没有存在`vue-cli-service`这一条指令
 
-<Image :src="'/automation/npm/npm-run-xxx/1.png'" />
+<Image :src="'/automation/package-management-tool/npm/npm-run-xxx/1.png'" />
 
 那既然`vue-cli-service`这条指令不存在操作系统中，为什么执行`npm run serve`的时候，也就是相当于执行了`vue-cli-service serve` ，为什么这样它就能成功，而且不报指令不存在的错误呢？
 
 我们在安装依赖的时候，是通过npm i xxx 来执行的，例如 `npm i @vue/cli-service`，npm 在 安装这个依赖的时候，就会`node_modules/.bin/` 目录中创建 好`vue-cli-service` 为名的几个可执行文件了。
 
-<Image :src="'/automation/npm/npm-run-xxx/2.png'" />
+<Image :src="'/automation/package-management-tool/npm/npm-run-xxx/2.png'" />
 
-<Image :src="'/automation/npm/npm-run-xxx/3.png'" />
+<Image :src="'/automation/package-management-tool/npm/npm-run-xxx/3.png'" />
 
 .bin 目录，这个目录不是任何一个 npm 包。目录下的文件，表示这是一个个软链接，打开文件可以看到文件顶部写着 `#!/bin/sh` ，表示这是一个脚本。
 
@@ -43,7 +43,7 @@ npm run xxx的时候，发生了什么。
 
 可以看到，它存在项目最外层的**package-lock.json**文件中
 
-<Image :src="'/automation/npm/npm-run-xxx/4.png'" />
+<Image :src="'/automation/package-management-tool/npm/npm-run-xxx/4.png'" />
 
 从 package-lock.json 中可知，当我们npm i 整个新建的vue项目的时候，npm 将 bin/vue-cli-service.js 作为 bin 声明了。
 
@@ -55,7 +55,7 @@ npm run xxx的时候，发生了什么。
 
 刚刚看到在node_modules/bin中 有三个vue-cli-service文件。为什么会有三个文件呢？
 
-<Image :src="'/automation/npm/npm-run-xxx/5.png'" />
+<Image :src="'/automation/package-management-tool/npm/npm-run-xxx/5.png'" />
 
 如果我们在 cmd 里运行的时候，windows 一般是调用了 `vue-cli-service.cmd`，这个文件
 
