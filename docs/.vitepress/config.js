@@ -42,6 +42,7 @@ module.exports = {
           { text: 'Webpack', link: '/blogs/automation/webpack/introduction' },
           { text: 'ESBuild', link: '/blogs/automation/esbuild/introduction' },
           { text: 'Rollup', link: '/blogs/automation/rollup/introduction' },
+          { text: 'npm', link: '/blogs/automation/npm/introduction' },
         ],
       },
       { text: 'JS&TS', link: '/blogs/js-ts/js/coriolization-of-the-function' },
@@ -214,6 +215,19 @@ module.exports = {
                   link: '/blogs/automation/rollup/groceries/rollup-vue3',
                 },
               ],
+            },
+          ],
+        },
+        {
+          text: 'npm',
+          items: [
+            {
+              text: 'introduction',
+              link: '/blogs/automation/npm/introduction',
+            },
+            {
+              text: '运行 npm run xxx 的时候发生了什么？',
+              link: '/blogs/automation/npm/npm-run-xxx',
             },
           ],
         },

@@ -1,8 +1,12 @@
-# 运行 npm run xxx 的时候发生了什么？(摘录)
+# 运行 npm run xxx 的时候发生了什么？【摘录】
+
+原博客链接https://juejin.cn/post/7078924628525056007
+
+## 一、问答
 
 npm run xxx的时候，发生了什么。
 
- npm run xxx的时候，首先会去项目的package.json文件里找scripts 里找对应的xxx，然后执行 xxx的命令，例如启动vue项目 npm run serve的时候，实际上就是执行了vue-cli-service serve 这条命令
+ npm run xxx的时候，首先会去项目的package.json文件里找scripts 里找对应的xxx，然后执行 xxx的命令，例如启动vue项目 npm run serve的时候，实际上就是执行了vue-cli-service serve 这条命令。
 
 **package.json文件**
 
@@ -17,19 +21,29 @@ npm run xxx的时候，发生了什么。
 }
 ```
 
-那 为什么 不直接执行`vue-cli-service serve`而要执行`npm run serve` 呢
+那 为什么 不直接执行`vue-cli-service serve`而要执行`npm run serve` 呢？
 
 因为 直接执行`vue-cli-service serve`，会报错，因为操作系统中没有存在`vue-cli-service`这一条指令
+
+<Image :src="'/automation/npm/npm-run-xxx/1.png'" />
 
 那既然`vue-cli-service`这条指令不存在操作系统中，为什么执行`npm run serve`的时候，也就是相当于执行了`vue-cli-service serve` ，为什么这样它就能成功，而且不报指令不存在的错误呢？
 
 我们在安装依赖的时候，是通过npm i xxx 来执行的，例如 `npm i @vue/cli-service`，npm 在 安装这个依赖的时候，就会`node_modules/.bin/` 目录中创建 好`vue-cli-service` 为名的几个可执行文件了。
 
+<Image :src="'/automation/npm/npm-run-xxx/2.png'" />
+
+<Image :src="'/automation/npm/npm-run-xxx/3.png'" />
+
 .bin 目录，这个目录不是任何一个 npm 包。目录下的文件，表示这是一个个软链接，打开文件可以看到文件顶部写着 `#!/bin/sh` ，表示这是一个脚本。
 
 由此我们可以知道，当使用 `npm run serve` 执行 `vue-cli-service  serve` 时，虽然没有安装 `vue-cli-service`的全局命令，但是 npm 会到 `./node_modules/.bin` 中找到 `vue-cli-service` 文件作为  脚本来执行，则相当于执行了 `./node_modules/.bin/vue-cli-service serve`（最后的 serve 作为参数传入）。
 
+.bin 目录下的文件表示软连接，那这个bin目录下的那些软连接文件是哪里来的呢？它又是怎么知道这条软连接是执行哪里的呢？
+
 可以看到，它存在项目最外层的**package-lock.json**文件中
+
+<Image :src="'/automation/npm/npm-run-xxx/4.png'" />
 
 从 package-lock.json 中可知，当我们npm i 整个新建的vue项目的时候，npm 将 bin/vue-cli-service.js 作为 bin 声明了。
 
@@ -40,6 +54,8 @@ npm run xxx的时候，发生了什么。
 也就是说，npm i 的时候，npm 就帮我们把这种软连接配置好了，其实这种软连接相当于一种映射，执行npm run xxx 的时候，就会到 node_modules/bin中找对应的映射文件，然后再找到相应的js文件来执行。
 
 刚刚看到在node_modules/bin中 有三个vue-cli-service文件。为什么会有三个文件呢？
+
+<Image :src="'/automation/npm/npm-run-xxx/5.png'" />
 
 如果我们在 cmd 里运行的时候，windows 一般是调用了 `vue-cli-service.cmd`，这个文件
 
@@ -60,3 +76,8 @@ vue-cli-service.cmd
 vue-cli-service.ps1
 ```
 
+## 二、总结
+
+1. 运行 npm run xxx的时候，npm 会先在当前目录的 node_modules/.bin 查找要执行的程序，如果找到则运行；
+2. 没有找到则从全局的 node_modules/.bin 中查找，npm i -g xxx就是安装到到全局目录；
+3. 如果全局目录还是没找到，那么就从 path 环境变量中查找有没有其他同名的可执行程序。
