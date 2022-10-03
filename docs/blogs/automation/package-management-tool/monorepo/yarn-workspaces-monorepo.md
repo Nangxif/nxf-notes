@@ -1,5 +1,7 @@
 # yarn workspaces创建monorepo项目
 
+## 一、monorepo创建
+
 我们先用`yarn init -y`创建一个项目
 
 此时的`package.json`长这样
@@ -95,6 +97,8 @@ console.log("package-b");
 ```
 yarn
 yarn install
+// PS
+yarn install # 等价于 lerna bootstrap --npm-client yarn --use-workspaces
 ```
 
 然后执行
@@ -149,3 +153,96 @@ yarn add prettier
 yarn add prettier -W
 ```
 
+## 二、其他的命令
+
+1.如果想看当前工作空间的依赖树，我们可以运行
+
+```
+yarn workspaces info
+```
+
+此时会输出这样的结构
+
+```
+{
+  "@yarn-monorepo/client": {
+    "location": "packages/client",
+    "workspaceDependencies": [
+      "@yarn-monorepo/service"
+    ],
+    "mismatchedWorkspaceDependencies": []
+  },
+  "@yarn-monorepo/package-a": {
+    "location": "packages/package-a",
+    "workspaceDependencies": [],
+    "mismatchedWorkspaceDependencies": []
+  },
+  "@yarn-monorepo/package-b": {
+    "location": "packages/package-b",
+    "workspaceDependencies": [
+      "@yarn-monorepo/package-a"
+    ],
+    "mismatchedWorkspaceDependencies": []
+  },
+  "@yarn-monorepo/service": {
+    "location": "packages/service",
+    "workspaceDependencies": [],
+    "mismatchedWorkspaceDependencies": []
+  }
+}
+```
+
+2.在指定的package中运行指定的命令
+
+```
+yarn workspace <workspace_name> <command>
+```
+
+```
+# 在react-app中添加react，react-dom作为devDependencies
+yarn workspace foo add react react-dom --dev
+
+# 移除service中的lodash依赖
+yarn workspace service remove lodash
+
+# 运行service中package.json的 scripts.test 命令
+yarn workspace service run test
+```
+
+3.在所有package中运行指定的命令，若某个package中没有对应的命令则会报错
+
+```
+yarn workspaces run <command>
+```
+
+```
+# 运行所有package（react-app、service）中package.json的 scripts.build 命令
+yarn workspaces run build
+```
+
+4.-W: --ignore-workspace-root-check ，允许依赖被安装在workspace的根目录
+
+```
+yarn <add|remove> <package> -W
+```
+
+```
+# 安装eslint作为根目录的devDependencies
+yarn add eslint -D -W
+```
+
+## 三、Yarn Workspace与Lerna
+
+[Lerna](https://link.juejin.cn/?target=https%3A%2F%2Fgithub.com%2Flerna%2Flerna%23readme)是社区主流的monorepo管理工具之一，集成了依赖管理、版本发布管理等功能。
+
+使用Learn管理的项目的目录结构和yarn workspace类似。
+
+Lerna的依赖管理是也基于`yarn/npm`，但是安装依赖的方式和yarn workspace有些差异：
+
+Yarn workspace只会在根目录安装一个node_modules，这有利于提升依赖的安装效率和不同package间的版本复用。而Lerna默认会进到每一个package中运行`yarn/npm install`，并在每个package中创建一个node_modules。
+
+目前社区中最主流的方案，也是yarn官方推荐的方案，是集成yarn workspace和lerna。使用yarn workspace来管理依赖，使用lerna来管理npm包的版本发布。
+
+
+
+下一章我们来讲解Lerna
