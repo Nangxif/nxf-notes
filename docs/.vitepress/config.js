@@ -238,6 +238,23 @@ module.exports = {
               ],
             },
             {
+              text: 'monorepo',
+              items: [
+                {
+                  text: 'monorepo介绍',
+                  link: '/blogs/automation/package-management-tool/monorepo/introduction',
+                },
+                {
+                  text: 'yarn workspaces创建monorepo项目',
+                  link: '/blogs/automation/package-management-tool/monorepo/yarn-workspaces-monorepo',
+                },
+                {
+                  text: 'lerna',
+                  link: '/blogs/automation/package-management-tool/monorepo/lerna',
+                },
+              ],
+            },
+            {
               text: '杂货间',
               items: [
                 {
