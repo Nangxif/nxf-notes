@@ -44,7 +44,7 @@ module.exports = {
           { text: 'Rollup', link: '/blogs/automation/rollup/introduction' },
           {
             text: '包管理工具',
-            link: '/blogs/automation/package-management-tool/npm/introduction',
+            link: '/blogs/automation/package-manage/npm/introduction',
           },
         ],
       },
@@ -134,6 +134,23 @@ module.exports = {
                 {
                   text: '实现一个Pinia',
                   link: '/blogs/front-frame/vue3/pinia/sound-code',
+                },
+              ],
+            },
+            {
+              text: 'Vuex',
+              items: [
+                {
+                  text: 'Vuex介绍以及使用',
+                  link: '/blogs/front-frame/vue3/vuex/introduction',
+                },
+                {
+                  text: '实现一个基础vuex',
+                  link: '/blogs/front-frame/vue3/vuex/simple-vuex',
+                },
+                {
+                  text: '实现一个完整vuex',
+                  link: '/blogs/front-frame/vue3/vuex/whole-vuex',
                 },
               ],
             },
@@ -229,11 +246,11 @@ module.exports = {
               items: [
                 {
                   text: 'introduction',
-                  link: '/blogs/automation/package-management-tool/npm/introduction',
+                  link: '/blogs/automation/package-manage/npm/introduction',
                 },
                 {
                   text: '运行 npm run xxx 的时候发生了什么？',
-                  link: '/blogs/automation/package-management-tool/npm/npm-run-xxx',
+                  link: '/blogs/automation/package-manage/npm/npm-run-xxx',
                 },
               ],
             },
@@ -242,15 +259,15 @@ module.exports = {
               items: [
                 {
                   text: 'monorepo介绍',
-                  link: '/blogs/automation/package-management-tool/monorepo/introduction',
+                  link: '/blogs/automation/package-manage/monorepo/introduction',
                 },
                 {
                   text: 'yarn workspaces创建monorepo项目',
-                  link: '/blogs/automation/package-management-tool/monorepo/yarn-workspaces-monorepo',
+                  link: '/blogs/automation/package-manage/monorepo/yarn-workspaces-monorepo',
                 },
                 {
                   text: 'lerna',
-                  link: '/blogs/automation/package-management-tool/monorepo/lerna',
+                  link: '/blogs/automation/package-manage/monorepo/lerna',
                 },
               ],
             },
@@ -259,7 +276,7 @@ module.exports = {
               items: [
                 {
                   text: 'npx',
-                  link: '/blogs/automation/package-management-tool/groceries/npx',
+                  link: '/blogs/automation/package-manage/groceries/npx',
                 },
               ],
             },

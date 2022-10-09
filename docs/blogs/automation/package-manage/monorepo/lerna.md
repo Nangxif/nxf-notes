@@ -72,7 +72,7 @@ PS:关于 lerna link 和 lerna bootstrap
 lerna clean
 ```
 
-<Image :src="'/automation/package-management-tool/monorepo/lerna/1.png'" />
+<Image :src="'/automation/package-manage/monorepo/lerna/1.png'" />
 
 **7.查看packages下面有哪些包**
 
@@ -81,7 +81,7 @@ lerna ls
 lerna list
 ```
 
-<Image :src="'/automation/package-management-tool/monorepo/lerna/2.png'" />
+<Image :src="'/automation/package-manage/monorepo/lerna/2.png'" />
 
 **8.运行某个包里的命令`lerna run < script >`**
 
@@ -108,7 +108,7 @@ lerna changed
 
 在发布包之前一定要有一个github仓库，而且还需要有一个master分支，不然流程走不下去。而且要登录npm。
 
-在登录npm的时候一定要关注一下npm的镜像是否正确，我之前的镜像是taobao的，所以导致登录一直报403，切换为https://registry.npmjs.org/后输入账号、密码，邮箱，以及邮箱验证码即可登录成功。
+在登录npm的时候一定要关注一下npm的镜像是否正确，我之前的镜像是taobao的，所以导致登录一直报403，切换为https://registry.npmjs.org/ 后输入账号、密码，邮箱，以及邮箱验证码即可登录成功。
 
 然后输入
 
@@ -118,10 +118,10 @@ lerna publish
 
 输入命令行之后会出现这样的界面
 
-<Image :src="'/automation/package-management-tool/monorepo/lerna/3.png'" />
+<Image :src="'/automation/package-manage/monorepo/lerna/3.png'" />
 
 选择我们要发版的版本号，是大版本还是小版本？选择完之后会列出这次需要更新的包
 
-<Image :src="'/automation/package-management-tool/monorepo/lerna/4.png'" />
+<Image :src="'/automation/package-manage/monorepo/lerna/4.png'" />
 
 然后就发布成功啦

@@ -143,7 +143,7 @@ yarn-workspaces的monorepo还有一个很方便的点就是，如果我们在git
 yarn add prettier
 ```
 
-<Image :src="'/automation/package-management-tool/monorepo/yarn-workspaces-monorepo/1.png'" />
+<Image :src="'/automation/package-manage/monorepo/yarn-workspaces-monorepo/1.png'" />
 
 控制台会提示目前是根目录，是不是搞错了，不在packages的包里面不能安装包。
 
