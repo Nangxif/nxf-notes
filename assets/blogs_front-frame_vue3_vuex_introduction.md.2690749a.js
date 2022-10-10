@@ -1,0 +1,1 @@
+import{_ as t,c as e,o}from"./app.8d28953e.js";const u=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"blogs/front-frame/vue3/vuex/introduction.md","lastUpdated":1665412748000}'),r={name:"blogs/front-frame/vue3/vuex/introduction.md"};function a(n,s,c,i,d,p){return o(),e("div")}const _=t(r,[["render",a]]);export{u as __pageData,_ as default};
