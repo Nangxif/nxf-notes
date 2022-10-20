@@ -150,35 +150,40 @@ module.exports = {
                 },
                 {
                   text: '完整的vuex',
-                  link: '/blogs/front-frame/vue3/vuex/whole-vuex',
-                },
-                {
-                  text: 'ModuleCollection的实现',
-                  link: '/blogs/front-frame/vue3/vuex/ModuleCollection',
-                },
-                {
-                  text: '递归安装模块以及格式化vuex',
-                  link: '/blogs/front-frame/vue3/vuex/installModule',
-                },
-                {
-                  text: 'vuex增加响应式效果',
-                  link: '/blogs/front-frame/vue3/vuex/resetStoreVm',
-                },
-                {
-                  text: '动态注册模块',
-                  link: '/blogs/front-frame/vue3/vuex/register-module',
-                },
-                {
-                  text: 'vuex插件',
-                  link: '/blogs/front-frame/vue3/vuex/plugins',
-                },
-                {
-                  text: '区分mutation和action',
-                  link: '/blogs/front-frame/vue3/vuex/difference-between-mutation-action',
-                },
-                {
-                  text: '辅助函数',
-                  link: '/blogs/front-frame/vue3/vuex/helper',
+                  items: [
+                    {
+                      text: '前言',
+                      link: '/blogs/front-frame/vue3/vuex/whole-vuex/introduction',
+                    },
+                    {
+                      text: 'ModuleCollection的实现',
+                      link: '/blogs/front-frame/vue3/vuex/whole-vuex/ModuleCollection',
+                    },
+                    {
+                      text: '递归安装模块以及格式化vuex',
+                      link: '/blogs/front-frame/vue3/vuex/whole-vuex/installModule',
+                    },
+                    {
+                      text: 'vuex增加响应式效果',
+                      link: '/blogs/front-frame/vue3/vuex/whole-vuex/resetStoreVm',
+                    },
+                    {
+                      text: '动态注册模块',
+                      link: '/blogs/front-frame/vue3/vuex/whole-vuex/register-module',
+                    },
+                    {
+                      text: 'vuex插件',
+                      link: '/blogs/front-frame/vue3/vuex/whole-vuex/plugins',
+                    },
+                    {
+                      text: '区分mutation和action',
+                      link: '/blogs/front-frame/vue3/vuex/whole-vuex/difference-between-mutation-action',
+                    },
+                    {
+                      text: '辅助函数',
+                      link: '/blogs/front-frame/vue3/vuex/whole-vuex/helper',
+                    },
+                  ],
                 },
               ],
             },

@@ -1,4 +1,4 @@
-# 完整的vuex
+# 前言
 
 上一节我们讲解的vuex是脱离modules概念的一个简单的实现，这一节开始我们把核心概念modules也加进来。
 
@@ -180,3 +180,7 @@ $store.commit('b/changeAge', 5); // c没有定义namespaced，因此mutations挂
 5. 默认会找当前模块上是否有namespaced，并且将父级的namespaced一同算上，做成命名空间
 
 接下来我们根据上面五点，来实现一个完整的vuex
+
+我这里先把源码放上来，大家可以配合文档一起“食用”
+
+<Codesandbox :src="'https://codesandbox.io/p/github/Nangxif/vue-vuex/draft/wild-forest?file=%2FREADME.md'"/>
