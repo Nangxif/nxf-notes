@@ -368,6 +368,10 @@ module.exports = {
               text: 'introduction',
               link: '/blogs/node/introduction',
             },
+            {
+              text: 'node模块化以及exports与module.exports',
+              link: '/blogs/node/node-modularization',
+            },
           ],
         },
       ],
