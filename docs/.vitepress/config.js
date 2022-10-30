@@ -213,6 +213,10 @@ module.exports = {
               text: '如何调试react源码',
               link: '/blogs/front-frame/react/debug-react',
             },
+            {
+              text: '手写react-router',
+              link: '/blogs/front-frame/react/react-router',
+            },
           ],
         },
       ],
