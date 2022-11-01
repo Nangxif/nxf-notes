@@ -439,9 +439,98 @@ export default class Route extends Component {
           return null;
         }}
       </Consumer>
-      // </Consumer>
     );
   }
 }
 ```
 
+## 六、BroswerRouter
+
+这里我们先讲一些前置的知识点
+
+路由跳转的方法
+
+前面三个会刷新页面
+
+- window.history.go
+- window.history.back
+- window.history.forward
+
+后面两个不会触发页面的刷新
+
+- window.history.pushState
+- window.history.replaceState
+
+那么如何监听路由的变化呢？监听我们熟知的`onpopstate`事件？不不不，这个时间只能监听上面前三个会触发页面刷新的跳转方法，后面两个方法并不能监听到，那怎么办？别着急，我们可以自定义监听事件。
+
+```
+// 直接自定义事件，使用 Event 构造函数：
+var event = new Event('build');
+var elem = document.querySelector('#id')
+// 监听事件
+elem.addEventListener('build', function (e) { ... }, false);
+// 触发事件
+elem.dispatchEvent(event);
+```
+
+我们可以通过这种方式，重写全局的`pushState`方法，并且监听自定义的`pushState`事件。
+
+```
+import React, { Component } from 'react';
+import { Provider } from './context';
+
+export default class BroswerRouter extends Component {
+  constructor() {
+    super();
+    this.state = {
+      location: {
+        pathname: window.location.pathname || '/',
+      },
+    };
+  }
+  componentDidMount() {
+    // 监听pathname值变化，重新设置状态
+    var _wr = function (type) {
+      var orig = window.history[type];
+      return function () {
+        var rv = orig.apply(this, arguments);
+        var e = new Event(type);
+        e.arguments = arguments;
+        window.dispatchEvent(e);
+        return rv;
+      };
+    };
+    window.history.pushState = _wr('pushState');
+
+    window.addEventListener('pushState', () => {
+      this.setState({
+        location: {
+          ...this.state.location,
+          pathname: window.location.pathname || '/',
+        },
+      });
+    });
+    // 默认pathname没有时跳转到/
+    window.history.pushState(
+      { path: window.location.pathname || '/' },
+      null,
+      window.location.pathname || '/'
+    );
+  }
+  render() {
+    let value = {
+      location: this.state.location,
+      history: {
+        push(to) {
+          window.history.pushState({ path: to }, null, to);
+        },
+      },
+    };
+    return <Provider value={value}>{this.props.children}</Provider>;
+  }
+}
+```
+
+## 七、源码
+
+<Codesandbox :src="'https://codesandbox.io/p/github/Nangxif/react-router/draft/silly-butterfly?file=%2FREADME.md'"/>
