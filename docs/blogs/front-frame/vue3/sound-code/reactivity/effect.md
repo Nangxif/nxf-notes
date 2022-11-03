@@ -1,7 +1,7 @@
 # effect
 ## 一、流程图
 
- <Image :src="'/front-frame/vue3/reactivity/effect/1.png'" />
+ <Image :src="'/front-frame/vue3/sound-code/reactivity/effect/1.png'" />
 
 ## 二、函数概览
 

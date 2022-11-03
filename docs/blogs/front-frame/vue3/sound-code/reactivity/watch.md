@@ -49,7 +49,7 @@ watch(
 
 ## 二、watch流程图
 
- <Image :src="'/front-frame/vue3/reactivity/watch/1.png'" />
+ <Image :src="'/front-frame/vue3/sound-code/reactivity/watch/1.png'" />
 
 ## 三、watch流程
 

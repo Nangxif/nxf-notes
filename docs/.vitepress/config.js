@@ -32,7 +32,7 @@ module.exports = {
       {
         text: '框架',
         items: [
-          { text: 'Vue3', link: '/blogs/front-frame/vue3/introduction' },
+          { text: 'Vue3', link: '/blogs/front-frame/vue3/sound-code/introduction' },
           { text: 'React', link: '/blogs/front-frame/react/introduction' },
         ],
       },
@@ -71,56 +71,61 @@ module.exports = {
           text: 'Vue3',
           items: [
             {
-              text: 'Vue3介绍',
-              link: '/blogs/front-frame/vue3/introduction',
-            },
-            {
-              text: 'Vue3环境搭建',
-              link: '/blogs/front-frame/vue3/environment-setup',
-            },
-            {
-              text: 'reactivity',
+              text: 'Vue3源码',
               items: [
                 {
-                  text: 'reactive',
-                  link: '/blogs/front-frame/vue3/reactivity/reactive',
+                  text: 'Vue3介绍',
+                  link: '/blogs/front-frame/vue3/sound-code/introduction',
                 },
                 {
-                  text: 'effect',
-                  link: '/blogs/front-frame/vue3/reactivity/effect',
+                  text: 'Vue3环境搭建',
+                  link: '/blogs/front-frame/vue3/sound-code/environment-setup',
                 },
                 {
-                  text: 'computed',
-                  link: '/blogs/front-frame/vue3/reactivity/computed',
+                  text: 'reactivity',
+                  items: [
+                    {
+                      text: 'reactive',
+                      link: '/blogs/front-frame/vue3/sound-code/reactivity/reactive',
+                    },
+                    {
+                      text: 'effect',
+                      link: '/blogs/front-frame/vue3/sound-code/reactivity/effect',
+                    },
+                    {
+                      text: 'computed',
+                      link: '/blogs/front-frame/vue3/sound-code/reactivity/computed',
+                    },
+                    {
+                      text: 'watch',
+                      link: '/blogs/front-frame/vue3/sound-code/reactivity/watch',
+                    },
+                  ],
                 },
                 {
-                  text: 'watch',
-                  link: '/blogs/front-frame/vue3/reactivity/watch',
-                },
-              ],
-            },
-            {
-              text: 'runtime-dom',
-              link: '/blogs/front-frame/vue3/runtime-dom',
-            },
-            {
-              text: 'runtime-core',
-              items: [
-                {
-                  text: '虚拟节点vnode',
-                  link: '/blogs/front-frame/vue3/runtime-core/vnode',
+                  text: 'runtime-dom',
+                  link: '/blogs/front-frame/vue3/sound-code/runtime-dom',
                 },
                 {
-                  text: 'createRenderer创建渲染器',
-                  link: '/blogs/front-frame/vue3/runtime-core/createRenderer',
-                },
-                {
-                  text: 'diff算法',
-                  link: '/blogs/front-frame/vue3/runtime-core/diff',
-                },
-                {
-                  text: '生命周期',
-                  link: '/blogs/front-frame/vue3/runtime-core/apiLifecycle',
+                  text: 'runtime-core',
+                  items: [
+                    {
+                      text: '虚拟节点vnode',
+                      link: '/blogs/front-frame/vue3/sound-code/runtime-core/vnode',
+                    },
+                    {
+                      text: 'createRenderer创建渲染器',
+                      link: '/blogs/front-frame/vue3/sound-code/runtime-core/createRenderer',
+                    },
+                    {
+                      text: '文本和无用标签(Fragment)的diff算法',
+                      link: '/blogs/front-frame/vue3/sound-code/runtime-core/text-fragment-diff',
+                    },
+                    {
+                      text: '生命周期',
+                      link: '/blogs/front-frame/vue3/sound-code/runtime-core/apiLifecycle',
+                    },
+                  ],
                 },
               ],
             },

@@ -83,11 +83,11 @@ export function computed(getterOrOptions) {
 
 ### 1.effect/computed/computedEffect关系图
 
- <Image :src="'/front-frame/vue3/reactivity/computed/1.png'" />
+ <Image :src="'/front-frame/vue3/sound-code/reactivity/computed/1.png'" />
 
 ### 2.更新流程图
 
- <Image :src="'/front-frame/vue3/reactivity/computed/2.png'" />
+ <Image :src="'/front-frame/vue3/sound-code/reactivity/computed/2.png'" />
 
 ## 五、核心ComputedRefImpl
 
