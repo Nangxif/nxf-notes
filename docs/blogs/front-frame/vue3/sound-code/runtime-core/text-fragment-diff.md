@@ -38,3 +38,5 @@ const processText = (n1, n2, container) => {
 在这之前我们得先了解Fragment标签是干嘛用的。
 
 Fragment标签是用来包裹一堆其他的节点的，在渲染的时候Fragment标签在节点上并不会有体现。
+
+因此。Fragment的diff算法，就是对每个子节点逐一执行patch流程，

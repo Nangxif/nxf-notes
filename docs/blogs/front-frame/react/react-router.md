@@ -18,6 +18,7 @@
 
 ```
 - HashRouter
+- BroswerRouter
 - Link
 - Redirect
 - Route
@@ -461,7 +462,7 @@ export default class Route extends Component {
 - window.history.pushState
 - window.history.replaceState
 
-那么如何监听路由的变化呢？监听我们熟知的`onpopstate`事件？不不不，这个时间只能监听上面前三个会触发页面刷新的跳转方法，后面两个方法并不能监听到，那怎么办？别着急，我们可以自定义监听事件。
+那么如何监听路由的变化呢？监听我们熟知的`onpopstate`事件？不不不，这个事件只能监听上面前三个会触发页面刷新的跳转方法，后面两个方法并不能监听到，那怎么办？别着急，我们可以自定义监听事件。
 
 ```
 // 直接自定义事件，使用 Event 构造函数：
