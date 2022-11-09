@@ -122,6 +122,14 @@ module.exports = {
                       link: '/blogs/front-frame/vue3/sound-code/runtime-core/text-fragment-diff',
                     },
                     {
+                      text: '元素节点组件的diff算法【上】',
+                      link: '/blogs/front-frame/vue3/sound-code/runtime-core/diff-1',
+                    },
+                    {
+                      text: '元素节点组件的diff算法【下】',
+                      link: '/blogs/front-frame/vue3/sound-code/runtime-core/diff-2',
+                    },
+                    {
                       text: '生命周期',
                       link: '/blogs/front-frame/vue3/sound-code/runtime-core/apiLifecycle',
                     },

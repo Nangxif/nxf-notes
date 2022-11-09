@@ -37,6 +37,56 @@ const processText = (n1, n2, container) => {
 
 在这之前我们得先了解Fragment标签是干嘛用的。
 
-Fragment标签是用来包裹一堆其他的节点的，在渲染的时候Fragment标签在节点上并不会有体现。
+Fragment标签是用来包裹一堆其他的节点的，在渲染的时候Fragment标签在真实节点上并不会有体现。
 
-因此。Fragment的diff算法，就是对每个子节点逐一执行patch流程，
+因此。Fragment的diff算法，就是对每个子节点逐一执行patch流程。
+
+```
+const processFragment = (n1, n2, container) => {
+	// 如果旧的虚拟节点不存在，那么就需要循环遍历n2的子节点并且逐一挂载
+    if (n1 == null) {
+      mountChildren(n2.children, container);
+    } else {
+    // 如果旧的虚拟节点存在，那么就需要循环遍历比较n1的子节点和n2的子节点
+      patchChildren(n1, n2, container);
+    }
+};
+```
+
+### 1.mountChildren
+
+```
+const mountChildren = (children, container) => {
+    for (let i = 0; i < children.length; i++) {
+      // 处理后要进行替换，否则children中存放的依旧是字符串
+      let child = normalize(children, i);
+      patch(null, child, container);
+    }
+};
+```
+
+因为Fragment的子节点里面可能会有文本，可能会有数字
+
+```
+<Fragment>
+	123
+	<div>文本1</div>
+	文本2
+</Fragment>
+```
+
+如果出现像上面123这种数字类型的子节点，或者像“文本2”这种类型的子节点，我们需要把它转成`Text`文本虚拟节点。下面`normalize`函数的功能就是将数字和文本全部转换为`Text`虚拟节点。
+
+```
+const normalize = (children, i) => {
+    if (isString(children[i]) || isNumber(children[i])) {
+      let vnode = createVnode(Text, null, children[i]);
+      children[i] = vnode;
+    }
+    return children[i];
+};
+```
+
+### 2.patchChildren
+
+patchChildren就是面试经常会问到的diff算法的核心部分，由于这部分内容与下个章节内容重合，因此这部分我们在下节【元素节点组件的diff算法】讲解。
