@@ -32,7 +32,10 @@ module.exports = {
       {
         text: '框架',
         items: [
-          { text: 'Vue3', link: '/blogs/front-frame/vue3/sound-code/introduction' },
+          {
+            text: 'Vue3',
+            link: '/blogs/front-frame/vue3/sound-code/introduction',
+          },
           { text: 'React', link: '/blogs/front-frame/react/introduction' },
         ],
       },
@@ -337,6 +340,31 @@ module.exports = {
         {
           text: 'JavaScript',
           items: [
+            {
+              text: '设计模式',
+              items: [
+                {
+                  text: '介绍',
+                  link: '/blogs/js-ts/js/design-mode/introduction',
+                },
+                {
+                  text: '模式一——构造器模式',
+                  link: '/blogs/js-ts/js/design-mode/gouzaoqimoshi',
+                },
+                {
+                  text: '模式二——原型模式',
+                  link: '/blogs/js-ts/js/design-mode/yuanxingmoshi',
+                },
+                {
+                  text: '模式三——工厂模式',
+                  link: '/blogs/js-ts/js/design-mode/gongchangmoshi',
+                },
+                {
+                  text: '模式四——抽象工厂模式',
+                  link: '/blogs/js-ts/js/design-mode/chouxianggongchangmoshi',
+                },
+              ],
+            },
             {
               text: '函数柯里化',
               link: '/blogs/js-ts/js/coriolization-of-the-function',
