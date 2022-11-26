@@ -363,6 +363,10 @@ module.exports = {
                   text: '模式四——抽象工厂模式',
                   link: '/blogs/js-ts/js/design-mode/chouxianggongchangmoshi',
                 },
+                {
+                  text: '模式五——建造者模式',
+                  link: '/blogs/js-ts/js/design-mode/jianzaozhemoshi',
+                },
               ],
             },
             {

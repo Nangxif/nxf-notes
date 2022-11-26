@@ -204,14 +204,14 @@ export function getSequence(arr: number[]) {
         p[i] = result[end - 1]; //记住他的前一个节点是谁
       }
     }
-    // 通过最后一项进行回溯
-    let index = result.length;
-    let last = result[index - 1]; //找到最后一项了
-    while (index-- > 0) {
-      // 倒叙追溯
-      result[index] = last; //最后一项是确定的
-      last = p[last];
-    }
+  }
+  // 通过最后一项进行回溯
+  let index = result.length;
+  let last = result[index - 1]; //找到最后一项了
+  while (index-- > 0) {
+    // 倒叙追溯
+    result[index] = last; //最后一项是确定的
+    last = p[last];
   }
   return result;
 }
