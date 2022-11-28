@@ -367,6 +367,66 @@ module.exports = {
                   text: '模式五——建造者模式',
                   link: '/blogs/js-ts/js/design-mode/jianzaozhemoshi',
                 },
+                {
+                  text: '模式六——单例模式',
+                  link: '/blogs/js-ts/js/design-mode/danlimoshi',
+                },
+                {
+                  text: '模式七——装饰器模式',
+                  link: '/blogs/js-ts/js/design-mode/zhuangshiqimoshi',
+                },
+                {
+                  text: '模式八——适配模式',
+                  link: '/blogs/js-ts/js/design-mode/shipeiqimoshi',
+                },
+                {
+                  text: '模式九——策略模式',
+                  link: '/blogs/js-ts/js/design-mode/celuemoshi',
+                },
+                {
+                  text: '模式十——代理模式',
+                  link: '/blogs/js-ts/js/design-mode/dailimoshi',
+                },
+                {
+                  text: '模式十一——观察者模式',
+                  link: '/blogs/js-ts/js/design-mode/guanchazhemoshi',
+                },
+                {
+                  text: '模式十二——发布订阅模式',
+                  link: '/blogs/js-ts/js/design-mode/fabudingyuemoshi',
+                },
+                {
+                  text: '模式十三——模块模式',
+                  link: '/blogs/js-ts/js/design-mode/mokuaimoshi',
+                },
+                {
+                  text: '模式十四——桥接模式',
+                  link: '/blogs/js-ts/js/design-mode/qiaojiemoshi',
+                },
+                {
+                  text: '模式十五——组合模式',
+                  link: '/blogs/js-ts/js/design-mode/zuhemoshi',
+                },
+                {
+                  text: '模式十六——命令模式',
+                  link: '/blogs/js-ts/js/design-mode/minglinmoshi',
+                },
+                {
+                  text: '模式十七——宏命令模式',
+                  link: '/blogs/js-ts/js/design-mode/hongminglinmoshi',
+                },
+                {
+                  text: '模式十八——模板方法模式',
+                  link: '/blogs/js-ts/js/design-mode/mubanfangfamoshi',
+                },
+                {
+                  text: '模式十九——迭代器模式',
+                  link: '/blogs/js-ts/js/design-mode/diedaiqimoshi',
+                },
+                {
+                  text: '模式二十——职责链模式',
+                  link: '/blogs/js-ts/js/design-mode/zhizelianmoshi',
+                },
               ],
             },
             {
