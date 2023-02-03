@@ -2,7 +2,7 @@
 
 这个章节的内容比较长，我就分为上下章节来讲解
 
-在[【createRenderer创建渲染器】](/nxf-notes/blogs/front-frame/vue3/sound-code/runtime-core/createRenderer.html)一节中，patch的最后一个判断
+在[【createRenderer创建渲染器】](https://nangxif.github.io/nxf-notes/blogs/front-frame/vue3/sound-code/runtime-core/createRenderer.html)一节中，patch的最后一个判断
 
 ```
 if (shapeFlag & ShapeFlags.COMPONENT) {
