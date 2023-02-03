@@ -56,7 +56,7 @@ module.exports = {
         text: '浏览器',
         link: '/blogs/browser/operating-machining',
       },
-      { text: 'Node', link: '/blogs/node/introduction' },
+      { text: '服务器端', link: '/blogs/server-end/node/introduction' },
       {
         text: '关于我',
         items: [
@@ -469,24 +469,47 @@ module.exports = {
           ],
         },
       ],
-      '/blogs/node/': [
+      '/blogs/server-end/': [
         {
-          text: 'Node',
+          text: '服务器端',
           items: [
             {
-              text: 'introduction',
-              link: '/blogs/node/introduction',
+              text: 'Node',
+              items: [
+                {
+                  text: 'introduction',
+                  link: '/blogs/server-end/node/introduction',
+                },
+                {
+                  text: 'node模块化以及exports与module.exports',
+                  link: '/blogs/server-end/node/node-modularization',
+                },
+              ],
             },
             {
-              text: 'node模块化以及exports与module.exports',
-              link: '/blogs/node/node-modularization',
+              text: '数据库',
+              items: [
+                {
+                  text: 'sql',
+                  items: [
+                    {
+                      text: '什么的是SQL',
+                      link: '/blogs/server-end/database/sql/introduction',
+                    },
+                    {
+                      text: 'MySQL workbench安装和介绍',
+                      link: '/blogs/server-end/database/sql/install-mysql-workbench',
+                    },
+                  ],
+                },
+              ],
             },
           ],
         },
       ],
     },
     footer: {
-      copyright: 'Copyright © 2022-present Nangxif',
+      copyright: 'Copyright © 2023-present Nangxif',
     },
   },
   lastUpdated: true,

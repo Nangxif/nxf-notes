@@ -1,1 +1,3 @@
 # TypeScript介绍
+
+JavaScript并没有语法支持表示某个标识符的类型，除非JavaScript在运行的时候进行检测，为了解决这个问题，TypeScript就产生了。TypeScript可以进行静态类型检查，也就是在代码还没运行的时候，在编写阶段，就可以对代码有实质性的检查。
