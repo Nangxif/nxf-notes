@@ -133,6 +133,10 @@ module.exports = {
                       link: '/blogs/front-frame/vue3/sound-code/runtime-core/diff-2',
                     },
                     {
+                      text: 'setup组件的创建和更新【上】',
+                      linl: '/blogs/front-frame/vue3/sound-code/runtime-core/setupComponent-1'
+                    },
+                    {
                       text: '生命周期',
                       link: '/blogs/front-frame/vue3/sound-code/runtime-core/apiLifecycle',
                     },
