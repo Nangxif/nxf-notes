@@ -79,6 +79,27 @@ newIndexToOldIndexMap是一个数组，这个数组的长度是新元素乱序�
 
 为什么要取最长递增子序列？因为最长递增子序列以为着这个数组的值随着索引的增加而增加（即：索引递增，值递增），那么这样旧节点的顺序才不用改变，因为在新的节点列表里面，这个最长递增子序列对应的几个新子节点顺序跟旧子节点的顺序是一致的，可以跳过插入的步骤（这块优化逻辑在vue2没有，所以有性能浪费）。
 
+我们先来看一下这个例子
+
+```
+<ul id="box">
+  <li id="li1">1</li>
+  <li id="li2">2</li>
+  <li id="li3">3</li>
+  <li id="li4">4</li>
+</ul>
+<script>
+  var box = document.querySelector('#box');
+  var li2 = document.querySelector('#li2');
+  var li3 = document.querySelector('#li3');
+  box.insertBefore(li3, li2);
+</script>
+
+// 最后输出 1，3,2,4
+```
+
+我们拿到li3，然后直接插入到li2的前面，li2没有执行插入的动作，但是被迫更改了位置，上面说的插入的步骤，就是指这一步。按照上面的例子c,d两个节点是不用更换位置的，直接把e插入到c之前即可，那么我们的最长递增子序列，就是算出c和d这两个不用更换位置的节点的位置。
+
 #### ①最长递增子序列的原理以及实现
 
 **求最长递增子序列（贪心算法+二分法查找）**
@@ -163,7 +184,8 @@ newIndexToOldIndexMap是一个数组，这个数组的长度是新元素乱序�
 ```
 export function getSequence(arr: number[]) {
   const len = arr.length;
-  const result = [0]; //以默认第0个为基准来做序列
+  const result = [0]; //以默认第0个为基准来做序列，存放的也是索引，因为一开始要取arr[0]
+  // p的索引是原来arr的值对应的索引，p的值对应的是前驱节点的索引
   const p = new Array(len).fill(0); //复制数组，最后要标记索引，放的东西不用关心，但是要和数组一样长
   let start;
   let end;
@@ -201,7 +223,7 @@ export function getSequence(arr: number[]) {
       if (arr[result[end]] > arrI) {
         // 这里用当前这一项替换掉已有的比当前大的那一项（即更有潜力的那一项）
         result[end] = i;
-        p[i] = result[end - 1]; //记住他的前一个节点是谁
+        p[i] = result[end - 1]; //记住他的前一个节点的索引是谁
       }
     }
   }
@@ -211,6 +233,7 @@ export function getSequence(arr: number[]) {
   while (index-- > 0) {
     // 倒叙追溯
     result[index] = last; //最后一项是确定的
+    // 然后把last赋值为p的上一个索引值，p存的是result的值，存的是追溯的值
     last = p[last];
   }
   return result;
@@ -221,7 +244,7 @@ export function getSequence(arr: number[]) {
 
 上面的最长递增子序列算出来之后，我们就要开始使用它。
 
-遍历新的子节点乱序的部分（倒着遍历，因为我们用不了appendChild方法，appendChild方法会插入到节点列表的末尾，但是我们要插入的地方不一定是末尾，所以不适用，我们只能用insert）因此我们要从后面往前遍历，先找出乱序的最后一项，查看这一项的后面是否有兄弟节点，如果为null的话就说明是最后一项了，然后拿这个兄弟节点为参照物，通过遍历，一个节点一个节点往前插入。
+遍历新的子节点乱序的部分（倒着遍历，因为我们用不了appendChild方法，appendChild方法会插入到节点列表的末尾，但是我们要插入的地方不一定是末尾，所以不适用，我们只能用insertBefore）因此我们要从后面往前遍历，先找出乱序的最后一项，查看这一项的后面是否有兄弟节点，如果为null的话就说明是最后一项了，然后拿这个兄弟节点为参照物，通过遍历，一个节点一个节点往前插入。
 
 如果检测到在newIndexToOldIndexMap对应的值为0的，即没有被patch过的，说明这个节点是新增的。
 
@@ -229,8 +252,9 @@ export function getSequence(arr: number[]) {
 
 ```
 const increment = getSequence(newIndexToOldIndexMap);
-  let j = increment.length - 1;
-  for (let i = toBePatched - 1; i >= 0; i--) {
+let j = increment.length - 1;
+// 这里遍历的是新子节点树
+for (let i = toBePatched - 1; i >= 0; i--) {
     let index = i + s2;
     let current = c2[index]; //找到h
     // 如果anchor为null的话说明h是新节点的最后一项了
@@ -243,15 +267,16 @@ const increment = getSequence(newIndexToOldIndexMap);
       // 不是0的话，说明已经是比对过属性的儿子了
       // 这种元素被创建过了，才能走到比对的流程，因此肯定有el
       if (i != increment[j]) {
-      hostInsert(current.el, el, anchor);
-      // 但是如果我们一个元素一个元素地插入的话，性能可能有些差，因为按照上面的例子
-      // c d的顺序是没变的，可以整块直接插入
-      // 从newIndexToOldIndexMap的结果[5,3,4,0]我们可以发现
-      // c d是里面的最长递增子序列 这块优化逻辑在vue2没有所以有性能浪费
-    } else {
-      j--;
+          hostInsert(current.el, el, anchor);
+          // 但是如果我们一个元素一个元素地插入的话，性能可能有些差，因为按照上面的例子
+          // c d的顺序是没变的，可以整块直接插入
+          // 从newIndexToOldIndexMap的结果[5,3,4,0]我们可以发现
+          // c d是里面的最长递增子序列 这块优化逻辑在vue2没有所以有性能浪费
+        } else {
+          // increment的长度和newIndexToOldIndexMap可能不一样，j--表示直接跳过插入逻辑
+          j--;
+        }
     }
-  }
 }
 ```
 

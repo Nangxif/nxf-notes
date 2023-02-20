@@ -115,9 +115,26 @@ render(h(VueComponent, { address: '地球' }), app);
 因此在这里会先处理组件的属性，将虚拟节点上props属性根据组件在使用时定义的props映射表，分类成组件的props以及attrs。并且把props变成响应式的。
 
 ```
-initProps = (instance, rawProps) => {
+const initProps = (instance, rawProps) => {
   const props = {};
   const attrs = {};
+  // instance.propsOptions = vnode.type.props
+  // 看到这里突然从node上的type上面取props的值有点纳闷，但是回去看源码就懂了
+  // 组件类型的type是一个对象，类似这样
+  // const VueComponent = {
+  //   props: {
+  //     address: String,
+  //   },
+  //   setup(props) {
+  //     const name = ref('曩昔');
+  //     const age = ref('27');
+
+  //     setTimeout(() => {
+  //       age.value++;
+  //     }, 1000);
+  //     return h(Fragment, [name.value, age.value, props.address]);
+  //   },
+  // };
   const options = instance.propsOptions || {};
   if (rawProps) {
     for (let key in rawProps) {
@@ -144,4 +161,99 @@ function initSlots(instance, children) {
   }
 }
 ```
+
+第三步，赋值实例上的proxy属性
+
+我们生成的这个proxy，后续这个组件在取data上面的属性的时候，在取setupState上面的属性的时候，在取props上面的熟悉的时候，甚至是取$attr和$slots的值的时候，都会在这个代理对象上拿。
+
+因此，通过上面我们可以知道，在实例上取属性，首先会先检查data上面有没有这个属性，再去检查setupState，最后检查props上面的属性。
+
+```
+instance.proxy = new Proxy(instance, publicInstanceProxy);
+
+const publicInstanceProxy = {
+  get(target, key) {
+    const { data, props, setupState } = target;
+    if (data && hasOwn(data, key)) {
+      return data[key];
+    } else if (setupState && hasOwn(setupState, key)) {
+      return setupState[key];
+    } else if (props && hasOwn(props, key)) {
+      return props[key];
+    }
+    let getter = publicPropertyMap[key]; //this.$attrs
+    if (getter) {
+      return getter(target);
+    }
+  },
+  set(target, key, value) {
+    const { data, props, setupState } = target;
+    if (data && hasOwn(data, key)) {
+      data[key] = value;
+      return true;
+      // 用户操作的是代理对象，这里屏蔽了
+      // 但是我们可以通过instance.props拿到真实的props
+    } else if (setupState && hasOwn(setupState, key)) {
+      setupState[key] = value;
+      return true;
+    } else if (props && hasOwn(props, key)) {
+      // 通过这里我们可以知道，实例上的props是不能修改的
+      console.warn(`attempting to mutate prop ${key as string}`);
+      return false;
+    }
+    return true;
+  },
+};
+```
+
+第四步，处理组件的data
+
+```
+let data = type.data;
+if (data) {
+    if (!isFunction(data)) {
+      return console.warn('data option must be a function');
+    }
+    instance.data = reactive(data.call(instance.proxy));
+}
+```
+
+由上面这一段就可以看出data必须是一个函数，最后执行完返回的对象还要包一层reactive，实现响应式。data函数里面的this指向instance.proxy。
+
+第五步，处理组件的setup函数
+
+```
+let setup = type.setup;
+if (setup) {
+    const setupContext = {
+      emit: (event, ...args) => {
+        // 事件的实现原理
+        const eventName = `on${event[0].toUpperCase() + event.slice(1)}`;
+        const handler = instance.vnode.props[eventName];
+        handler && handler(...args);
+      },
+      attrs: instance.attrs,
+      slots: instance.slots,
+    };
+    setCurrentInstance(instance);
+    const setupResult = setup(instance.props, setupContext);
+    // setup执行完之后置空
+    setCurrentInstance(null);
+    if (isFunction(setupResult)) {
+      // render函数
+      instance.render = setupResult;
+    } else if (isObject(setupResult)) {
+      // 对内部的ref进行取消.value
+      instance.setupState = proxyRefs(setupResult);
+    }
+}
+```
+
+setup函数参数有两个，一个是props，是一个上下文对象（这个上下文对象里面包含emit方法以及attrs和slots对象）。
+
+与此同时要给全局变量currentInstance赋值，将当前生成的这个实例存放到该变量上，在其他地方可以通过`const getCurrentInstance = () => currentInstance;`取到当前的组件实例。
+
+最后要执行一下setup函数，判断一下setupResult的值是一个函数还是一个对象，如果是函数的话，那么这个函数就是render函数，如果是对象的话，那么这个对象就是实例上的setupState。
+
+至此一个实例就创建完成了。
 
