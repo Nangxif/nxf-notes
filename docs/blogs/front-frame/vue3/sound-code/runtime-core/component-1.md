@@ -1,4 +1,4 @@
-# setup组件的创建和更新【上】
+# 组件的创建和更新【上】
 
 这个章节的内容比较长，我就分为上下章节来讲解
 
@@ -82,15 +82,15 @@ setupComponent(instance);
 
 ②初始化插槽
 
-③赋值实例上的proxy属性
+③赋值组件实例上的proxy属性
 
 ④处理组件的data
 
-⑤处理组件的setup函数
+⑤如果有setup，则需处理组件的setup函数
 
 ⑥初始化出实例的render函数
 
-我们setup组件可能是这么使用的
+我们组件可能是这么使用的
 
 ```
 const VueComponent = {
@@ -162,7 +162,7 @@ function initSlots(instance, children) {
 }
 ```
 
-第三步，赋值实例上的proxy属性
+第三步，赋值组件实例上的proxy属性
 
 我们生成的这个proxy，后续这个组件在取data上面的属性的时候，在取setupState上面的属性的时候，在取props上面的熟悉的时候，甚至是取$attr和$slots的值的时候，都会在这个代理对象上拿。
 
@@ -220,7 +220,7 @@ if (data) {
 
 由上面这一段就可以看出data必须是一个函数，最后执行完返回的对象还要包一层reactive，实现响应式。data函数里面的this指向instance.proxy。
 
-第五步，处理组件的setup函数
+第五步，如果有setup，则需处理组件的setup函数
 
 ```
 let setup = type.setup;

@@ -133,12 +133,16 @@ module.exports = {
                       link: '/blogs/front-frame/vue3/sound-code/runtime-core/diff-2',
                     },
                     {
-                      text: 'setup组件的创建和更新【上】',
-                      link: '/blogs/front-frame/vue3/sound-code/runtime-core/setupComponent-1'
+                      text: '组件的创建和更新【上】',
+                      link: '/blogs/front-frame/vue3/sound-code/runtime-core/component-1'
                     },
                     {
-                      text: 'setup组件的创建和更新【下】',
-                      link: '/blogs/front-frame/vue3/sound-code/runtime-core/setupComponent-2'
+                      text: '组件的创建和更新【下】',
+                      link: '/blogs/front-frame/vue3/sound-code/runtime-core/component-2'
+                    },
+                    {
+                      text: '组件插槽',
+                      link: '/blogs/front-frame/vue3/sound-code/runtime-core/slots'
                     },
                     {
                       text: '生命周期',

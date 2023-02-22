@@ -1,4 +1,4 @@
-# setup组件的创建和更新【下】
+# 组件的创建和更新【下】
 
 上一节我们讲了setup组件的创建，接下来我们来讲讲更新。
 
@@ -198,4 +198,27 @@ export function queueJob(job) {
 }
 ```
 
-上述就是setup组件的更新流程。
+上述就是组件的更新流程。
+
+最后我们在使用组件的时候应该是这么用的
+
+```
+const VueComponent = {
+  props: {
+    address: String,
+  },
+  setup(props) {
+    const name = ref('nangxif');
+    const age = ref('27');
+    setTimeout(() => {
+      age.value++;
+    }, 1000);
+    return { name, age, address: props.address + '广州' };
+  },
+  render() {
+    return h(Fragment, [this.name, this.age, this.address]);
+  },
+};
+render(h(VueComponent, { address: '地球' }), app);
+```
+
