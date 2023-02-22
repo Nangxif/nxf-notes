@@ -257,3 +257,41 @@ setup函数参数有两个，一个是props，是一个上下文对象（这个�
 
 至此一个实例就创建完成了。
 
+### 3.创建实例的副作用
+
+```
+setupRenderEffect(instance, container, anchor);
+```
+
+其实这块的逻辑也是使用effect，核心是调用我们前面封装好的ReactiveEffect类，我们只需要构建好需要传给ReactiveEffect类的核心方法就可以。
+
+```
+const setupRenderEffect = (instance, container, anchor) => {
+  const { render } = instance;
+  // 收集组件里面render方法的依赖
+  const componentUpdateFn = () => {
+  // 区分是初始化还是更新
+  if (!instance.isMounted) {
+    // 初始化，render的this指向代理对象，执行render就能获取到最新的vnode
+    const subTree = render.call(instance.proxy);
+    patch(null, subTree, container, anchor); //创造了subTree的真实节点并且插入了
+    instance.subTree = subTree;
+    instance.isMounted = true;
+  } else {
+    // 组件内部更新
+    // 如果是组件里面自己导致的组件发生变化，那么会走这段逻辑
+    TODO: 组件更新流程
+  }
+  // 到这里我们就需要将componentUpdateFn传给ReactiveEffect类，并通过它实例化出来一个reactiveEffect，并且将reactiveEffect这个实例上的run方法赋值给组件实例上的update方法，以供后续组件更新的流程使用，同时还要将这个update方法先执行一次，不然componentUpdateFn里面的创建流程压根就不会执行到
+  const effect = new ReactiveEffect(componentUpdateFn, () =>
+      queueJob(instance.update)
+  );
+  // 这里只会在组件创建的时候执行一次，更新的时候不走这里了
+  // 我们将组件强制更新的逻辑保存到了组件的实例上，后续可以使用
+  let update = (instance.update = effect.run.bind(effect)); //调用effect.run可以让组件强制渲染
+  // 这里执行effect.run就会开始收集依赖
+  update();
+};
+```
+
+通过**instance.isMounted**判断是否是创建过的，没有创建过则走创建流程，至此setup组件的创建流程就完成了。
