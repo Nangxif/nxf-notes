@@ -14,7 +14,7 @@ function User(role, pages) {
 // 假设我们现在有三种不同的角色，然后我们要根据接口返回的数据判断我们要使用角色a还是b，c
 var a = new User("superadmin",["home","user-manage","right-manage","news-manage"]);
 var b = new User("admin",["home","user-manage","news-manage"]);
-var c = new User("superadmin",["home","user-manage"]);
+var c = new User("editor",["home","user-manage"]);
 // 接口返回之后我们通过类似a.role===current.role去判断是否取a，还是b,还是c，这种写法一开始就实例化了三个User实例，占用内存，这是不合理的
 ```
 
@@ -36,7 +36,7 @@ function UserFactory(role) {
 			return new User("admin",["home","user-manage","news-manage"]);
 		}
 		case "editor": {
-			return new User("superadmin",["home","user-manage"]);
+			return new User("editor",["home","user-manage"]);
 		}
 		default: {
 			throw new Error("参数错误");
@@ -65,7 +65,7 @@ class User {
                 return new User("admin",["home","user-manage","news-manage"]);
             }
             case "editor": {
-                return new User("superadmin",["home","user-manage"]);
+                return new User("editor",["home","user-manage"]);
             }
             default: {
                 throw new Error("参数错误");

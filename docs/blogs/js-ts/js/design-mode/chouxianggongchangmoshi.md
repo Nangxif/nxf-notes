@@ -46,7 +46,7 @@ class SuperAdmin extend User {
 	// 添加用户
 	addUser() {}
 }
-class SuperAdmin extend User {
+class Admin extend User {
 	constructor(name) {
 		super(name, "admin", ["home","user-manage","news-manage"]);
 	}
@@ -58,7 +58,7 @@ class SuperAdmin extend User {
 }
 class Editor extend User {
 	constructor(name) {
-		super(name, "admin", ["home","news-manage"]);
+		super(name, "editor", ["home","news-manage"]);
 	}
 	dataShow() {}
 }
