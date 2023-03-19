@@ -101,7 +101,7 @@ execute：该方法会执行当前包的主要逻辑，要是需要用到依赖�
 
 ### 1.流程图
 
- <Image :src="'/front-frame/microfront/systemjs/1.png'" />
+ <Image :src="'/front-frame/microfront/systemjs/1.jpg'" />
 
 ### 2.源码
 
