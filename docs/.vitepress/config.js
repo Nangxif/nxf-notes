@@ -37,6 +37,7 @@ module.exports = {
             link: '/blogs/front-frame/vue3/sound-code/introduction',
           },
           { text: 'React', link: '/blogs/front-frame/react/introduction' },
+          { text: '微前端', link: '/blogs/front-frame/microfront/introduction' },
         ],
       },
       {
@@ -134,15 +135,15 @@ module.exports = {
                     },
                     {
                       text: '组件的创建和更新【上】',
-                      link: '/blogs/front-frame/vue3/sound-code/runtime-core/component-1'
+                      link: '/blogs/front-frame/vue3/sound-code/runtime-core/component-1',
                     },
                     {
                       text: '组件的创建和更新【下】',
-                      link: '/blogs/front-frame/vue3/sound-code/runtime-core/component-2'
+                      link: '/blogs/front-frame/vue3/sound-code/runtime-core/component-2',
                     },
                     {
                       text: '组件插槽',
-                      link: '/blogs/front-frame/vue3/sound-code/runtime-core/slots'
+                      link: '/blogs/front-frame/vue3/sound-code/runtime-core/slots',
                     },
                     {
                       text: '生命周期',
@@ -245,6 +246,23 @@ module.exports = {
               text: '手写react-router',
               link: '/blogs/front-frame/react/react-router',
             },
+          ],
+        },
+        {
+          text: '微前端',
+          items: [
+            {
+              text: '微前端概念',
+              link: '/blogs/front-frame/microfront/introduction',
+            },
+            {
+              text: 'SystemJS剖析',
+              link: '/blogs/front-frame/microfront/systemjs',
+            },
+            {
+              text: 'single-spa实战',
+              link: '/blogs/front-frame/microfront/single-spa-use'
+            }
           ],
         },
       ],
