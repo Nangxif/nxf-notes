@@ -52,7 +52,7 @@ module.exports = {
           },
         ],
       },
-      { text: 'JS&TS', link: '/blogs/js-ts/js/coriolization-of-the-function' },
+      { text: 'JS&TS', link: '/blogs/js-ts/js/design-mode/introduction' },
       {
         text: '浏览器',
         link: '/blogs/browser/operating-machining',

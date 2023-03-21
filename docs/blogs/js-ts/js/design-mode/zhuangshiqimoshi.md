@@ -3,14 +3,14 @@
 装饰器模式能够很好的对已有的功能进行拓展，这样不会更改原有的代码，对其他的业务产生影响，这方便我们在较少的改动下对软件的功能进行拓展。
 
 ```
-Function.property.before = function(beforeFn) {
+Function.prototype.before = function(beforeFn) {
 	var _this = this;
 	return function() {
 		beforeFn.apply(this, argument);
 		return _this.apply(this, argument);
 	}
 }
-Function.property.after = function(afterFn) {
+Function.prototype.after = function(afterFn) {
 	var _this = this;
 	return function() {
 		var ret = _this.apply(this, argument);
