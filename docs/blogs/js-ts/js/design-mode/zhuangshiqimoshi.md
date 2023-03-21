@@ -6,15 +6,15 @@
 Function.prototype.before = function(beforeFn) {
 	var _this = this;
 	return function() {
-		beforeFn.apply(this, argument);
-		return _this.apply(this, argument);
+		beforeFn.apply(this, arguments);
+		return _this.apply(this, arguments);
 	}
 }
 Function.prototype.after = function(afterFn) {
 	var _this = this;
 	return function() {
-		var ret = _this.apply(this, argument);
-		afterFn.apply(this, argument);
+		var ret = _this.apply(this, arguments);
+		afterFn.apply(this, arguments);
 		return ret;
 	}
 }
