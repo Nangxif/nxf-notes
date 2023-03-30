@@ -62,7 +62,7 @@ const PubSub = {
 			// 取消所有当前type事件
 			this.message[type] && (this.message[type].length = 0);
 		}else {
-			this.message[type] = this..message[type].filter(item => item != cb);
+			this.message[type] = this.message[type].filter(item => item != cb);
 		}
 	}
 }
