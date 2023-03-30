@@ -15,7 +15,7 @@ class BaiduMap {
 		console.log("开始渲染百度地图");
 	}
 }
-class BaiduMapAdapter entends BaiduMap {
+class BaiduMapAdapter extends BaiduMap {
 	constructor() {
 		super();
 	}
