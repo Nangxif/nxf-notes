@@ -84,6 +84,17 @@ export function toBootstrapPromise(app){
 
 ## 三、监听路由变化重新执行reroute
 
+我们通过下面的方式更新路由
+
+```
+<a href="#/a">a应用</a>
+<a href="#/b">b应用</a>
+```
+
+这种调用方式在window.addEventListener的回调里面就可以拿到event对象。
+
+接下来我们要监听路由变化重新执行reroute。
+
 ```
 function urlRoute() {
 	// 这里传的arguments参数后续会用到
@@ -94,7 +105,7 @@ window.addEventListener('hashchange', urlRoute)
 window.addEventListener('popstate', urlRoute);
 ```
 
-如果我们在外部对**hashchange**或者是**popstate**也有监听
+如果我们在外部对**hashchange**或者是**popstate**也有监听。
 
 ```
 window.addEventListener('hashchange', function () {
@@ -122,7 +133,7 @@ function performAppChange(){
 }
 ```
 
-至于capturedEventListeners是怎么来的。我们需要劫持原生的路由事件，重写window.addEventListener方法，当监听到触发的是hashchange或popstate事件时，将该回调存放到capturedEventListeners。注意
+至于capturedEventListeners是怎么来的。我们需要劫持原生的路由事件，重写window.addEventListener方法，当监听到触发的是hashchange或popstate事件时，将该回调存放到capturedEventListeners。注意：
 
 ```
 window.addEventListener('hashchange', urlRoute)
@@ -183,3 +194,36 @@ function urlRoute() {
 }
 ```
 
+如果我们跳转路由的方式换成下面这种，会有什么样的影响呢？
+
+```
+<a onclick="go('#/a')">a应用</a>
+<a onclick="go('#/b')">b应用</a>
+
+function go(url) {
+    history.pushState({}, null, url)
+}
+```
+
+这种跳转路由的方式，用户调用pushState或replaceState方法不会被popstate监听到，需要我们手动触发，所以我们需要重写history上面的pushState和replaceState。
+
+```
+window.history.pushState = patchFn(window.history.pushState,'pushState')
+window.history.replaceState = patchFn(window.history.replaceState,'replaceState')
+```
+
+```
+function patchFn(updateState,methodName){
+    return function(){
+        const urlBefore = window.location.href;
+        const r = updateState.apply(this,arguments); // 调用此方法 确实发生了路径的变化
+        const urlAfter = window.location.href;
+
+        if(urlBefore !== urlAfter){
+            // 手动派发popstate事件
+            window.dispatchEvent(new PopStateEvent("popstate"))
+        }
+        return r;
+    }
+}
+```
