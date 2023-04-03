@@ -81,3 +81,105 @@ export function toBootstrapPromise(app){
 ```
 
 如果应用的状态不是NOT_BOOTSTRAPED（未启动），那么肯定不属于即将挂载载的范畴，直接返回该应用。如果应用的状态是NOT_BOOTSTRAPED，那么在卸载之前把状态改为BOOTSTRAPING（启动中），卸载完成之后再把状态改成NOT_MOUNTED（未挂载）。
+
+## 三、监听路由变化重新执行reroute
+
+```
+function urlRoute() {
+	// 这里传的arguments参数后续会用到
+    reroute(arguments)
+}
+
+window.addEventListener('hashchange', urlRoute)
+window.addEventListener('popstate', urlRoute);
+```
+
+如果我们在外部对**hashchange**或者是**popstate**也有监听
+
+```
+window.addEventListener('hashchange', function () {
+    console.log(window.location.hash, 'p----')
+})
+```
+
+那么会出现一种情况，就是在外部监听的回调会比在内部监听的回调先执行。这是有问题的，上面这个监听操作应该被延迟到当应用挂载完毕后再执行。所以我们还要做一下处理。先用一个对象（capturedEventListeners）将对应的外部事件监听回调缓存起来。如果是在注册的时候，那么就在应用全部加载完成之后执行缓存起来的回调。
+
+```
+function loadApps() {
+    // 应用的加载
+    return Promise.all(appsToLoad.map(toLoadPromise)).then(callEventListener)// 目前我们没有调用start 
+}
+```
+
+如果是在start的时候，那么就在应用全部加载完成之后执行缓存起来的回调。如果是在start的时候，那么就在挂载完之后执行缓存起来的回调。
+
+```
+function performAppChange(){
+	……
+	return Promise.all([loadMountPromises,mountPromises]).then(()=>{ 		 // 卸载完毕后
+        callEventListener();
+    })
+}
+```
+
+至于capturedEventListeners是怎么来的。我们需要劫持原生的路由事件，重写window.addEventListener方法，当监听到触发的是hashchange或popstate事件时，将该回调存放到capturedEventListeners。注意
+
+```
+window.addEventListener('hashchange', urlRoute)
+window.addEventListener('popstate', urlRoute);
+```
+
+这一步必须放在重写的逻辑之前，因为这一步不需要放到capturedEventListeners。
+
+```
+const capturedEventListeners = {
+    hashchange: [],
+    popstate: []
+}
+
+const listentingTo = ['hashchange','popstate']
+const originalAddEventListener = window.addEventListener;
+const originalRemoveEventListener = window.removeEventListener;
+
+window.addEventListener = function(eventName,callback){
+    // 有要监听的事件， 函数不能重复
+    if(listentingTo.includes(eventName) && !capturedEventListeners[eventName].some(listener=>listener === callback)){
+        return capturedEventListeners[eventName].push(callback)
+    }
+    return originalAddEventListener.apply(this,arguments)
+}
+window.removeEventListener = function(eventName,callback){
+    // 有要监听的事件， 函数不能重复
+    if(listentingTo.includes(eventName) ){
+        capturedEventListeners[eventName] = capturedEventListeners[eventName].filter(fn=> fn!== callback)
+        return 
+    }
+    return originalRemoveEventListener.apply(this,arguments)
+}
+```
+
+至于callEventListener的逻辑
+
+```
+function reroute(event) {
+	function callEventListener(){
+        callCaptureEventListeners(event)
+    }
+}
+
+export function callCaptureEventListeners(e){
+    if(e){
+        const eventType = e[0].type;
+        if(listentingTo.includes(eventType)){
+            capturedEventListeners[eventType].forEach(listener => {
+                listener.apply(this,e)
+            });
+        }
+    }
+}
+// 记得上面留下来的一个问题吗？arguments的作用是什么？window.addEventListener('hashchange', urlRoute)里面，urlRoute作为回调函数的时候，会接收到一个event对象，这个对象可以获取到urlRoute是由hashchange触发的还是popstate触发的。
+function urlRoute() {
+    reroute(arguments)
+}
+```
+
