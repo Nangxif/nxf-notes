@@ -262,6 +262,14 @@ module.exports = {
             {
               text: 'single-spa实战',
               link: '/blogs/front-frame/microfront/single-spa-use'
+            },
+            {
+              text: 'single-spa的实现【上】',
+              link: '/blogs/front-frame/microfront/realize-single-spa-1'
+            },
+            {
+              text: 'single-spa的实现【下】',
+              link: '/blogs/front-frame/microfront/realize-single-spa-2'
             }
           ],
         },
