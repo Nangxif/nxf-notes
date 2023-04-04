@@ -227,3 +227,54 @@ function patchFn(updateState,methodName){
     }
 }
 ```
+
+当我们用下面这种方式跳转页面的时候
+
+```
+<a href="#/a">a应用</a>
+<a href="#/b">b应用</a>
+```
+
+会触发hashchange事件和popstate事件，此时会导致urlRoute走了两次，如果此时注册应用的时候，mount里面是这样的
+
+```
+mount: [
+  async () => {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        console.log('app2 mount');
+        resolve();
+      }, 1000);
+    });
+  },
+],
+```
+
+那么app2 mount会在控制台输出两次，这显然是不合理的，因此我们要做一个防抖。
+
+```
+let appChangeUnderWay = false;
+let peopleWaitingOnAppChange = []
+
+export function reroute(event) {
+    // 如果多次触发reroute 方法我们可以创造一个队列来屏蔽这个问题
+    if(appChangeUnderWay){
+        return new Promise((resolve,reject)=>{
+            peopleWaitingOnAppChange.push({
+                resolve,reject
+            })
+        })
+    }
+    // ...
+    function performAppChange(){
+    	return Promise.all([loadMountPromises,mountPromises]).then(()=>{
+            callEventListener();
+            appChangeUnderWay = false;
+            if(peopleWaitingOnAppChange.length > 0){
+                peopleWaitingOnAppChange = []; // 多次操作 我缓存起来，。。。。
+            }
+        })
+    }
+}
+```
+
