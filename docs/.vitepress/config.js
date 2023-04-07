@@ -37,7 +37,10 @@ module.exports = {
             link: '/blogs/front-frame/vue3/sound-code/introduction',
           },
           { text: 'React', link: '/blogs/front-frame/react/introduction' },
-          { text: '微前端', link: '/blogs/front-frame/microfront/introduction' },
+          {
+            text: '微前端',
+            link: '/blogs/front-frame/microfront/introduction',
+          },
         ],
       },
       {
@@ -261,16 +264,24 @@ module.exports = {
             },
             {
               text: 'single-spa实战',
-              link: '/blogs/front-frame/microfront/single-spa-use'
+              link: '/blogs/front-frame/microfront/single-spa-use',
             },
             {
               text: 'single-spa的实现【上】',
-              link: '/blogs/front-frame/microfront/realize-single-spa-1'
+              link: '/blogs/front-frame/microfront/realize-single-spa-1',
             },
             {
               text: 'single-spa的实现【下】',
-              link: '/blogs/front-frame/microfront/realize-single-spa-2'
-            }
+              link: '/blogs/front-frame/microfront/realize-single-spa-2',
+            },
+            {
+              text: 'qiankun实战',
+              link: '/blogs/front-frame/microfront/qiankun-use',
+            },
+            {
+              text: '沙箱的原理',
+              link: '/blogs/front-frame/microfront/sandbox-theory',
+            },
           ],
         },
       ],
