@@ -515,6 +515,10 @@ module.exports = {
               text: '事件循环',
               link: '/blogs/browser/event-loop',
             },
+            {
+              text: '协商缓存和强缓存',
+              link: '/blogs/browser/negotiated-cache-and-strong-cache',
+            },
           ],
         },
       ],
