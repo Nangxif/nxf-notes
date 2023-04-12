@@ -519,6 +519,10 @@ module.exports = {
               text: '协商缓存和强缓存',
               link: '/blogs/browser/negotiated-cache-and-strong-cache',
             },
+            {
+              text: '预检请求（preflight）【摘录】',
+              link: '/blogs/browser/precheck-request',
+            },
           ],
         },
       ],

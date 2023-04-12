@@ -164,3 +164,65 @@ Cache-Control是比Etag优先级更高的，如果响应头包含Cache-Control�
 因此，当Cache-Control和Etag同时存在时，浏览器会优先遵循Cache-Control中指定的缓存策略来处理响应，而Etag只是一个辅助判断缓存更新的标识。
 
 **5.为什么我一直实现不出强缓存**
+
+其实我之前用了下面几种写法来触发强缓存
+
+第一种：
+
+```
+app.use(
+  express.static('public', {
+    maxAge: 60 * 60 * 1000, // 设置为1小时
+  })
+);
+```
+
+express的静态资源托管
+
+然后我直接在浏览器的地址栏输入http://localhost:3000/test.js 之后，无论我刷新多少次，都只会触发协商缓存，状态码304
+
+<Image :src="'/browser/negotiated-cache-and-strong-cache/7.png'" />
+
+后来我才发现虽然我在响应头设置了Cache-Control: public, max-age=36000，但是请求头却变成了Cache-Control: max-age=0了，结果才导致走了协商缓存。
+
+在浏览器中直接输入接口地址通常会导致浏览器发送一个普通的HTTP GET请求，而不是一个可以被缓存的资源请求。因为缓存是建立在HTTP请求-响应机制之上的，只有当资源的请求满足一定的要求时，才会被浏览器缓存起来，供稍后再次使用。
+
+根据HTTP标准，所有不安全的HTTP请求（比如在浏览器地址栏中直接输入接口地址）的缓存策略都是隐私保护的，Cache-Control等信息不会被缓存。
+
+因此，如果您希望接的数据能够被浏览器缓存起来，请将数据以静态资源的形式（如HTML页面，CSS样式表，JS脚本等）嵌入到页面中，在实际使用时通过JavaScript进行获取。
+
+果然，我换成下面这种形式请求js，多次请求可以出现强缓存了
+
+```
+<script src="http://localhost:3000/test.js"></script>
+```
+
+<Image :src="'/browser/negotiated-cache-and-strong-cache/8.png'" />
+
+第二种：
+
+```
+router.get('/form-memory-cache', (req, res) => {
+  res.append('Access-Control-Allow-Origin', '*');
+  res.append(
+    'Access-Control-Allow-Headers',
+    'X-Requested-With,Content-Type,Authorization'
+  );
+  res.append('Access-Control-Allow-Methods', 'PUT,POST,GET,DELETE,OPTIONS');
+  res.append('Cache-Control', 'max-age=360,public');
+  res.send({
+    success: true,
+  });
+});
+
+
+const xhr = new XMLHttpRequest();
+xhr.open('GET', 'http://localhost:3000/form-memory-cache');
+xhr.send();
+```
+
+然后我也是直接在浏览器的地址栏输入http://localhost:3000/form-memory-cache 之后，无论我刷新多少次，都只会触发协商缓存，状态码304。
+
+原因上面已经说了，后来改成js脚本去请求就可以了。
+
+<Image :src="'/browser/negotiated-cache-and-strong-cache/9.png'" />
