@@ -179,7 +179,7 @@ app.use(
 
 express的静态资源托管
 
-然后我直接在浏览器的地址栏输入http://localhost:3000/test.js 之后，无论我刷新多少次，都只会触发协商缓存，状态码304
+然后我直接在浏览器的地址栏输入`http://localhost:3000/test.js`之后，无论我刷新多少次，都只会触发协商缓存，状态码304
 
 <Image :src="'/browser/negotiated-cache-and-strong-cache/7.png'" />
 
@@ -221,7 +221,7 @@ xhr.open('GET', 'http://localhost:3000/form-memory-cache');
 xhr.send();
 ```
 
-然后我也是直接在浏览器的地址栏输入http://localhost:3000/form-memory-cache 之后，无论我刷新多少次，都只会触发协商缓存，状态码304。
+然后我也是直接在浏览器的地址栏输入`http://localhost:3000/form-memory-cache` 之后，无论我刷新多少次，都只会触发协商缓存，状态码304。
 
 原因上面已经说了，后来改成js脚本去请求就可以了。
 
