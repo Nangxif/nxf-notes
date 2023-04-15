@@ -147,7 +147,22 @@ HTTP请求中的If-Modified-Since请求头是用来帮助服务器判断资源�
 
 相对应的，ETag是使用一种类似哈希摘要的方式生成的唯一标识符，无论文件的修改时间还是内容是否发生变化，都能够准确地标识该资源的特定版本。因此，ETag提供了比If-Modified-Since更精确地判断文件是否修改的方法，可以更好地支持Web缓存和其他应用场景的需求。所以，ETag是If-Modified-Since的一种补充，可以更完善地衡量资源是否发生变化。
 
-**3.Cache-Control和If-Modified-Since的优先级**
+**3.如何验证Etag优先级比If-Modified-Since高**
+
+```
+router.get('/test.js', (req, res) => {
+  res.set('Cache-Control', 'no-cache');
+  // 写死Last-Modified
+  res.set('Last-Modified','Sat, 15 Apr 2023 07:12:37 GMT');
+  res.sendFile(path.join(__dirname, './test.js'));
+});
+```
+
+第一次访问test.js，返回状态码200。第二次访问test.js，返回状态码304。此时修改test.js文件。Etag会发生改变，第三次访问会返回状态码200。
+
+因为If-Modified-Since一直没变，Etag发生变化从而导致资源不走缓存，因此可以证明Etag优先级比If-Modified-Since高。
+
+**4.Cache-Control和If-Modified-Since的优先级**
 
 Cache-Control是比If-Modified-Since优先级更高的，如果Cache-Control头存在，则浏览器会按照Cache-Control指示的缓存机制来处理响应，而忽略If-Modified-Since请求头。具体来说，如果响应的Cache-Control头包含no-cache或no-store指令，则浏览器不会缓存响应，而会在每次请求时向服务器发起完整请求。
 
@@ -155,7 +170,7 @@ Cache-Control是比If-Modified-Since优先级更高的，如果Cache-Control头�
 
 因此，当Cache-Control和If-Modified-Since同时存在时，浏览器会优先遵循Cache-Control头中的缓存策略来处理响应。
 
-**4.Cache-Control和Etag的优先级**
+**5.Cache-Control和Etag的优先级**
 
 Cache-Control是比Etag优先级更高的，如果响应头包含Cache-Control指令，则浏览器会按照Cache-Control中指定的缓存策略来处理响应，而忽略Etag头。具体来说，如果响应的Cache-Control指令为no-cache或no-store，则浏览器不会缓存响应，而是在每次请求时向服务器发送请求。
 
@@ -163,7 +178,7 @@ Cache-Control是比Etag优先级更高的，如果响应头包含Cache-Control�
 
 因此，当Cache-Control和Etag同时存在时，浏览器会优先遵循Cache-Control中指定的缓存策略来处理响应，而Etag只是一个辅助判断缓存更新的标识。
 
-**5.为什么我一直实现不出强缓存**
+**6.为什么我一直实现不出强缓存**
 
 其实我之前用了下面几种写法来触发强缓存
 
