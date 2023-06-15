@@ -14,9 +14,9 @@ export default {
     const { src } = toRefs(props);
     // 这里不能用beforeMount，因为img节点还未挂载
     onMounted(() => {
-      if (window.location.pathname.startsWith('/nxf-notes')) {
-        src.value = `/nxf-notes${src.value}`;
-      }
+      // if (window.location.pathname.startsWith('/nxf-notes')) {
+      src.value = `/nxf-notes${src.value}`;
+      // }
     });
     return { src };
   },

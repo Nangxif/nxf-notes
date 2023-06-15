@@ -290,7 +290,9 @@ button.addEventListener('click',function(){
 至此，任务队列已被分为：
 宏任务队列，即上文说的任务队列，callback queue，用于存放宏任务
 微任务队列，再开辟一个队列，用于存放微任务。
+
 PS1：我们使用微任务创建一个无限循环会怎样呢？像之前的setTimeout做的
+
 ```
 function loop(){
   Promise.resolve().then(loop)
@@ -298,7 +300,9 @@ function loop(){
 loop();
 ```
 页面的动画会卡主并且选不了文字，跟之前的while(true)效果相同。微任务并不意味着它必须屈服于渲染，并不意味着它必须屈服于事件循环的任何特定部分。这句话怎么理解呢？如果处理微任务的过程中，有新的微任务加进来，加入的速度比执行快，那么就永远会执行微任务，事件环会阻塞，直到微任务队列完全清空，这就是它阻止渲染的原因。
+
 PS2:
+
 ```
 button.addEventListener('click',()=>{
   Promise.resolve().then(()=>console.log('Microtask 1'));
@@ -316,7 +320,7 @@ button.addEventListener('click',()=>{
 Listener 1,Microtask 1,Listener 2,Microtask 2
 但是如果我的点击是通过buton.click()来触发的呢？答案就变成了
 Listener 1,Listener 2,Microtask 1,Microtask 2
-用户直接点击的时候，浏览器先后触发 2 个 listener。第一个 listener 触发完成 (listener 1) 之后，队列空了，就先打印了 microtask 1。然后再执行下一个 listener。重点在于浏览器并不实现知道有几个 listener，因此它发现一个执行一个，执行完了再看后面还有没有。
+用户直接点击的时候，浏览器先后触发 2 个 listener。第一个 listener 触发完成 (listener 1) 之后，队列空了，就先打印了 microtask 1。然后再执行下一个 listener。重点在于浏览器并不事先知道有几个 listener，因此它发现一个执行一个，执行完了再看后面还有没有。
 而使用 button.click() 时，浏览器的内部实现是把 2 个 listener 都同步执行。因此 listener 1 之后，执行队列还没空，还要继续执行 "listener 2" 之后才行。所以 listener 2 会早于 microtask 1。重点在于浏览器的内部实现，click 方法会先采集有哪些 listener，再依次触发。
 
 PS3:
@@ -328,8 +332,9 @@ nextClick.then(event => {
   event.preventDefault();
 })
 ```
-如果通过用户点击来触发的话，event.preventDefault是生效的，但是如果我们通过link.click()来触发的话，那么就不会生效了，在此之前我们先讲讲一些规范，这是对单击链接如歌工作的非常粗略的描述。
+如果通过用户点击来触发的话，event.preventDefault是生效的，但是如果我们通过link.click()来触发的话，那么就不会生效了，在此之前我们先讲讲一些规范，这是对单击链接如何工作的非常粗略的描述。
 我们首先会创建一个事件对象，然后调用每一个监听器，传入事件对象，然后我们检查事件对象的canceled属性，如果是canceled，就不会打开链接，如果没有canceled，就打开链接，当调用event.preventDefault()时，事件会标记成canceled。如果用户单击一个链接，那么我的微任务就会在每次回调之后发生，因为js调用栈清空了，但是当我们用js调用click的时候，它会执行完链接点击的操作，只有在算法完成之后才会返回，因此js执行栈永远不会清空。在此算法执行期间，微任务不可能发生，所以它到达了“查看事件对象”这一步，即使你有很多的Promise想要调用event.preventDefault()，也太晚了，它会打开超链接之后，执行Promise回调，但是已经错过了取消事件的时间点。
+
 ### 2.那么宏任务和微任务处于事件循环中的哪个环节？
 
 <Image :src="'/browser/event-loop/18.png'" />
