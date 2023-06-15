@@ -145,7 +145,9 @@ el.style.display = 'none'
 document.body.appendChild(el)
 ```
 但实际上，这里并没有竞争条件，因为js的执行和页面的渲染都有规定的时间段，这都要归功于事件循环。
+
 网页我们有一个称之为主线程的东西，之所以称之为主线程是因为这里发生的大量的事情，是js发生的地方，这里是渲染发生的地方，这里是DOM存在的地方，这意味着网页上大部分的活动都具有确定性的顺序，我们不会同时运行多段代码去修改同一处DOM，让你处于一个可怕的竞争世界，但它意味着如果主线程上的任务需要很长的时间，用户会注意到，它阻塞了加载渲染和交互。
+
 ```
 setTimeout(function(){
   // 修改界面
@@ -158,6 +160,7 @@ setTimeout(function(){
 <Image :src="'/browser/event-loop/5.jpg'" />
 
 webapi是浏览器提供给我们的一些api，还有一个神秘的事件循环（Event Loop）和一个回调任务队列（Task Queue）
+
 JavaScript是一门单线程的语言，单线程在运行时，意味着它只有一个调用栈，也就是上图的stack，同一时刻只能做一件事，我们先来看一个简单的案例，可以用可视化的方式理解一下这部分的知识
 
 <Image :src="'/browser/event-loop/6.png'" />
@@ -183,7 +186,9 @@ loop();
 <Image :src="'/browser/event-loop/8.png'" />
 
 白色方块一直在循环走动，T会每隔一段时间放入任务队列，方块在执行完页面渲染任务之后就会跑到任务队列的环里面执行setTimeout的回调，当这个回调执行完之后又会跑去执行页面渲染任务，所以页面并不会被阻塞。
+
 如果你想执行与渲染页面有关的代码，尽量不要把他放在任务队列中，因为任务队列在渲染任务的另一边，我们要把渲染的代码放在渲染阶段之前，浏览器允许我们这样做，使用requestAnimationFrame可以做到这点。我们来创建一个循环
+
 ```
 function callback（） {
   // 一段移动div的逻辑
@@ -203,7 +208,9 @@ callback();
 <Image :src="'/browser/event-loop/9.png'" />
 
 我们看到渲染可能在任务之间执行，但是这不意味着必须是执行一次调用栈从任务队列里面拿到的任务就必须执行一次渲染任务，有可能会执行几次调用栈里面的东西再渲染一次页面，因为调用栈里面的任务可能不是很大，不到16.6毫秒就执行完了，所以我们上面说到的display的例子，那两句代码在一帧的时间内就被执行完了，所以不存在闪现的现象。
+
 我们一直在纠结setTimeout的0是否真的是立即执行的，其实setTimeout就算设置为0还是会有延迟。即使我们将延迟设置为0，浏览器会根据标准规定选择任意数字作为延时，从测试上看大概是4.7ms。
+
 我们假设这是显示给用户的帧图，浏览器的渲染发生在每个帧的开头，包括样式计算，布局和绘制，不一定三个都有，取决于需要更新的内容
 
 <Image :src="'/browser/event-loop/10.png'" />
@@ -221,7 +228,9 @@ callback();
 <Image :src="'/browser/event-loop/13.png'" />
 
 一些老的动画库为了避免上面这种情况，会采取下面这种做法
+
 setTimeout(animationFrame,1000/60)
+
 他们利用这么一个毫秒值，每秒执行60次，他们假设这是一个60赫兹的屏幕，所以这样做可以减少无用的任务，这是一个无奈之举，因为setTimeout不是为了动画存在的，这种做法由于不精确会造成漂移。这里显示的就是一帧没有任务执行，然后下一帧执行了两个任务
 
 <Image :src="'/browser/event-loop/14.png'" />
@@ -239,7 +248,9 @@ setTimeout(animationFrame,1000/60)
 <Image :src="'/browser/event-loop/17.png'" />
 
 还有一个细节，这是难倒很多开发人员的地方，requestAnimationFrame回调函数运行在处理css之前和绘制之前
+
 所以像下面这样的代码可能看起来开销很大，我们多次展示和隐藏一个盒子，但是实际上并不大
+
 ```
 button.addEventListener('click',function(){
   box.style.display = 'none';
@@ -270,9 +281,13 @@ button.addEventListener('click',function(){
 })
 ```
 它仍然是从0移动到500，不是我们想要的效果。其实为什么会这样呢，因为这两句代码会被视为同一个任务
+
 box.style.transform = 'translateX(1000px)';
+
 box.style.transition = 'transform 1s ease-in-out';
+
 在这两句代码执行完之后就要进行页面渲染，但是此时页面的box并没有移动到1000px的位置，而且此时我们又在requestAnimationFrame的回调里面将box移动到500px的位置，所以，自然而然的，就会从0移动到500。如果我们要box按照我们设想的进行移动的话，可以这么写
+
 ```
 button.addEventListener('click',function(){
   box.style.transform = 'translateX(1000px)';
@@ -319,11 +334,17 @@ button.addEventListener('click',()=>{
 })
 ```
 你们觉得上面这段代码在点击之后的输出顺序会是怎么样的？
+
 答案是
+
 Listener 1,Microtask 1,Listener 2,Microtask 2
+
 但是如果我的点击是通过buton.click()来触发的呢？答案就变成了
+
 Listener 1,Listener 2,Microtask 1,Microtask 2
+
 用户直接点击的时候，浏览器先后触发 2 个 listener。第一个 listener 触发完成 (listener 1) 之后，队列空了，就先打印了 microtask 1。然后再执行下一个 listener。重点在于浏览器并不事先知道有几个 listener，因此它发现一个执行一个，执行完了再看后面还有没有。
+
 而使用 button.click() 时，浏览器的内部实现是把 2 个 listener 都同步执行。因此 listener 1 之后，执行队列还没空，还要继续执行 "listener 2" 之后才行。所以 listener 2 会早于 microtask 1。重点在于浏览器的内部实现，click 方法会先采集有哪些 listener，再依次触发。
 
 PS3:
@@ -336,6 +357,7 @@ nextClick.then(event => {
 })
 ```
 如果通过用户点击来触发的话，event.preventDefault是生效的，但是如果我们通过link.click()来触发的话，那么就不会生效了，在此之前我们先讲讲一些规范，这是对单击链接如何工作的非常粗略的描述。
+
 我们首先会创建一个事件对象，然后调用每一个监听器，传入事件对象，然后我们检查事件对象的canceled属性，如果是canceled，就不会打开链接，如果没有canceled，就打开链接，当调用event.preventDefault()时，事件会标记成canceled。如果用户单击一个链接，那么我的微任务就会在每次回调之后发生，因为js调用栈清空了，但是当我们用js调用click的时候，它会执行完链接点击的操作，只有在算法完成之后才会返回，因此js执行栈永远不会清空。在此算法执行期间，微任务不可能发生，所以它到达了“查看事件对象”这一步，即使你有很多的Promise想要调用event.preventDefault()，也太晚了，它会打开超链接之后，执行Promise回调，但是已经错过了取消事件的时间点。
 
 ### 2.那么宏任务和微任务处于事件循环中的哪个环节？
@@ -359,6 +381,7 @@ nextClick.then(event => {
 * process.nextTick（Node.js）
 ### 4.宏任务和微任务的执行顺序
 在调用栈和任务队列中轮询。（此时的任务队列指的是宏任务队列）
+
 （1）调用栈为空后，优先检查微任务队列，如果微任务队列中存在事件，则加入到调用栈中进行执行
 
 注：如果在执行微任务队列中的函数时，产生了新的微任务（比如then函数嵌套），则会继续在本次微任务执行过程中执行下去，直到微任务队列为空为止（就是说如果期间一直有微任务产生，那就会永远卡在微任务队列执行）
