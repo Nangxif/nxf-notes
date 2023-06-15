@@ -155,7 +155,7 @@ setTimeout(function(){
 
 任务环中首先关注任务队列（Task Queue），这也是任务环中历史最悠久的部分
 
-<Image :src="'/browser/event-loop/5.png'" />
+<Image :src="'/browser/event-loop/5.jpg'" />
 
 webapi是浏览器提供给我们的一些api，还有一个神秘的事件循环（Event Loop）和一个回调任务队列（Task Queue）
 JavaScript是一门单线程的语言，单线程在运行时，意味着它只有一个调用栈，也就是上图的stack，同一时刻只能做一件事，我们先来看一个简单的案例，可以用可视化的方式理解一下这部分的知识
