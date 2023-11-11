@@ -494,6 +494,10 @@ module.exports = {
                   text: "实现instanceof操作符",
                   link: "/blogs/js-ts/js/js-api/instanceof",
                 },
+                {
+                  text: "实现深拷贝",
+                  link: "/blogs/js-ts/js/js-api/deep-clone",
+                },
               ],
             },
             {
