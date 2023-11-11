@@ -498,6 +498,10 @@ module.exports = {
                   text: "实现深拷贝",
                   link: "/blogs/js-ts/js/js-api/deep-clone",
                 },
+                {
+                  text: "实现Map",
+                  link: "/blogs/js-ts/js/js-api/map",
+                },
               ],
             },
             {
