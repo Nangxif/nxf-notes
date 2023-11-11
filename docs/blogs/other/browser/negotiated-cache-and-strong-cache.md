@@ -66,7 +66,7 @@ app.listen(3000, function () {
 
 ```
 
-<Image :src="'/browser/negotiated-cache-and-strong-cache/1.png'" />
+<Image :src="'/other/browser/negotiated-cache-and-strong-cache/1.png'" />
 
 我们发现设置了**no-store**之后浏览器每次请求这个资源都会返回200。
 
@@ -76,9 +76,9 @@ app.listen(3000, function () {
 res.set('Cache-Control', 'no-cache');
 ```
 
-<Image :src="'/browser/negotiated-cache-and-strong-cache/2.png'" />
+<Image :src="'/other/browser/negotiated-cache-and-strong-cache/2.png'" />
 
-<Image :src="'/browser/negotiated-cache-and-strong-cache/3.png'" />
+<Image :src="'/other/browser/negotiated-cache-and-strong-cache/3.png'" />
 
 我们发现设置了**no-cache**之后浏览器第一次请求这个资源返回200，后面判断到资源没有变更后，返回304，接口也接收到了请求，控制台会输出“访问了”。
 
@@ -104,19 +104,19 @@ res.set('Cache-Control', 'no-cache');
 
 第一次请求接口
 
-<Image :src="'/browser/negotiated-cache-and-strong-cache/4.png'" />
+<Image :src="'/other/browser/negotiated-cache-and-strong-cache/4.png'" />
 
 接口返回200，此时请求头里面是没有If-Modified-Since字段的，响应头里面会有一个ETag返回给浏览器。
 
 第二次请求
 
-<Image :src="'/browser/negotiated-cache-and-strong-cache/5.png'" />
+<Image :src="'/other/browser/negotiated-cache-and-strong-cache/5.png'" />
 
 在资源文件没有变更的情况下，接口返回304，此时请求头里面有If-Modified-Since字段的，响应头里面会有一个ETag返回给浏览器，而且这两个值是相等的。
 
 修改资源文件之后进行第三次请求
 
-<Image :src="'/browser/negotiated-cache-and-strong-cache/6.png'" />
+<Image :src="'/other/browser/negotiated-cache-and-strong-cache/6.png'" />
 
 在资源文件变更的情况下，接口返回200，此时请求头里面有If-Modified-Since字段的，响应头里面会有一个ETag返回给浏览器，而且这两个值是不相等的。
 
@@ -196,7 +196,7 @@ express的静态资源托管
 
 然后我直接在浏览器的地址栏输入`http://localhost:3000/test.js`之后，无论我刷新多少次，都只会触发协商缓存，状态码304
 
-<Image :src="'/browser/negotiated-cache-and-strong-cache/7.png'" />
+<Image :src="'/other/browser/negotiated-cache-and-strong-cache/7.png'" />
 
 后来我才发现虽然我在响应头设置了Cache-Control: public, max-age=36000，但是请求头却变成了Cache-Control: max-age=0了，结果才导致走了协商缓存。
 
@@ -212,7 +212,7 @@ express的静态资源托管
 <script src="http://localhost:3000/test.js"></script>
 ```
 
-<Image :src="'/browser/negotiated-cache-and-strong-cache/8.png'" />
+<Image :src="'/other/browser/negotiated-cache-and-strong-cache/8.png'" />
 
 第二种：
 
@@ -240,4 +240,4 @@ xhr.send();
 
 原因上面已经说了，后来改成js脚本去请求就可以了。
 
-<Image :src="'/browser/negotiated-cache-and-strong-cache/9.png'" />
+<Image :src="'/other/browser/negotiated-cache-and-strong-cache/9.png'" />
