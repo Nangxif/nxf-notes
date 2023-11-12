@@ -502,6 +502,10 @@ module.exports = {
                   text: "实现Map",
                   link: "/blogs/js-ts/js/js-api/map",
                 },
+                {
+                  text: "实现call,apply,bind",
+                  link: "/blogs/js-ts/js/js-api/call-apply-bind",
+                },
               ],
             },
             {
