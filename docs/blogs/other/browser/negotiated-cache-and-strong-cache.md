@@ -92,7 +92,7 @@ Etag字段是在响应头返回的，If-None-Match是存在于请求头的。
 
 Etag是属于HTTP 1.1属性，它是由服务器（Apache或者其他工具）生成返回给前端，用来帮助服务器控制Web端的缓存验证。 Apache中，ETag的值，默认是对文件的索引节（INode），大小（Size）和最后修改时间（MTime）进行Hash后得到的。
 
-当资源过期时，浏览器发现响应头里有Etag,则再次像服务器请求时带上请求头if-none-match(值是Etag的值)。服务器收到请求进行比对，决定返回200或304。
+当资源过期时，浏览器发现响应头里有Etag,则再次像服务器请求时带上请求头If-None-Match(值是Etag的值)。服务器收到请求进行比对，决定返回200或304。
 
 我们接下来用一个实验来看一下这个过程
 
@@ -106,19 +106,19 @@ res.set('Cache-Control', 'no-cache');
 
 <Image :src="'/other/browser/negotiated-cache-and-strong-cache/4.png'" />
 
-接口返回200，此时请求头里面是没有If-Modified-Since字段的，响应头里面会有一个ETag返回给浏览器。
+接口返回200，此时请求头里面是没有If-None-Match字段的，响应头里面会有一个ETag返回给浏览器。
 
 第二次请求
 
 <Image :src="'/other/browser/negotiated-cache-and-strong-cache/5.png'" />
 
-在资源文件没有变更的情况下，接口返回304，此时请求头里面有If-Modified-Since字段的，响应头里面会有一个ETag返回给浏览器，而且这两个值是相等的。
+在资源文件没有变更的情况下，接口返回304，此时请求头里面有If-None-Match字段的，响应头里面会有一个ETag返回给浏览器，而且这两个值是相等的。
 
 修改资源文件之后进行第三次请求
 
 <Image :src="'/other/browser/negotiated-cache-and-strong-cache/6.png'" />
 
-在资源文件变更的情况下，接口返回200，此时请求头里面有If-Modified-Since字段的，响应头里面会有一个ETag返回给浏览器，而且这两个值是不相等的。
+在资源文件变更的情况下，接口返回200，此时请求头里面有If-None-Match字段的，响应头里面会有一个ETag返回给浏览器，而且这两个值是不相等的。
 
 #### ②Last-Modifed/If-Modified-Since
 
