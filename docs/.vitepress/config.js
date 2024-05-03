@@ -553,6 +553,10 @@ module.exports = {
               text: "预检请求（preflight）【摘录】",
               link: "/blogs/other/browser/precheck-request",
             },
+            {
+              text: "indexDB",
+              link: "/blogs/other/browser/indexdb",
+            }
           ],
         },
         {
