@@ -254,6 +254,15 @@ module.exports = {
               text: "手写react-router",
               link: "/blogs/front-frame/react/react-router",
             },
+            {
+              text: "状态管理",
+              items: [
+                {
+                  text: "zustand",
+                  link: "/blogs/front-frame/react/state-management/zustand",
+                },
+              ],
+            },
           ],
         },
         {
@@ -556,7 +565,7 @@ module.exports = {
             {
               text: "indexDB",
               link: "/blogs/other/browser/indexdb",
-            }
+            },
           ],
         },
         {
