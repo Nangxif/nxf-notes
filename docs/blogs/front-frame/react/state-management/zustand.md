@@ -2,7 +2,7 @@
 
 ## 一、基本使用
 
-```react
+```javascript
 import { create } from "zustand";
 // 先定义一个状态函数，执行它可以返回一个初始状态
 const createState = (set) => {
@@ -42,7 +42,7 @@ function App() {
 
 ### 1、编写获取状态
 
-```react
+```javascript
 import { create } from "zustand";
 // 先定义一个状态函数，执行它可以返回一个初始状态
 const createState = () => {
@@ -103,7 +103,7 @@ export default createStore;
 
 ### 2、编写更新状态
 
-```react
+```javascript
 import { create } from "zustand";
 const createState = (set) => {
   return {
