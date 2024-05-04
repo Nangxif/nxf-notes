@@ -36,6 +36,10 @@ function App() {
 ---- index.js  入口文件
 ---- react.js  跟react相关的逻辑
 ---- vanilla.js 这部分代码跟框架没关系，只属于状态管理库的
+---- middleware 中间件
+------ immer.js
+------ logger.js
+------ persist.js
 ```
 
 ## 三、源码
