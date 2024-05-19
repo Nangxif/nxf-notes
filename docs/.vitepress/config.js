@@ -566,6 +566,10 @@ module.exports = {
               text: "indexDB",
               link: "/blogs/other/browser/indexdb",
             },
+            {
+              text: "【转】Web Components",
+              link: "/blogs/other/browser/web-compoments",
+            },
           ],
         },
         {
@@ -618,7 +622,7 @@ module.exports = {
       ],
     },
     footer: {
-      copyright: "Copyright © 2023-present Nangxif",
+      copyright: "Copyright © 2024-present Nangxif",
     },
   },
   lastUpdated: true,
