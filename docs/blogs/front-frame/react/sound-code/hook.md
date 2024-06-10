@@ -2,7 +2,7 @@
 
 ## 一、涉及到的文件
 
-```
+```js
 packages
 - react
   - index.ts  // 把hook暴露给使用者
@@ -17,7 +17,7 @@ packages
 
 首先在react包的index.ts中我们会发现它把所有hook都从这个文件里面暴露出去了
 
-```
+```javascript
 import currentBatchConfig from './src/currentBatchConfig';
 import currentDispatcher, {
 	Dispatcher,
@@ -72,13 +72,13 @@ export default {
 
 同时我们也发现了，每个hook在被调用之后，都会先执行一下这段代码
 
-```
+```javascript
 const dispatcher = resolveDispatcher();
 ```
 
 然后再从dispatcher重获取相应的hook，那么这个resolveDispatcher究竟干了什么事呢？
 
-```
+```javascript
 const currentDispatcher: { current: Dispatcher | null } = {
 	current: null
 };
@@ -97,7 +97,7 @@ export default currentDispatcher;
 
 我们发现hook的真实实现都会被挂在currentDispatcher的current上面，而currentDispatcher最终会被挂载到内部数据共享层上
 
-```
+```javascript
 // 内部数据共享层
 export const __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = {
 	currentDispatcher
@@ -106,7 +106,7 @@ export const __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = {
 
 到这一步为止，__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED还是在react包中的，而shared包会将这个数据共享层引进来，然后再暴露出去给react-reconciler用
 
-```
+```javascript
 import * as React from 'react';
 const internals = React.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
 export default internals;
@@ -122,7 +122,7 @@ hook的实现是在react-reconciler的fiberHook中的，我们以useState来举�
 
 函数组件在执行的时候，其实是执行renderWithHooks
 
-```
+```javascript
 export function renderWithHooks(wip: FiberNode, lane: Lane) {
 	// 赋值操作
 	currentlyRenderingFiber = wip;
@@ -159,7 +159,7 @@ export function renderWithHooks(wip: FiberNode, lane: Lane) {
 
 我们上面有提到resolveDispatcher的实现
 
-```
+```javascript
 export const resolveDispatcher = (): Dispatcher => {
 	const dispatcher = currentDispatcher.current;
 	// 如果没有在函数组件中执行，那么dispatcher是不会被赋值的
@@ -172,7 +172,7 @@ export const resolveDispatcher = (): Dispatcher => {
 
 我们会发现dispatcher为空的时候，就说明当前的hook不在函数组件中执行，因为dispatcher是在renderWithHooks时（也就是函数组件执行时）才会被赋值，这也就回答了我们在当前章节提出的问题，当然这只是其中的一种判断方式。
 
-```
+```javascript
 const HookDispatcherOnMount: Dispatcher = {
 	useState: mountState,
 	useEffect: mountEffect,
@@ -194,7 +194,7 @@ const HookDispatcherOnUpdate: Dispatcher = {
 
 useState在挂载阶段的时候会执行mountState
 
-```
+```javascript
 // 在mount阶段执行的useState
 function mountState<State>(
 	initialState: (() => State) | State
@@ -220,7 +220,7 @@ function mountState<State>(
 
 在mount阶段的state会执行mountWorkInProgressHook去获取当前的hook
 
-```
+```javascript
 // mount阶段查找当前的hook，并且把某个函数组件里面的hook串联起来
 function mountWorkInProgressHook(): Hook {
 	const hook: Hook = {
@@ -258,7 +258,7 @@ function mountWorkInProgressHook(): Hook {
 
 在update阶段的state会执行updateWorkInProgressHook去获取当前的hook
 
-```
+```javascript
 function updateWorkInProgressHook(): Hook {
 	// hook的数据从哪里来？从current的memoizedState来
 	/**
@@ -327,7 +327,7 @@ function updateWorkInProgressHook(): Hook {
 
 updateWorkInProgressHook的整体实现逻辑就是，通过之前mount阶段的hook链表，从链表的第一项开始（也就是current树的memoizedState），找到update阶段的hook对应的mount阶段的hook，然后基于mount阶段的hook数据，复用或者修改，从而形成一个新的hook。这个时候currentHook就派上用场了，currentHook的作用是在update阶段，每执行到一个hook就会指向那个hook，也就相当于一个游标。currentHook如果为空那么就说明当前即将处理的是update阶段的第一个hook，因此
 
-```
+```javascript
 nextCurrentHook = current?.memoizedState
 ```
 
@@ -335,7 +335,7 @@ nextCurrentHook = current?.memoizedState
 
 接下来就得基于nextCurrentHook去改造出新的hook
 
-```
+```javascript
 const newHook = {
   memoizedState: currentHook.memoizedState,
   updateQueue: currentHook.updateQueue,
