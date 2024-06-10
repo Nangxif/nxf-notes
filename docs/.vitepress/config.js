@@ -64,6 +64,10 @@ module.exports = {
             text: "浏览器",
             link: "/blogs/other/browser/operating-machining",
           },
+          {
+            text: "网络",
+            link: "/blogs/other/network/websocket",
+          },
         ],
       },
       {
@@ -260,6 +264,15 @@ module.exports = {
                 {
                   text: "zustand",
                   link: "/blogs/front-frame/react/state-management/zustand",
+                },
+              ],
+            },
+            {
+              text: "react源码",
+              items: [
+                {
+                  text: "hook机制",
+                  link: "/blogs/front-frame/react/sound-code/hook",
                 },
               ],
             },
