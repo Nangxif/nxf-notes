@@ -37,7 +37,7 @@ radium by FormidableLabs
 
 **css prop**
 
-```undefined
+```css
 export function MyContainer({ color, children }) {
   return (
     <div
@@ -58,7 +58,7 @@ export function MyContainer({ color, children }) {
 
 **样式组件**
 
-```undefined
+```javascript
 import styled from '@emotion/styled';
 
 export const MyContainer = styled.div`
@@ -73,7 +73,7 @@ export const MyContainer = styled.div`
 
 同时，这两种方案都支持模板字符串或是对象样式。
 
-```undefined
+```javascript
 import styled from '@emotion/styled';
 
 export function MyContainer({ color, children }) {
@@ -148,7 +148,7 @@ css prop 可以算是内联样式的升级版，用户定义的内联样式以 J
 
 以 Tailwind CSS 为代表，CSS 原子化是使用纯 CSS 的一种流行方案。这种方案中，用户使用库提供的功能性 CSS 类修饰 DOM 结构。下面是一个使用 Tailwind 的例子：
 
-```undefined
+```html
 <button class="bg-blue-500 hover:bg-blue-700 rounded">
   Button
 </button>
