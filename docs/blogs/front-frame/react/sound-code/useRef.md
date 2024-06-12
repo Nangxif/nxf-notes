@@ -6,13 +6,13 @@ Ref有两种数据结构
 
 1. (Instance: T) => void
 
-   ```react
+   ```html
    <div ref={dom => console.log(dom)}></div>
    ```
 
 2. {current: T}
 
-   ```react
+   ```html
    <div ref={domRef}></div>
    ```
 
