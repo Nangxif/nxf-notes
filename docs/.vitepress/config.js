@@ -274,6 +274,14 @@ module.exports = {
                   text: "hook机制",
                   link: "/blogs/front-frame/react/sound-code/hook",
                 },
+                {
+                  text: "useState",
+                  link: "/blogs/front-frame/react/sound-code/useState",
+                },
+                {
+                  text: "useEffect",
+                  link: "/blogs/front-frame/react/sound-code/useEffect",
+                },
               ],
             },
           ],
