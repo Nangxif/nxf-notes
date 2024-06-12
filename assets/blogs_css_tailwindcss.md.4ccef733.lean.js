@@ -1,1 +1,0 @@
-import{_ as s,c as l,o as e,h as n}from"./app.e0d1beaf.js";const C=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"blogs/css/tailwindcss.md","lastUpdated":1717998218000}'),o={name:"blogs/css/tailwindcss.md"},a=n("",23),i=[a];function p(t,c,d,r,S,y){return e(),l("div",null,i)}const w=s(o,[["render",p]]);export{C as __pageData,w as default};
