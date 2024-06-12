@@ -452,7 +452,7 @@ function commitHookEffectList(
 
 1. 以下useEffect的执行顺序是什么样的，为什么？
 
-   ```react
+   ```javascript
    import React, { useEffect, useState } from "react";
    const Child1 = () => {
      useEffect(() => {

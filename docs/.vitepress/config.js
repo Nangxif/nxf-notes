@@ -282,6 +282,10 @@ module.exports = {
                   text: "useEffect",
                   link: "/blogs/front-frame/react/sound-code/useEffect",
                 },
+                {
+                  text: "useRef",
+                  link: "/blogs/front-frame/react/sound-code/useRef",
+                },
               ],
             },
           ],
