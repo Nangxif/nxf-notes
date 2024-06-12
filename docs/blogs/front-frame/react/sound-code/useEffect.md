@@ -512,7 +512,7 @@ function commitHookEffectList(
 
    初始执行会输出
 
-   ```
+   ```javascript
    Child1 useEffect create有deps
    Child2 useEffect create有deps
    App useEffect create没有deps
@@ -558,7 +558,7 @@ function commitHookEffectList(
 
    点击div之后，会输出
 
-   ```
+   ```javascript
    Child1 useEffect destroy有deps
    Child2 useEffect destroy有deps
    App useEffect destroy有deps
