@@ -450,121 +450,121 @@ function commitHookEffectList(
 
 ## 五、提出几个问题
 
-1. 以下useEffect的执行顺序是什么样的，为什么？
+以下useEffect的执行顺序是什么样的，为什么？
 
-   ```javascript
-   import React, { useEffect, useState } from "react";
-   const Child1 = () => {
-     useEffect(() => {
-       console.log("Child1 useEffect create有deps");
-       return () => {
-         console.log("Child1 useEffect destroy有deps");
-       };
-     }, []);
-     return <div>child1</div>;
-   };
-   const Child2 = () => {
-     useEffect(() => {
-       console.log("Child2 useEffect create有deps");
-       return () => {
-         console.log("Child2 useEffect destroy有deps");
-       };
-     }, []);
-     return <div>child2</div>;
-   };
-   const Child3 = () => {
-     useEffect(() => {
-       console.log("Child3 useEffect create有deps");
-       return () => {
-         console.log("Child3 useEffect destroy有deps");
-       };
-     }, []);
-     return <div>child3</div>;
-   };
-   const App = () => {
-     const [show, setShow] = useState(true);
-     useEffect(() => {
-       console.log("App useEffect create没有deps");
-     });
-     useEffect(() => {
-       console.log("App useEffect create有deps");
-       return () => {
-         console.log("App useEffect destroy有deps");
-       };
-     }, [show]);
-   
-     return (
-       <div onClick={() => setShow(!show)}>
-         {show ? (
-           <>
-             <Child1 />
-             <Child2 />
-           </>
-         ) : (
-           <Child3 />
-         )}
-       </div>
-     );
-   };
-   const root = document.querySelector("#root");
-   ReactDOM.createRoot(root).render(<App />);
-   ```
+```javascript
+import React, { useEffect, useState } from "react";
+const Child1 = () => {
+  useEffect(() => {
+    console.log("Child1 useEffect create有deps");
+    return () => {
+      console.log("Child1 useEffect destroy有deps");
+    };
+  }, []);
+  return <div>child1</div>;
+};
+const Child2 = () => {
+  useEffect(() => {
+    console.log("Child2 useEffect create有deps");
+    return () => {
+      console.log("Child2 useEffect destroy有deps");
+    };
+  }, []);
+  return <div>child2</div>;
+};
+const Child3 = () => {
+  useEffect(() => {
+    console.log("Child3 useEffect create有deps");
+    return () => {
+      console.log("Child3 useEffect destroy有deps");
+    };
+  }, []);
+  return <div>child3</div>;
+};
+const App = () => {
+  const [show, setShow] = useState(true);
+  useEffect(() => {
+    console.log("App useEffect create没有deps");
+  });
+  useEffect(() => {
+    console.log("App useEffect create有deps");
+    return () => {
+      console.log("App useEffect destroy有deps");
+    };
+  }, [show]);
 
-   初始执行会输出
+  return (
+    <div onClick={() => setShow(!show)}>
+      {show ? (
+        <>
+          <Child1 />
+          <Child2 />
+        </>
+      ) : (
+        <Child3 />
+      )}
+    </div>
+  );
+};
+const root = document.querySelector("#root");
+ReactDOM.createRoot(root).render(<App />);
+```
 
-   ```javascript
-   Child1 useEffect create有deps
-   Child2 useEffect create有deps
-   App useEffect create没有deps
-   App useEffect create有deps
-   ```
+初始执行会输出
 
-   为什么先输出子组件的useEffect create再输出父组件的？因为回调的收集是在commitRoot里面，而commitRoot里面是通过commitEffects往下查找子节点的
+```javascript
+Child1 useEffect create有deps
+Child2 useEffect create有deps
+App useEffect create没有deps
+App useEffect create有deps
+```
 
-   ```typescript
-   export const commitEffects = (
-   	phase: 'mutation' | 'layout',
-   	mask: Flags,
-   	callback: (fiber: FiberNode, root: FiberRootNode) => void
-   ) => {
-   	return (finishedWork: FiberNode, root: FiberRootNode) => {
-   		nextEffect = finishedWork;
-   		while (nextEffect !== null) {
-   			// 向下遍历
-   			const child: FiberNode | null = nextEffect.child;
-   
-   			if ((nextEffect.subtreeFlags & mask) !== NoFlags && child !== null) {
-   				// 代表了子节点有可能存在MutationMask的操作
-   				nextEffect = child;
-   			} else {
-   				// 表示找底了，或者说我们找到的那个节点不包含subtreeFlags了，如果不包含subtreeFlags的话，那么就可能包含flags
-   				// 向上遍历DFS
-   				up: while (nextEffect !== null) {
-   					callback(nextEffect, root);
-   					const sibling: FiberNode | null = nextEffect.sibling;
-   					if (sibling !== null) {
-   						nextEffect = sibling;
-   						break up;
-   					}
-   					nextEffect = nextEffect.return;
-   				}
-   			}
-   		}
-   	};
-   };
-   ```
+为什么先输出子组件的useEffect create再输出父组件的？因为回调的收集是在commitRoot里面，而commitRoot里面是通过commitEffects往下查找子节点的
 
-   首先先深度优先遍历，查询到某个fiber的subtreeFlags（也就是在completeWork阶段冒泡上来的子fiber的flag的集合）已经不存在对应的mask，则执行回调，因此Child1和Child2组件的回调会先被收集，接着再收集App的回调。而执行回调的时候，又是除了是按照数组顺序执行之外，对每个数组里面的effect链表，它的执行顺序也是从链表头到链表尾。
+```typescript
+export const commitEffects = (
+	phase: 'mutation' | 'layout',
+	mask: Flags,
+	callback: (fiber: FiberNode, root: FiberRootNode) => void
+) => {
+	return (finishedWork: FiberNode, root: FiberRootNode) => {
+		nextEffect = finishedWork;
+		while (nextEffect !== null) {
+			// 向下遍历
+			const child: FiberNode | null = nextEffect.child;
 
-   点击div之后，会输出
+			if ((nextEffect.subtreeFlags & mask) !== NoFlags && child !== null) {
+				// 代表了子节点有可能存在MutationMask的操作
+				nextEffect = child;
+			} else {
+				// 表示找底了，或者说我们找到的那个节点不包含subtreeFlags了，如果不包含subtreeFlags的话，那么就可能包含flags
+				// 向上遍历DFS
+				up: while (nextEffect !== null) {
+					callback(nextEffect, root);
+					const sibling: FiberNode | null = nextEffect.sibling;
+					if (sibling !== null) {
+						nextEffect = sibling;
+						break up;
+					}
+					nextEffect = nextEffect.return;
+				}
+			}
+		}
+	};
+};
+```
 
-   ```javascript
-   Child1 useEffect destroy有deps
-   Child2 useEffect destroy有deps
-   App useEffect destroy有deps
-   Child3 useEffect create有deps
-   App useEffect create没有deps
-   App useEffect create有deps
-   ```
+首先先深度优先遍历，查询到某个fiber的subtreeFlags（也就是在completeWork阶段冒泡上来的子fiber的flag的集合）已经不存在对应的mask，则执行回调，因此Child1和Child2组件的回调会先被收集，接着再收集App的回调。而执行回调的时候，又是除了是按照数组顺序执行之外，对每个数组里面的effect链表，它的执行顺序也是从链表头到链表尾。
 
-   App组件发生了状态变更，触发了新的一轮调度，从App开始往上到root开始beginWork，遍历到Child3的时候发现有新的useEffect，因此在commitRoot的时候，正如上面所说的effect的顺序，再加上组件unmount的destroy会被先执行，因此才有了前两个输出。其次，再执行App组件的useEffect的destory因此有了第三个输出。而commitRoot在遍历的时候，发现Child1和Child2节点被卸载了，但是出现了Child3节点，那么会将Child3节点的create收集起来，然后往上遍历的时候收集App节点的create，因此才会出现Child3节点的useEffect比App的先执行。
+点击div之后，会输出
+
+```javascript
+Child1 useEffect destroy有deps
+Child2 useEffect destroy有deps
+App useEffect destroy有deps
+Child3 useEffect create有deps
+App useEffect create没有deps
+App useEffect create有deps
+```
+
+App组件发生了状态变更，触发了新的一轮调度，从App开始往上到root开始beginWork，遍历到Child3的时候发现有新的useEffect，因此在commitRoot的时候，正如上面所说的effect的顺序，再加上组件unmount的destroy会被先执行，因此才有了前两个输出。其次，再执行App组件的useEffect的destory因此有了第三个输出。而commitRoot在遍历的时候，发现Child1和Child2节点被卸载了，但是出现了Child3节点，那么会将Child3节点的create收集起来，然后往上遍历的时候收集App节点的create，因此才会出现Child3节点的useEffect比App的先执行。

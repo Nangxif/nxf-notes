@@ -279,6 +279,14 @@ module.exports = {
                   link: "/blogs/front-frame/react/sound-code/useState",
                 },
                 {
+                  text: "实现同步更新流程（一）",
+                  link: "/blogs/front-frame/react/sound-code/batched-updates-1",
+                },
+                {
+                  text: "实现同步更新流程（二）",
+                  link: "/blogs/front-frame/react/sound-code/batched-updates-2",
+                },
+                {
                   text: "useEffect",
                   link: "/blogs/front-frame/react/sound-code/useEffect",
                 },
