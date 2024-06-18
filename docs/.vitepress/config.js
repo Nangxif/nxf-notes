@@ -271,6 +271,18 @@ module.exports = {
               text: "react源码",
               items: [
                 {
+                  text: "什么是jsx",
+                  link: "/blogs/front-frame/react/sound-code/what-is-jsx",
+                },
+                {
+                  text: "初探reconciler",
+                  link: "/blogs/front-frame/react/sound-code/first-exploration-reconciler",
+                },
+                {
+                  text: "如何触发更新",
+                  link: "/blogs/front-frame/react/sound-code/how-to-trigger-update",
+                },
+                {
                   text: "hook机制",
                   link: "/blogs/front-frame/react/sound-code/hook",
                 },
