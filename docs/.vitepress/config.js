@@ -283,6 +283,10 @@ module.exports = {
                   link: "/blogs/front-frame/react/sound-code/how-to-trigger-update",
                 },
                 {
+                  text: "初探mount流程",
+                  link: "/blogs/front-frame/react/sound-code/first-exploration-mount-progress",
+                },
+                {
                   text: "hook机制",
                   link: "/blogs/front-frame/react/sound-code/hook",
                 },
