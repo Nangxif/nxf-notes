@@ -1,4 +1,4 @@
-# 初探mount流程
+# 初探mount流程（beginWork/completeWork）
 
 更新流程的目的：
 
