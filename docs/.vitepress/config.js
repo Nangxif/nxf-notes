@@ -291,6 +291,10 @@ module.exports = {
                   link: "/blogs/front-frame/react/sound-code/commit-work",
                 },
                 {
+                  text: "初探函数组件",
+                  link: "/blogs/front-frame/react/sound-code/function-component",
+                },
+                {
                   text: "hook机制",
                   link: "/blogs/front-frame/react/sound-code/hook",
                 },
