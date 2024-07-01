@@ -295,6 +295,10 @@ module.exports = {
                   link: "/blogs/front-frame/react/sound-code/function-component",
                 },
                 {
+                  text: "合成事件机制",
+                  link: "/blogs/front-frame/react/sound-code/event-system",
+                },
+                {
                   text: "hook机制",
                   link: "/blogs/front-frame/react/sound-code/hook",
                 },
