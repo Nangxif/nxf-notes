@@ -277,4 +277,177 @@ triggerEventFlow(bubble, se);
 
 ## 三、提出几个问题
 
-1.
+### 1、下面的例子输出顺序是什么
+
+```typescript
+function App() {
+  const ref1 = useRef(null);
+  const ref2 = useRef(null);
+  useEffect(() => {
+    ref1.current.addEventListener(
+      "click",
+      () => {
+        console.log("ref1 origin capture");
+      },
+      true
+    );
+    ref1.current.addEventListener(
+      "click",
+      () => {
+        console.log("ref1 origin bubble");
+      },
+      false
+    );
+
+    ref2.current.addEventListener(
+      "click",
+      () => {
+        console.log("ref2 origin capture");
+      },
+      true
+    );
+    ref2.current.addEventListener(
+      "click",
+      () => {
+        console.log("ref2 origin bubble");
+      },
+      false
+    );
+  }, []);
+  return (
+    <div
+      onClick={() => {
+        console.log("ref1 bubble");
+      }}
+      onClickCapture={() => {
+        console.log("ref1 capture");
+      }}
+      ref={ref1}
+    >
+      <div
+        onClick={() => {
+          console.log("ref2 bubble");
+        }}
+        onClickCapture={() => {
+          console.log("ref2 capture");
+        }}
+        ref={ref2}
+      >
+        点击
+      </div>
+    </div>
+  );
+}
+```
+
+点击之后输出结果为
+
+```typescript
+ref1 origin capture
+ref2 origin capture
+ref2 origin bubble
+ref1 origin bubble
+ref1 capture
+ref2 capture
+ref2 bubble
+ref1 bubble
+```
+
+捕获流程肯定是由外到内，因此ref1的捕获事件会比ref2的捕获事件先执行。但是为什么是原始事件比合成事件先执行呢？因为合成事件是当真实事件冒泡到container节点之后，才开始收集和执行的。当然我们这种实现跟真实的情况还是有差异的，真实的react是这么返回的
+
+```typescript
+ref1 capture
+ref2 capture
+ref1 origin capture
+ref2 origin capture
+ref2 origin bubble
+ref1 origin bubble
+ref2 bubble
+ref1 bubble
+```
+
+那么我们之前的处理方式跟真实react的处理方式有什么不同呢？答案是，我们上面container代理事件的时候，只代理了捕获事件，其实还需要代理冒泡事件。因此有几个方法需要适当做一些修改。
+
+initEvent需要区分捕获阶段和冒泡阶段
+
+```typescript
+export function initEvent(container: Container, eventType: string) {
+	if (!validEventTypeList.includes(eventType)) {
+		console.warn('当前不支持', eventType, '事件');
+	}
+	if (__DEV__) {
+		console.log('初始化时间', eventType);
+	}
+	container.addEventListener(
+		eventType,
+		(e) => {
+			dispatchEvent(container, eventType, e, true);
+		},
+		true
+	);
+	container.addEventListener(
+		eventType,
+		(e) => {
+			dispatchEvent(container, eventType, e, false);
+		},
+		false
+	);
+}
+```
+
+dispatchEvent在捕获阶段时不执行bubble，在冒泡阶段时不执行capture
+
+```typescript
+function dispatchEvent(
+	container: Container,
+	eventType: string,
+	e: Event,
+	isCapture: boolean
+) {
+	const targetElement = e.target;
+	if (targetElement === null) {
+		console.warn('事件不存在target', e);
+		return;
+	}
+	// 1. 收集沿途的事件
+	const { bubble, capture } = collectPaths(
+		targetElement as DOMElement,
+		container,
+		eventType
+	);
+	// 2. 构造合成事件
+	const se = createSyntheticEvent(e);
+	// 3. 遍历capture
+	if (isCapture) {
+		triggerEventFlow(capture, se);
+	}
+	// 4. 遍历bubble
+	if (!isCapture && !se.__stopPropagation) {
+		triggerEventFlow(bubble, se);
+	}
+}
+```
+
+### 2、为什么要有合成事件？
+
+React 使用合成事件（Synthetic Events）是为了在不同浏览器之间提供一致的事件行为，并提高性能。以下是一些详细的原因：
+
+#### 1. 跨浏览器兼容性
+
+不同浏览器对原生事件的实现可能存在差异。React 的合成事件将这些差异抽象出来，提供一个统一的接口，使得开发者不必担心在不同浏览器中处理事件的细微差别。
+
+#### 2. 性能优化
+
+合成事件系统在事件处理过程中进行了多种优化。例如，React 会将事件处理程序绑定到最顶层的元素，而不是每个具体的元素。这种事件委托机制减少了需要绑定的事件处理程序的数量，从而提高了性能。
+
+#### 3. 事件池化
+
+React 使用事件池来复用事件对象，这样可以减少垃圾回收的压力。事件对象在事件处理函数调用结束后会被放回池中，供后续事件使用。
+
+#### 4. 一致的事件接口
+
+合成事件提供了一个与原生事件接口一致的API，使得开发者可以像使用原生事件一样使用合成事件，同时享受跨浏览器兼容和性能优化的好处。例如，合成事件对象有相同的属性和方法，如 `stopPropagation` 和 `preventDefault`。
+
+#### 5. 事件优先级管理
+
+React 18 引入了并发模式（Concurrent Mode），合成事件系统可以更好地与并发渲染协调工作。React 可以更灵活地管理事件的优先级，从而提高应用的响应性。
