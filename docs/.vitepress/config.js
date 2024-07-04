@@ -299,6 +299,18 @@ module.exports = {
                   link: "/blogs/front-frame/react/sound-code/event-system",
                 },
                 {
+                  text: "更新后是单节点的diff算法",
+                  link: "/blogs/front-frame/react/sound-code/diff-1",
+                },
+                {
+                  text: "更新后是多节点的diff算法",
+                  link: "/blogs/front-frame/react/sound-code/diff-2",
+                },
+                {
+                  text: "diff之后在commit阶段的操作",
+                  link: "/blogs/front-frame/react/sound-code/diff-3",
+                },
+                {
                   text: "hook机制",
                   link: "/blogs/front-frame/react/sound-code/hook",
                 },
