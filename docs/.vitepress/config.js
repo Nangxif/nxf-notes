@@ -295,6 +295,14 @@ module.exports = {
                   link: "/blogs/front-frame/react/sound-code/function-component",
                 },
                 {
+                  text: "hook机制",
+                  link: "/blogs/front-frame/react/sound-code/hook",
+                },
+                {
+                  text: "useState",
+                  link: "/blogs/front-frame/react/sound-code/useState",
+                },
+                {
                   text: "合成事件机制",
                   link: "/blogs/front-frame/react/sound-code/event-system",
                 },
@@ -309,14 +317,6 @@ module.exports = {
                 {
                   text: "diff之后在commit阶段的操作",
                   link: "/blogs/front-frame/react/sound-code/diff-3",
-                },
-                {
-                  text: "hook机制",
-                  link: "/blogs/front-frame/react/sound-code/hook",
-                },
-                {
-                  text: "useState",
-                  link: "/blogs/front-frame/react/sound-code/useState",
                 },
                 {
                   text: "实现同步更新流程（一）",
