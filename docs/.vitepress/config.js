@@ -1,9 +1,8 @@
 import mdItCustomAttrs from "markdown-it-custom-attrs";
-const isProd = process.env.NODE_ENV === "production";
 module.exports = {
   title: "Nangxi's blogs",
   description: "Nangxi's blogs",
-  base: isProd ? "/nxf-notes/" : "/",
+  base: "/",
   head: [
     [
       "link",
@@ -709,3 +708,4 @@ module.exports = {
     },
   },
 };
+
