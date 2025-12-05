@@ -9,7 +9,7 @@ module.exports = {
       {
         rel: "icon",
         type: "image/x-icon",
-        href: `${isProd ? "/nxf-notes/" : "/"}favicon.ico`,
+        href: "/favicon.ico",
       },
     ],
     [
@@ -708,4 +708,5 @@ module.exports = {
     },
   },
 };
+
 
